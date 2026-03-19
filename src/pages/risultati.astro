@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { RESULTS, NOTABLE_ATHLETES, SITE } from '../data/site.js';
+
+// Group results by year
+const resultsByYear = {};
+RESULTS.forEach(r => {
+  const year = r.date.substring(0, 4);
+  if (!resultsByYear[year]) resultsByYear[year] = [];
+  resultsByYear[year].push(r);
+});
+const years = Object.keys(resultsByYear).sort((a, b) => b - a);
+---
+
+<BaseLayout
+  title="Risultati — Sci Club Orezzo"
+  description="20 anni di risultati dello Sci Club Orezzo Valseriana. Gare FISI, circuito provinciale, campionati regionali e nazionali di sci alpino."
+>
+
+  <!-- Hero -->
+  <section class="relative py-28 md:py-36 px-5 bg-brand-dark text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="/img/gara-gigante.jpeg" alt="" class="w-full h-full object-cover opacity-20" />
+      <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/80 via-brand-dark/60 to-brand-blue/20"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center">
+      <p class="text-brand-blue text-xs font-bold tracking-[0.25em] uppercase mb-4 reveal">Dal 1983 a oggi</p>
+      <h1 class="font-display text-[clamp(2.5rem,8vw,4.5rem)] font-bold leading-tight mb-6 reveal reveal-delay-1">
+        Risultati e Palmares
+      </h1>
+      <p class="text-white/60 text-lg max-w-xl mx-auto reveal reveal-delay-2">
+        Oltre vent'anni di gare, podi e pettorali rossi nei circuiti FISI provinciali, regionali e nazionali.
+      </p>
+    </div>
+  </section>
+
+  <!-- Notable athletes highlight -->
+  <section class="py-16 md:py-20 px-5">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-brand-dark mb-8 text-center reveal">Atleti di Rilievo</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {NOTABLE_ATHLETES.map((a, i) => (
+          <div class={`flex items-center gap-3 bg-white border border-brand-dark/10 p-4 hover:border-brand-blue/30 transition-colors reveal reveal-delay-${Math.min(i % 4 + 1, 4)}`}>
+            <span class="text-brand-blue font-display font-bold text-xs bg-brand-blue/10 px-2 py-1 flex-shrink-0 min-w-[60px] text-center">{a.era}</span>
+            <div class="min-w-0">
+              <span class="font-bold text-brand-dark text-sm block truncate">{a.name}</span>
+              <span class="text-brand-dark/50 text-xs block truncate">{a.achievement}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Results by year -->
+  <section class="py-16 md:py-24 px-5 bg-brand-dark text-white">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="font-display text-3xl font-bold text-center mb-16 reveal">Archivio Risultati</h2>
+
+      {years.map((year, yi) => {
+        const yearResults = resultsByYear[year];
+        const podiums = yearResults.filter(r => r.podium);
+        return (
+          <div class={`mb-16 last:mb-0 reveal reveal-delay-${Math.min(yi % 4 + 1, 4)}`}>
+            <div class="flex items-center gap-4 mb-6">
+              <span class="font-display text-4xl md:text-5xl font-bold text-brand-blue">{year}</span>
+              <div class="flex-1 h-px bg-white/10"></div>
+              <span class="text-xs font-bold text-white/40 tracking-wider uppercase">
+                {yearResults.length} risultat{yearResults.length === 1 ? 'o' : 'i'}{podiums.length > 0 ? ` / ${podiums.length} pod${podiums.length === 1 ? 'io' : 'i'}` : ''}
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {yearResults.filter(r => r.position > 0 || r.note).map(r => (
+                <div class={`flex items-start gap-3 p-4 border ${r.podium ? 'border-brand-blue/30 bg-brand-blue/5' : 'border-white/5 bg-white/[0.02]'}`}>
+                  {r.position > 0 ? (
+                    <span class={`flex-shrink-0 w-8 h-8 flex items-center justify-center text-xs font-bold ${r.position <= 3 && r.podium ? 'bg-brand-blue text-white' : 'bg-white/10 text-white/60'}`}>
+                      {r.position}°
+                    </span>
+                  ) : (
+                    <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center text-xs bg-white/5 text-white/30">
+                      —
+                    </span>
+                  )}
+                  <div class="min-w-0">
+                    <p class="text-sm font-medium text-white">{r.athlete}</p>
+                    <p class="text-xs text-white/40 truncate">{r.race}</p>
+                    <div class="flex items-center gap-2 mt-1">
+                      <span class="text-[0.6rem] text-brand-blue font-bold tracking-wider uppercase">{r.category}</span>
+                      {r.note && <span class="text-xs text-brand-blue">— {r.note}</span>}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- Events organized -->
+  <section class="py-16 md:py-24 px-5">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-3xl font-bold text-brand-dark text-center mb-12 reveal">Gare Organizzate</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white border-2 border-brand-dark shadow-[5px_5px_0_#1A1A1A] p-6 reveal reveal-delay-1">
+          <span class="text-3xl block mb-3">🏆</span>
+          <h3 class="font-display text-xl font-bold text-brand-dark mb-2">Trofeo Merelli Fiorenza</h3>
+          <p class="text-xs font-bold text-brand-blue tracking-wider uppercase mb-3">43 edizioni — Lizzola, pista "Due Baite"</p>
+          <p class="text-sm text-brand-dark/60 leading-relaxed">
+            Slalom Speciale per la categoria Children del Circuito Provinciale FISI Bergamo.
+            Intitolato alla memoria di Fiorenza Merelli, e una delle gare piu longeve della provincia.
+          </p>
+        </div>
+        <div class="bg-white border-2 border-brand-dark shadow-[5px_5px_0_#1A1A1A] p-6 reveal reveal-delay-2">
+          <span class="text-3xl block mb-3">⛷️</span>
+          <h3 class="font-display text-xl font-bold text-brand-dark mb-2">Trofeo La Penzana del Merel</h3>
+          <p class="text-xs font-bold text-brand-blue tracking-wider uppercase mb-3">Lizzola — Circuito Provinciale Pulcini</p>
+          <p class="text-sm text-brand-dark/60 leading-relaxed">
+            Slalom Speciale per le categorie Baby, Cuccioli e Pulcini. Il nome richiama la storica pizzeria
+            di Tarcisio Merelli dove il club e stato fondato nel 1968.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 px-5 bg-brand-snow">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-brand-dark/60 text-sm mb-4">Segui i nostri risultati su Instagram</p>
+      <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-7 py-3 bg-brand-dark text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-dark hover:bg-brand-blue hover:border-brand-blue transition-all">
+        @scicluborezzo
+      </a>
+    </div>
+  </section>
+
+  <div class="text-center py-12">
+    <a href="/" class="inline-flex items-center gap-2 text-sm font-bold text-brand-blue hover:underline">
+      &larr; Torna alla home
+    </a>
+  </div>
+
+</BaseLayout>

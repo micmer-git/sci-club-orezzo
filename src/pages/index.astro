@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, FEATURED_EVENT, GALLERY_IMAGES, NOTABLE_ATHLETES } from '../data/site.js';
+import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, FEATURED_EVENT, GALLERY_IMAGES, NOTABLE_ATHLETES, RESULTS } from '../data/site.js';
+const recentPodiums = RESULTS.filter(r => r.podium && r.position > 0).slice(0, 6);
 ---
 
 <BaseLayout
@@ -169,27 +170,36 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, FEATURED_EVENT,
     </div>
   </section>
 
-  <!-- ========== CATEGORIES ========== -->
+  <!-- ========== RECENT RESULTS ========== -->
   <section class="py-20 md:py-28 px-5">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Per tutte le eta</p>
+      <div class="text-center mb-12">
+        <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Ultimi podi</p>
         <h2 class="font-display text-[clamp(2rem,5vw,3rem)] font-bold text-brand-dark leading-tight mb-4 reveal reveal-delay-1">
-          Categorie Agonistiche
+          Risultati Recenti
         </h2>
-        <p class="text-brand-dark/60 max-w-xl mx-auto reveal reveal-delay-2">
-          Dai primi passi sulla neve fino all'agonismo. In oltre mezzo secolo abbiamo avviato allo sci piu di mille atleti.
-        </p>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
-        {CATEGORIES.map((cat, i) => (
-          <div class={`bg-white border-2 border-brand-dark/10 p-5 text-center hover:border-brand-blue/30 transition-colors reveal reveal-delay-${Math.min(i + 1, 4)}`}>
-            <h3 class="font-display text-lg font-bold text-brand-blue mb-1">{cat.name}</h3>
-            <p class="text-xs font-bold text-brand-dark/40 tracking-wider uppercase mb-2">{cat.ages}</p>
-            <p class="text-xs text-brand-dark/60">{cat.desc}</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        {recentPodiums.map((r, i) => (
+          <div class={`bg-white border-2 border-brand-blue/20 shadow-[4px_4px_0_#0066B3] p-5 reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-10 h-10 flex items-center justify-center bg-brand-blue text-white font-display font-bold text-lg">{r.position}°</span>
+              <div>
+                <span class="font-bold text-brand-dark text-sm block">{r.athlete}</span>
+                <span class="text-brand-blue text-[0.65rem] font-bold tracking-wider uppercase">{r.category}</span>
+              </div>
+            </div>
+            <p class="text-xs text-brand-dark/50 truncate">{r.race}</p>
+            {r.note && <p class="text-xs text-brand-blue mt-1 font-medium">{r.note}</p>}
           </div>
         ))}
+      </div>
+
+      <div class="text-center mt-10 reveal reveal-delay-4">
+        <a href="/risultati/" class="inline-flex items-center gap-2 px-7 py-3 bg-brand-dark text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-dark hover:bg-brand-blue hover:border-brand-blue transition-all">
+          Tutti i risultati &rarr;
+        </a>
       </div>
     </div>
   </section>
@@ -309,6 +319,7 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, FEATURED_EVENT,
               {sponsor.tier === 'main' ? 'Main Sponsor' : sponsor.tier === 'technical' ? 'Partner Tecnico' : 'Supporter'}
             </span>
             <span class="font-display text-sm font-bold text-brand-dark block">{sponsor.name}</span>
+            {sponsor.desc && <span class="block text-[0.55rem] text-brand-dark/30 mt-1">{sponsor.desc}</span>}
           </a>
         ))}
       </div>
