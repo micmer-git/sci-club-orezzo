@@ -1,26 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTONES } from '../data/site.js';
+import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, FEATURED_EVENT, GALLERY_IMAGES, NOTABLE_ATHLETES } from '../data/site.js';
 ---
 
 <BaseLayout
-  title="Sci Club Orezzo — Sci Alpino dal 1970"
-  description="ASD Sci Club Orezzo, societa di sci alpino fondata nel 1970 a Orezzo, Gazzaniga, Valle Seriana. Vivaio giovanile, gare e passione per la montagna bergamasca."
+  title="Sci Club Orezzo — Sci Alpino dal 1968"
+  description="ASD Sci Club Orezzo Valseriana, societa di sci alpino fondata nel 1968 a Orezzo, Gazzaniga, Valle Seriana. 57 atleti agonisti, vivaio giovanile, gare FISI."
 >
 
   <!-- ========== HERO ========== -->
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark" id="hero">
-    <!-- Background gradient simulating snowy mountain landscape -->
-    <div class="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-dark/80 to-brand-blue/30"></div>
-    <!-- Geometric mountain shapes -->
-    <div class="absolute bottom-0 left-0 right-0 h-[40vh]">
-      <svg viewBox="0 0 1440 400" preserveAspectRatio="none" class="w-full h-full" aria-hidden="true">
-        <polygon points="0,400 200,120 380,280 520,80 720,260 900,60 1100,200 1280,100 1440,220 1440,400" fill="#0066B3" opacity="0.15"/>
-        <polygon points="0,400 150,200 300,320 480,140 680,300 850,120 1050,280 1200,160 1440,280 1440,400" fill="#0066B3" opacity="0.1"/>
-        <polygon points="0,400 100,300 250,350 400,250 600,340 800,200 1000,320 1200,240 1440,340 1440,400" fill="#F0F4F8" opacity="0.05"/>
-      </svg>
+    <!-- Real mountain background -->
+    <div class="absolute inset-0">
+      <img src="/img/montagna-sfondo.jpg" alt="" class="w-full h-full object-cover opacity-30" />
+      <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/60 via-brand-dark/40 to-brand-blue/30"></div>
     </div>
-    <!-- Mountain silhouette at bottom -->
+    <!-- Mountain silhouette -->
     <div class="absolute bottom-0 left-0 right-0 z-10">
       <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="w-full h-20 md:h-28" aria-hidden="true">
         <path d="M0,120 L0,80 L80,50 L160,70 L280,20 L400,60 L520,10 L640,55 L760,25 L880,65 L1000,15 L1120,50 L1240,30 L1360,55 L1440,40 L1440,120 Z" fill="#F0F4F8"/>
@@ -28,20 +23,77 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
     </div>
 
     <div class="relative z-20 text-center px-5 max-w-4xl mx-auto">
-      <p class="text-brand-blue text-xs font-bold tracking-[0.25em] uppercase mb-6 reveal">Orezzo, Valle Seriana — dal 1970</p>
-      <h1 class="font-cursive text-white text-[clamp(3.5rem,12vw,9rem)] leading-[0.85] mb-4 reveal reveal-delay-1" style="text-shadow: 0 4px 30px rgba(0,0,0,0.4);">
+      <!-- Club logo -->
+      <div class="mb-8 reveal">
+        <img src="/img/logo-sci-club-orezzo.jpg" alt="Logo Sci Club Orezzo" class="w-24 h-auto mx-auto rounded-lg shadow-2xl border-2 border-white/20" />
+      </div>
+      <p class="text-brand-blue text-xs font-bold tracking-[0.25em] uppercase mb-6 reveal reveal-delay-1">Orezzo, Valle Seriana — dal 1968</p>
+      <h1 class="font-cursive text-white text-[clamp(3.5rem,12vw,9rem)] leading-[0.85] mb-4 reveal reveal-delay-2" style="text-shadow: 0 4px 30px rgba(0,0,0,0.4);">
         Sci Club Orezzo
       </h1>
-      <p class="font-display text-brand-blue text-[clamp(0.9rem,2.5vw,1.6rem)] tracking-[0.3em] uppercase font-bold mb-10 reveal reveal-delay-2">
-        Sci Alpino
+      <p class="font-display text-brand-blue text-[clamp(0.9rem,2.5vw,1.6rem)] tracking-[0.3em] uppercase font-bold mb-3 reveal reveal-delay-3">
+        Sci Alpino &bull; Fondo &bull; Alpinismo
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-3">
+      <p class="text-white/50 text-sm mb-10 reveal reveal-delay-3">
+        {SITE.athleteCount} atleti agonisti &bull; {SITE.memberCount} tesserati &bull; FISI Bergamo
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-4">
         <a href="#attivita" class="inline-flex items-center gap-2 px-7 py-3 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-transparent hover:text-brand-blue transition-all">
           Le nostre attivita
         </a>
         <a href="#societa" class="inline-flex items-center gap-2 px-7 py-3 bg-transparent text-white font-bold text-sm tracking-wider uppercase border-2 border-white/40 hover:border-white hover:bg-white/10 transition-all">
-          La Societa
+          Chi siamo
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INSTAGRAM CAROUSEL ========== -->
+  <section class="py-12 md:py-16 px-5 bg-brand-snow" id="instagram">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center gap-3">
+          <svg class="w-6 h-6 text-brand-dark" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <h2 class="font-display text-xl md:text-2xl font-bold text-brand-dark">@scicluborezzo</h2>
+          <span class="hidden sm:inline text-xs text-brand-dark/40 font-medium">275 post &bull; 1.059 follower</span>
+        </div>
+        <a href="https://www.instagram.com/scicluborezzo/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2 bg-brand-dark text-white text-xs font-bold tracking-wider uppercase hover:bg-brand-blue transition-colors">
+          Seguici
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
+
+      <div class="ig-slider-container overflow-hidden relative">
+        <div class="ig-slider flex gap-4 transition-transform duration-500 ease-out" id="igSlider">
+          {GALLERY_IMAGES.map((img, i) => (
+            <div class="ig-card flex-shrink-0 w-[260px] md:w-[300px] group">
+              <a href="https://www.instagram.com/scicluborezzo/" target="_blank" rel="noopener noreferrer" class="block no-underline">
+                <div class="aspect-square overflow-hidden border-2 border-brand-dark shadow-[4px_4px_0_#1A1A1A] group-hover:shadow-[2px_2px_0_#1A1A1A] group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all">
+                  <img src={img.src} alt={img.alt} class="w-full h-full object-cover" loading={i < 3 ? 'eager' : 'lazy'} />
+                </div>
+                <p class="mt-3 text-xs text-brand-dark/60 font-medium">{img.caption}</p>
+              </a>
+            </div>
+          ))}
+          <!-- CTA card -->
+          <div class="ig-card flex-shrink-0 w-[260px] md:w-[300px] group">
+            <a href="https://www.instagram.com/scicluborezzo/" target="_blank" rel="noopener noreferrer" class="block no-underline">
+              <div class="aspect-square overflow-hidden border-2 border-brand-blue bg-gradient-to-br from-brand-blue/20 to-brand-blue/5 flex items-center justify-center">
+                <div class="text-center px-8">
+                  <svg class="w-12 h-12 text-brand-blue mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                  <p class="font-display text-lg font-bold text-brand-dark mb-2">Vedi tutti i post</p>
+                  <p class="text-xs text-brand-dark/50">Segui @scicluborezzo su Instagram</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <button class="ig-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-brand-dark text-white flex items-center justify-center hover:bg-brand-blue transition-colors opacity-0 pointer-events-none" aria-label="Precedente">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="ig-next absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-brand-dark text-white flex items-center justify-center hover:bg-brand-blue transition-colors" aria-label="Successivo">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -51,14 +103,49 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
     <div class="marquee-track">
       {[...Array(8)].map(() => (
         <span class="flex-shrink-0 text-white font-display text-lg font-bold tracking-wider pr-8">
-          SCI ALPINO &bull; SLALOM &bull; GIGANTE &bull; SUPER G &bull; DAL 1970 &bull;
+          SCI ALPINO &bull; SLALOM &bull; GIGANTE &bull; SUPER G &bull; FONDO &bull; ALPINISMO &bull; DAL 1968 &bull;
         </span>
       ))}
     </div>
   </div>
 
-  <!-- ========== DISCIPLINES / ACTIVITIES ========== -->
-  <section class="py-20 md:py-28 px-5" id="attivita">
+  <!-- ========== FEATURED EVENT ========== -->
+  <section class="py-20 md:py-28 px-5" id="evento">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Il nostro evento</p>
+          <h2 class="font-display text-[clamp(2rem,5vw,3.5rem)] font-bold text-brand-dark leading-tight mb-6 reveal reveal-delay-1">
+            {FEATURED_EVENT.name}
+          </h2>
+          <p class="text-brand-dark/70 text-lg leading-relaxed mb-8 reveal reveal-delay-2">
+            {FEATURED_EVENT.description}
+          </p>
+          <div class="flex flex-wrap gap-4 mb-8 reveal reveal-delay-3">
+            <div class="bg-white px-5 py-3 border-2 border-brand-dark shadow-[4px_4px_0_#1A1A1A]">
+              <span class="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-brand-blue">Sede</span>
+              <span class="font-display text-lg font-bold">{FEATURED_EVENT.location}</span>
+            </div>
+            <div class="bg-white px-5 py-3 border-2 border-brand-dark shadow-[4px_4px_0_#1A1A1A]">
+              <span class="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-brand-blue">Categorie</span>
+              <span class="font-display text-lg font-bold">{FEATURED_EVENT.categories}</span>
+            </div>
+          </div>
+        </div>
+        <div class="relative reveal reveal-delay-2">
+          <div class="border-2 border-brand-dark shadow-[6px_6px_0_#1A1A1A] aspect-[4/3] overflow-hidden">
+            <img src="/img/gara-lizzola.jpg" alt="Gara di sci a Lizzola — sede del Trofeo La Penzana del Merel" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <div class="absolute -bottom-3 -right-3 bg-brand-dark text-white px-5 py-2 font-display text-sm font-bold tracking-wider">
+            Lizzola — Valbondione
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DISCIPLINES ========== -->
+  <section class="py-20 md:py-28 px-5 bg-brand-snow" id="attivita">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16">
         <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Cosa facciamo</p>
@@ -66,16 +153,16 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
           Le Nostre Discipline
         </h2>
         <p class="text-brand-dark/60 max-w-xl mx-auto reveal reveal-delay-2">
-          Dallo slalom al gigante, dal Super G al fondo. Formiamo sciatori di tutte le eta sulle piste delle Orobie.
+          Tre discipline, una passione. Dal 1968 formiamo sciatori sulle montagne delle Orobie bergamasche.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {DISCIPLINES.map((d, i) => (
-          <div class={`bg-white border-2 border-brand-dark shadow-[5px_5px_0_#1A1A1A] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_#1A1A1A] transition-all p-6 text-center reveal reveal-delay-${Math.min(i + 1, 4)}`}>
-            <span class="text-4xl block mb-4">{d.icon}</span>
-            <h3 class="font-display text-lg font-bold text-brand-dark mb-2">{d.name}</h3>
-            <p class="text-sm text-brand-dark/60">{d.desc}</p>
+          <div class={`bg-white border-2 border-brand-dark shadow-[5px_5px_0_#1A1A1A] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_#1A1A1A] transition-all p-8 text-center reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <span class="text-5xl block mb-4">{d.icon}</span>
+            <h3 class="font-display text-xl font-bold text-brand-dark mb-3">{d.name}</h3>
+            <p class="text-sm text-brand-dark/60 leading-relaxed">{d.desc}</p>
           </div>
         ))}
       </div>
@@ -83,7 +170,7 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
   </section>
 
   <!-- ========== CATEGORIES ========== -->
-  <section class="py-20 md:py-28 px-5 bg-brand-snow">
+  <section class="py-20 md:py-28 px-5">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16">
         <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Per tutte le eta</p>
@@ -91,7 +178,7 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
           Categorie Agonistiche
         </h2>
         <p class="text-brand-dark/60 max-w-xl mx-auto reveal reveal-delay-2">
-          Dai primi passi sulla neve fino all'agonismo di alto livello. Un percorso completo per ogni sciatore.
+          Dai primi passi sulla neve fino all'agonismo. In oltre mezzo secolo abbiamo avviato allo sci piu di mille atleti.
         </p>
       </div>
 
@@ -107,7 +194,7 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
     </div>
   </section>
 
-  <!-- ========== VENUES / PISTE ========== -->
+  <!-- ========== VENUES ========== -->
   <section class="py-20 md:py-28 px-5 bg-brand-dark text-white" id="gare">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16">
@@ -116,7 +203,7 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
           Le Nostre Piste
         </h2>
         <p class="text-white/60 max-w-xl mx-auto reveal reveal-delay-2">
-          Le localita sciistiche dove il club compete e allena i propri atleti nelle Orobie bergamasche.
+          Dalle Orobie al Tonale, le localita dove allenarsi e competere con i colori dello Sci Club Orezzo.
         </p>
       </div>
 
@@ -128,14 +215,14 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
             </div>
             <h3 class="font-display text-xl font-bold text-white mb-1">{v.name}</h3>
             <p class="text-brand-blue text-xs font-bold tracking-wider uppercase mb-3">{v.location}</p>
-            <p class="text-white/60 text-sm">{v.desc}</p>
+            <p class="text-white/60 text-sm leading-relaxed">{v.desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ========== BOARD / SOCIETA ========== -->
+  <!-- ========== SOCIETA / BOARD ========== -->
   <section class="py-20 md:py-28 px-5" id="societa">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16">
@@ -144,17 +231,18 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
           Chi Siamo
         </h2>
         <p class="text-brand-dark/60 max-w-xl mx-auto reveal reveal-delay-2">
-          Oltre cinquant'anni di passione per lo sci alpino, una tradizione che si rinnova di generazione in generazione nella Valle Seriana.
+          Fondato nel 1968 da Tarcisio Merelli nella storica pizzeria "La Penzana del Merel" a Orezzo.
+          Amicizia, serenita e divertimento vanno di pari passo con competizione, disciplina e rigore.
         </p>
       </div>
 
       <!-- Key numbers -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mb-16">
         {[
-          { num: '1970', label: 'Anno di fondazione' },
-          { num: '50+', label: 'Anni di attivita' },
-          { num: '7', label: 'Categorie agonistiche' },
-          { num: '5', label: 'Piste di gara' },
+          { num: '1968', label: 'Anno di fondazione' },
+          { num: '57', label: 'Atleti agonisti' },
+          { num: '118', label: 'Tesserati' },
+          { num: '1000+', label: 'Atleti formati' },
         ].map((stat, i) => (
           <div class={`text-center bg-white border-2 border-brand-dark shadow-[4px_4px_0_#1A1A1A] p-6 reveal reveal-delay-${Math.min(i + 1, 4)}`}>
             <span class="font-display text-3xl md:text-4xl font-bold text-brand-blue block">{stat.num}</span>
@@ -164,16 +252,37 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
       </div>
 
       <!-- Board -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-3xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
         {BOARD.map((member, i) => (
-          <div class={`bg-brand-snow border-2 border-brand-dark/10 p-5 text-center hover:border-brand-blue/30 transition-colors reveal reveal-delay-${Math.min(i + 1, 4)}`}>
-            <div class="w-14 h-14 bg-brand-blue/20 rounded-full flex items-center justify-center mx-auto mb-3">
-              <span class="font-display text-brand-blue font-bold text-lg">{member.name.charAt(0)}</span>
+          <div class={`bg-brand-snow border-2 border-brand-dark/10 p-6 reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <div class="flex items-center gap-4 mb-3">
+              <div class="w-14 h-14 bg-brand-blue/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <span class="font-display text-brand-blue font-bold text-lg">{member.name.charAt(0)}</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-brand-dark">{member.name}</h3>
+                <p class="text-brand-blue text-[0.7rem] font-bold tracking-wider uppercase">{member.role}</p>
+              </div>
             </div>
-            <h3 class="font-bold text-sm text-brand-dark mb-1">{member.name}</h3>
-            <p class="text-brand-blue text-[0.7rem] font-bold tracking-wider uppercase">{member.role}</p>
+            {member.note && <p class="text-sm text-brand-dark/60 leading-relaxed">{member.note}</p>}
           </div>
         ))}
+      </div>
+
+      <!-- Notable athletes -->
+      <div class="max-w-2xl mx-auto">
+        <h3 class="font-display text-xl font-bold text-brand-dark text-center mb-6 reveal">Atleti di Rilievo</h3>
+        <div class="space-y-3">
+          {NOTABLE_ATHLETES.map((a, i) => (
+            <div class={`flex items-center gap-4 bg-white border border-brand-dark/10 p-4 reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+              <span class="text-brand-blue font-display font-bold text-sm bg-brand-blue/10 px-3 py-1 flex-shrink-0">{a.era}</span>
+              <div>
+                <span class="font-bold text-brand-dark text-sm">{a.name}</span>
+                <span class="text-brand-dark/50 text-xs block">{a.achievement}</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -188,7 +297,7 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
         </h2>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
         {SPONSORS.map((sponsor, i) => (
           <a
             href={sponsor.url}
@@ -207,13 +316,17 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
   </section>
 
   <!-- ========== CTA ========== -->
-  <section class="py-20 md:py-28 px-5 bg-brand-dark text-white">
-    <div class="max-w-3xl mx-auto text-center">
+  <section class="py-20 md:py-28 px-5 bg-brand-dark text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <img src="/img/neve-sfondo.jpg" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="relative z-10 max-w-3xl mx-auto text-center">
       <h2 class="font-display text-[clamp(2rem,5vw,3rem)] font-bold leading-tight mb-6 reveal">
         Vuoi entrare nel club?
       </h2>
       <p class="text-white/60 text-lg mb-10 reveal reveal-delay-1">
-        Iscrizioni aperte per tutte le categorie. Contattaci per informazioni sui corsi e l'attivita agonistica.
+        Iscrizioni aperte per tutte le categorie, dai Baby ai Master.
+        Contattaci per informazioni sui corsi e l'attivita agonistica.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-2">
         <a href="/contatti/" class="inline-flex items-center gap-2 px-7 py-3 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-transparent hover:text-brand-blue transition-all">
@@ -236,5 +349,53 @@ import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTON
       ))}
     </div>
   </div>
+
+  <!-- Instagram slider + carousel JS -->
+  <script>
+    (() => {
+      const slider = document.getElementById('igSlider');
+      const prev = document.querySelector('.ig-prev');
+      const next = document.querySelector('.ig-next');
+      if (!slider || !prev || !next) return;
+      let pos = 0;
+      const cardW = slider.querySelector('.ig-card')?.offsetWidth || 300;
+      const gap = 16;
+      const step = cardW + gap;
+
+      function getMaxScroll() {
+        return Math.max(0, slider.scrollWidth - slider.parentElement.offsetWidth);
+      }
+
+      function update() {
+        const maxScroll = getMaxScroll();
+        slider.style.transform = `translateX(-${pos}px)`;
+        prev.classList.toggle('opacity-0', pos <= 0);
+        prev.classList.toggle('pointer-events-none', pos <= 0);
+        next.classList.toggle('opacity-0', pos >= maxScroll);
+        next.classList.toggle('pointer-events-none', pos >= maxScroll);
+      }
+
+      next.addEventListener('click', () => { pos = Math.min(pos + step, getMaxScroll()); update(); });
+      prev.addEventListener('click', () => { pos = Math.max(pos - step, 0); update(); });
+
+      // Touch/swipe support
+      let startX = 0, startPos = 0;
+      slider.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; startPos = pos; }, { passive: true });
+      slider.addEventListener('touchmove', (e) => {
+        const dx = startX - e.touches[0].clientX;
+        pos = Math.max(0, Math.min(startPos + dx, getMaxScroll()));
+        slider.style.transition = 'none';
+        slider.style.transform = `translateX(-${pos}px)`;
+      }, { passive: true });
+      slider.addEventListener('touchend', () => {
+        slider.style.transition = '';
+        pos = Math.round(pos / step) * step;
+        pos = Math.max(0, Math.min(pos, getMaxScroll()));
+        update();
+      });
+
+      update();
+    })();
+  </script>
 
 </BaseLayout>
