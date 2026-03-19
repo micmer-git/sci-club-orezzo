@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../data/site.js';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const fullTitle = title === SITE.name ? title : `${title} — ${SITE.fullName}`;
+---
+
+<!DOCTYPE html>
+<html lang="it" class="bg-brand-ice text-brand-dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={`${SITE.url}/`} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={SITE.fullName} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:locale" content="it_IT" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Oswald:wght@500;600;700&family=Yellowtail&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": SITE.fullName,
+    "description": "Associazione sportiva dilettantistica di sci alpino, fondata nel 1970 a Orezzo, Gazzaniga, Valle Seriana, Bergamo.",
+    "foundingDate": "1970",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Via alla Chiesa 4",
+      "addressLocality": "Gazzaniga",
+      "addressRegion": "BG",
+      "postalCode": "24025",
+      "addressCountry": "IT"
+    },
+    "sport": "Alpine Skiing",
+    "url": SITE.url,
+  })} />
+</head>
+<body class="min-h-screen">
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+
+  <script>
+    const initRevealObserver = () => {
+      const items = document.querySelectorAll('.reveal');
+      if (!items.length) return;
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        items.forEach((el) => el.classList.add('visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+
+      items.forEach((el) => observer.observe(el));
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initRevealObserver, { once: true });
+    } else {
+      initRevealObserver();
+    }
+  </script>
+</body>
+</html>

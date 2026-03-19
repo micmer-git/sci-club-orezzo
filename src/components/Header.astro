@@ -1,0 +1,100 @@
+---
+const navItems = [
+  { label: 'Attivita', href: '/#attivita' },
+  { label: 'Storia', href: '/storia/' },
+  { label: 'Gare', href: '/#gare' },
+  { label: 'Sponsor', href: '/#sponsor' },
+  { label: 'Contatti', href: '/contatti/' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="site-header">
+  <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3 no-underline group">
+      <div class="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center border-2 border-brand-dark shadow-md group-hover:scale-105 transition-transform">
+        <span class="text-white font-bold text-sm font-display">SC</span>
+      </div>
+      <div>
+        <span class="font-cursive text-xl text-brand-dark leading-none">Sci Club Orezzo</span>
+        <span class="block text-[0.6rem] font-bold tracking-[0.18em] uppercase text-brand-blue">Dal 1970</span>
+      </div>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-1" aria-label="Menu principale">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="text-xs font-bold tracking-wider uppercase text-brand-dark/70 hover:text-brand-blue px-3 py-2 rounded transition-colors"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <button
+      type="button"
+      class="md:hidden w-11 h-11 flex items-center justify-center text-brand-dark"
+      id="nav-toggle"
+      aria-label="Apri menu"
+      aria-expanded="false"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="4" y1="7" x2="20" y2="7" class="nav-line-top" />
+        <line x1="4" y1="17" x2="20" y2="17" class="nav-line-bottom" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile nav -->
+  <div class="md:hidden fixed inset-0 bg-brand-ice z-40 flex flex-col items-start justify-center px-8 gap-2 opacity-0 pointer-events-none transition-all duration-300" id="mobile-nav">
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class="mobile-nav-link text-3xl font-display font-bold text-brand-dark hover:text-brand-blue transition-colors"
+      >
+        {item.label}
+      </a>
+    ))}
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('nav-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  let isOpen = false;
+
+  const openNav = () => {
+    isOpen = true;
+    mobileNav?.classList.remove('opacity-0', 'pointer-events-none');
+    mobileNav?.classList.add('opacity-100', 'pointer-events-auto');
+    toggle?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeNav = () => {
+    isOpen = false;
+    mobileNav?.classList.add('opacity-0', 'pointer-events-none');
+    mobileNav?.classList.remove('opacity-100', 'pointer-events-auto');
+    toggle?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  };
+
+  toggle?.addEventListener('click', () => isOpen ? closeNav() : openNav());
+
+  document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    link.addEventListener('click', closeNav);
+  });
+
+  // Header scroll effect
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > 80) {
+      header?.classList.add('bg-brand-ice/95', 'backdrop-blur-md', 'shadow-sm');
+    } else {
+      header?.classList.remove('bg-brand-ice/95', 'backdrop-blur-md', 'shadow-sm');
+    }
+    lastScroll = y;
+  }, { passive: true });
+</script>

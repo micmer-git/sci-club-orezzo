@@ -1,0 +1,309 @@
+{
+  "base": "https://www.scicluborezzo.com/",
+  "title": "Sci Club Orezzo | Sci Club Orezzo",
+  "nav_text": [
+    "",
+    "Il Team",
+    "La Nostra Storia",
+    "News",
+    "Gare",
+    "Gallery",
+    "Attività",
+    "Sponsors",
+    "Contatti",
+    "Meteo & Webcam",
+    "Cerco/Offro",
+    "Area Riservata"
+  ],
+  "sample_internal_links": [
+    "https://www.scicluborezzo.com/",
+    "https://www.scicluborezzo.com/#",
+    "https://www.scicluborezzo.com/?m=201603",
+    "https://www.scicluborezzo.com/?m=201606",
+    "https://www.scicluborezzo.com/?m=201701",
+    "https://www.scicluborezzo.com/?m=201702",
+    "https://www.scicluborezzo.com/?m=202011",
+    "https://www.scicluborezzo.com/?p=2121",
+    "https://www.scicluborezzo.com/?p=2144",
+    "https://www.scicluborezzo.com/?p=2161",
+    "https://www.scicluborezzo.com/?p=2206",
+    "https://www.scicluborezzo.com/?p=2224",
+    "https://www.scicluborezzo.com/?p=2240",
+    "https://www.scicluborezzo.com/?p=2272",
+    "https://www.scicluborezzo.com/?p=2325",
+    "https://www.scicluborezzo.com/?p=2333",
+    "https://www.scicluborezzo.com/?p=2450",
+    "https://www.scicluborezzo.com/?page_id=184",
+    "https://www.scicluborezzo.com/?page_id=1905",
+    "https://www.scicluborezzo.com/?page_id=21",
+    "https://www.scicluborezzo.com/?page_id=24",
+    "https://www.scicluborezzo.com/?page_id=298",
+    "https://www.scicluborezzo.com/?page_id=445",
+    "https://www.scicluborezzo.com/?page_id=66",
+    "https://www.scicluborezzo.com/?page_id=81",
+    "https://www.scicluborezzo.com/?page_id=84",
+    "https://www.scicluborezzo.com/?page_id=87",
+    "https://www.scicluborezzo.com/?page_id=90",
+    "https://www.scicluborezzo.com/?page_id=93",
+    "https://www.scicluborezzo.com/?paged=10",
+    "https://www.scicluborezzo.com/?paged=12",
+    "https://www.scicluborezzo.com/?paged=2",
+    "https://www.scicluborezzo.com/?paged=3",
+    "https://www.scicluborezzo.com/?paged=4",
+    "https://www.scicluborezzo.com/?paged=5",
+    "https://www.scicluborezzo.com/wp-content/uploads/2016/03/3marzo2016_3.jpg",
+    "https://www.scicluborezzo.com/wp-content/uploads/2016/06/WhatsApp-Image-20160602.jpg",
+    "https://www.scicluborezzo.com/wp-content/uploads/2016/06/WhatsApp-Image-204160601.jpg",
+    "https://www.scicluborezzo.com/wp-content/uploads/2017/01/22_01_17_6.jpg",
+    "https://www.scicluborezzo.com/wp-content/uploads/2017/01/Medaglie.jpeg",
+    "https://www.scicluborezzo.com/wp-content/uploads/2017/01/Pora07_01_17.jpg",
+    "https://www.scicluborezzo.com/wp-content/uploads/2017/01/selvino_14_1_17.jpg",
+    "https://www.scicluborezzo.com/wp-content/uploads/2017/02/12_02_17_lizzola_5.jpg",
+    "https://www.scicluborezzo.com/wp-content/uploads/2017/02/27gennaio_gigante_pora_1.jpg",
+    "https://www.scicluborezzo.com/wp-content/uploads/2020/11/IMG-20191103-WA0031.jpg"
+  ],
+  "assets_found": 48,
+  "assets_downloaded": 48,
+  "assets": [
+    {
+      "url": "http://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C600%2C700%2C900%2C400italic&ver=1.2.2",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\css",
+      "bytes": 1040
+    },
+    {
+      "url": "https://www.scicluborezzo.com/?cssgenerator=custom&ver=1.2.2",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\asset",
+      "bytes": 975
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/LayerSlider/css/layerslider.css",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\layerslider.css",
+      "bytes": 14651
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/LayerSlider/js/jquery-easing-1.3.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\jquery-easing-1.3.js",
+      "bytes": 8152
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/LayerSlider/js/jquerytransit.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\jquerytransit.js",
+      "bytes": 6830
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/LayerSlider/js/layerslider.kreaturamedia.jquery.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\layerslider.kreaturamedia.jquery.js",
+      "bytes": 48722
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/LayerSlider/js/layerslider.transitions.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\layerslider.transitions.js",
+      "bytes": 21024
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/cookie-notice/css/front.css",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\front.css",
+      "bytes": 3200
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/cookie-notice/js/front.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\front.js",
+      "bytes": 2563
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/login-with-ajax/widget/login-with-ajax.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\login-with-ajax.js",
+      "bytes": 4934
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/login-with-ajax/widget/widget.css",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\widget.css",
+      "bytes": 3477
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/nextcellent-gallery-nextgen-legacy/css/nggallery.css",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\nggallery.css",
+      "bytes": 7176
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/nextcellent-gallery-nextgen-legacy/js/jquery.cycle.all.min.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\jquery.cycle.all.min.js",
+      "bytes": 26590
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/nextcellent-gallery-nextgen-legacy/js/ngg.slideshow.min.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\ngg.slideshow.min.js",
+      "bytes": 1791
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/plugins/shortcodeigniter/js/shortcodes.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\shortcodes.js",
+      "bytes": 8811
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/themes/im-startup/assets/css/extensions/nivo-slider.css",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\nivo-slider.css",
+      "bytes": 1946
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/themes/im-startup/assets/css/extensions/packed.css",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\packed.css",
+      "bytes": 20822
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/themes/im-startup/assets/css/fonts/packed.css",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\packed_1.css",
+      "bytes": 81687
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/themes/im-startup/assets/css/generic/packed.css",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\packed_2.css",
+      "bytes": 317328
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/themes/im-startup/assets/css/responsive/packed.css",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\packed_3.css",
+      "bytes": 52136
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/themes/im-startup/assets/scripts/static/bootstrap/packed.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\packed.js",
+      "bytes": 39629
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/themes/im-startup/assets/scripts/static/extensions/packed.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\packed_1.js",
+      "bytes": 13841
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/themes/im-startup/assets/scripts/static/generic/packed.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\packed_2.js",
+      "bytes": 1621
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/themes/im-startup/assets/scripts/static/init/packed.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\packed_3.js",
+      "bytes": 7565
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/themes/im-startup/assets/scripts/static/jquery/packed.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\packed_4.js",
+      "bytes": 145133
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/themes/im-startup/style.css",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\style.css",
+      "bytes": 542
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/2015/04/BG.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\BG.jpg",
+      "bytes": 45848
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/2015/04/Brembana-Service.bmp",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\Brembana-Service.bmp",
+      "bytes": 302790
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/2015/04/PANZERI.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\PANZERI.jpg",
+      "bytes": 6949
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/2015/04/hidrodepur.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\hidrodepur.jpg",
+      "bytes": 71791
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/2015/04/kempatex.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\kempatex.jpg",
+      "bytes": 27441
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/2015/04/pedretti-serramenti.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\pedretti-serramenti.jpg",
+      "bytes": 19609
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/cache/0/08e9cc3abff635b3eebff25224e8bc34.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\08e9cc3abff635b3eebff25224e8bc34.jpg",
+      "bytes": 15402
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/cache/0/0f201a1c1e5cb3454169cfe2cc7803a3.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\0f201a1c1e5cb3454169cfe2cc7803a3.jpg",
+      "bytes": 14148
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/cache/1/1bf31e9b6e32cb90831cc76c0acdf932.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\1bf31e9b6e32cb90831cc76c0acdf932.jpg",
+      "bytes": 14185
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/cache/1/1dda4c9598bf162e3fdae0c9e14d330d.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\1dda4c9598bf162e3fdae0c9e14d330d.jpg",
+      "bytes": 15334
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/cache/4/474d5bffd6582a3a5206f61a24cbe320.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\474d5bffd6582a3a5206f61a24cbe320.jpg",
+      "bytes": 25648
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/cache/6/624fa5d5204c36984f4c7311e9041974.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\624fa5d5204c36984f4c7311e9041974.jpg",
+      "bytes": 8702
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/cache/7/7dcc39cac1fd8374eafc2b183dda5f5c.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\7dcc39cac1fd8374eafc2b183dda5f5c.jpg",
+      "bytes": 19311
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/cache/9/9a9662e2950a8ef125771370ed8a9390.jpeg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\9a9662e2950a8ef125771370ed8a9390.jpeg",
+      "bytes": 17413
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/cache/b/b99673f195c5b5517e7b911efde7b5bf.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\b99673f195c5b5517e7b911efde7b5bf.jpg",
+      "bytes": 15475
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/cache/d/dd93c5ae035f8e1009d33a22cac21fb1.jpg",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\dd93c5ae035f8e1009d33a22cac21fb1.jpg",
+      "bytes": 28961
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/cache/skin.min.css",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\skin.min.css",
+      "bytes": 45617
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-content/uploads/layerslider.custom.transitions.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\layerslider.custom.transitions.js",
+      "bytes": 2577
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-includes/css/dist/block-library/style.min.css",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\style.min.css",
+      "bytes": 25242
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-includes/js/jquery/jquery-migrate.min.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\jquery-migrate.min.js",
+      "bytes": 10056
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-includes/js/jquery/jquery.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\jquery.js",
+      "bytes": 96873
+    },
+    {
+      "url": "https://www.scicluborezzo.com/wp-includes/js/wp-embed.min.js",
+      "file": "C:\\Users\\micme\\Desktop\\micmer\\sci-club-orezzo\\current-site-snapshot\\assets_live\\wp-embed.min.js",
+      "bytes": 1444
+    }
+  ]
+}

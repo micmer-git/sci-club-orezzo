@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site.js';
+---
+
+<BaseLayout
+  title="Contatti — Sci Club Orezzo"
+  description="Contatta lo Sci Club Orezzo. Informazioni su iscrizioni, corsi di sci e attivita agonistica."
+>
+
+  <!-- Hero -->
+  <section class="relative py-28 md:py-36 px-5 bg-brand-dark text-white overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-dark/90 to-brand-blue/20"></div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center">
+      <p class="text-brand-blue text-xs font-bold tracking-[0.25em] uppercase mb-4 reveal">Scrivici</p>
+      <h1 class="font-display text-[clamp(2.5rem,8vw,4.5rem)] font-bold leading-tight mb-6 reveal reveal-delay-1">
+        Contatti
+      </h1>
+      <p class="text-white/60 text-lg max-w-xl mx-auto reveal reveal-delay-2">
+        Per informazioni su iscrizioni, corsi, attivita agonistica e collaborazioni.
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-4xl mx-auto px-5 py-16 md:py-24">
+    <div class="grid md:grid-cols-2 gap-12 md:gap-16">
+
+      <!-- Contact Form -->
+      <div>
+        <h2 class="font-display text-2xl font-bold text-brand-dark mb-2 reveal">Scrivici un Messaggio</h2>
+        <p class="text-brand-dark/60 text-sm mb-8 reveal reveal-delay-1">Per iscrizioni, informazioni sui corsi e sull'attivita agonistica.</p>
+
+        <form id="contactForm" class="space-y-5" action="https://formsubmit.co/scicluborezzo@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Nuovo messaggio dal sito Sci Club Orezzo" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="https://www.scicluborezzo.com/contatti/?sent=1" />
+          <input type="text" name="_honey" style="display:none" />
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="c-name" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Nome</label>
+              <input type="text" id="c-name" name="nome" required
+                class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
+                placeholder="Mario" />
+            </div>
+            <div>
+              <label for="c-surname" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Cognome</label>
+              <input type="text" id="c-surname" name="cognome" required
+                class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
+                placeholder="Rossi" />
+            </div>
+          </div>
+
+          <div>
+            <label for="c-email" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Email</label>
+            <input type="email" id="c-email" name="email" required
+              class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
+              placeholder="mario@email.com" />
+          </div>
+
+          <div>
+            <label for="c-subject" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Oggetto</label>
+            <select id="c-subject" name="oggetto"
+              class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark focus:border-brand-blue focus:outline-none transition-colors">
+              <option value="info">Informazioni generali</option>
+              <option value="iscrizione">Iscrizione al club</option>
+              <option value="corsi">Corsi di sci</option>
+              <option value="sponsor">Sponsorizzazione / Partnership</option>
+              <option value="altro">Altro</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="c-msg" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Messaggio</label>
+            <textarea id="c-msg" name="messaggio" rows="5" required
+              class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors resize-y"
+              placeholder="Scrivi il tuo messaggio..."></textarea>
+          </div>
+
+          <button type="submit"
+            class="w-full px-7 py-3.5 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-brand-dark hover:border-brand-dark transition-all">
+            Invia messaggio
+          </button>
+        </form>
+      </div>
+
+      <!-- Info sidebar -->
+      <div>
+        <h2 class="font-display text-2xl font-bold text-brand-dark mb-8 reveal">Dove Trovarci</h2>
+
+        <div class="space-y-4">
+          <div class="bg-brand-snow p-5 border-2 border-brand-dark/10 reveal reveal-delay-1">
+            <span class="block text-[0.65rem] font-bold tracking-wider uppercase text-brand-blue mb-1">Sede</span>
+            <p class="text-sm font-medium text-brand-dark">{SITE.contacts.address}</p>
+          </div>
+
+          <div class="bg-brand-snow p-5 border-2 border-brand-dark/10 reveal reveal-delay-2">
+            <span class="block text-[0.65rem] font-bold tracking-wider uppercase text-brand-blue mb-1">Telefono</span>
+            <a href={`tel:${SITE.contacts.phone.replace(/\s/g, '')}`} class="text-sm font-medium text-brand-dark hover:text-brand-blue transition-colors">
+              {SITE.contacts.phone}
+            </a>
+          </div>
+
+          <div class="bg-brand-snow p-5 border-2 border-brand-dark/10 reveal reveal-delay-3">
+            <span class="block text-[0.65rem] font-bold tracking-wider uppercase text-brand-blue mb-1">P.IVA</span>
+            <p class="text-sm text-brand-dark">{SITE.contacts.piva}</p>
+          </div>
+
+          <div class="bg-brand-snow p-5 border-2 border-brand-dark/10 reveal reveal-delay-4">
+            <span class="block text-[0.65rem] font-bold tracking-wider uppercase text-brand-blue mb-1">Affiliazione</span>
+            <p class="text-sm text-brand-dark">FISI — Federazione Italiana Sport Invernali</p>
+            <p class="text-xs text-brand-dark/50 mt-1">Comitato Regionale Lombardia — FISI Bergamo</p>
+          </div>
+        </div>
+
+        <!-- Social -->
+        <div class="mt-8 reveal reveal-delay-4">
+          <h3 class="text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-4">Seguici</h3>
+          <div class="flex gap-3">
+            <a href={SITE.social.facebook} target="_blank" rel="noopener noreferrer"
+              class="flex items-center gap-2 px-4 py-2 bg-brand-dark text-white text-xs font-bold tracking-wider uppercase hover:bg-brand-blue transition-colors">
+              Facebook
+            </a>
+            <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer"
+              class="flex items-center gap-2 px-4 py-2 bg-brand-dark text-white text-xs font-bold tracking-wider uppercase hover:bg-brand-blue transition-colors">
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Success message (shown after form submission) -->
+  <script>
+    if (window.location.search.includes('sent=1')) {
+      const form = document.getElementById('contactForm');
+      if (form) {
+        form.innerHTML = '<div class="bg-brand-blue/10 border-2 border-brand-blue p-8 text-center"><p class="font-display text-2xl font-bold text-brand-blue mb-2">Messaggio inviato!</p><p class="text-brand-dark/60">Ti risponderemo il prima possibile. Grazie!</p></div>';
+      }
+    }
+  </script>
+
+  <!-- Back link -->
+  <div class="text-center pb-16">
+    <a href="/" class="inline-flex items-center gap-2 text-sm font-bold text-brand-blue hover:underline">
+      &larr; Torna alla home
+    </a>
+  </div>
+
+</BaseLayout>

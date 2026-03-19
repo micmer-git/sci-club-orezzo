@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, CATEGORIES, STORIA_MILESTONES } from '../data/site.js';
+---
+
+<BaseLayout
+  title="Sci Club Orezzo — Sci Alpino dal 1970"
+  description="ASD Sci Club Orezzo, societa di sci alpino fondata nel 1970 a Orezzo, Gazzaniga, Valle Seriana. Vivaio giovanile, gare e passione per la montagna bergamasca."
+>
+
+  <!-- ========== HERO ========== -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark" id="hero">
+    <!-- Background gradient simulating snowy mountain landscape -->
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-dark/80 to-brand-blue/30"></div>
+    <!-- Geometric mountain shapes -->
+    <div class="absolute bottom-0 left-0 right-0 h-[40vh]">
+      <svg viewBox="0 0 1440 400" preserveAspectRatio="none" class="w-full h-full" aria-hidden="true">
+        <polygon points="0,400 200,120 380,280 520,80 720,260 900,60 1100,200 1280,100 1440,220 1440,400" fill="#0066B3" opacity="0.15"/>
+        <polygon points="0,400 150,200 300,320 480,140 680,300 850,120 1050,280 1200,160 1440,280 1440,400" fill="#0066B3" opacity="0.1"/>
+        <polygon points="0,400 100,300 250,350 400,250 600,340 800,200 1000,320 1200,240 1440,340 1440,400" fill="#F0F4F8" opacity="0.05"/>
+      </svg>
+    </div>
+    <!-- Mountain silhouette at bottom -->
+    <div class="absolute bottom-0 left-0 right-0 z-10">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="w-full h-20 md:h-28" aria-hidden="true">
+        <path d="M0,120 L0,80 L80,50 L160,70 L280,20 L400,60 L520,10 L640,55 L760,25 L880,65 L1000,15 L1120,50 L1240,30 L1360,55 L1440,40 L1440,120 Z" fill="#F0F4F8"/>
+      </svg>
+    </div>
+
+    <div class="relative z-20 text-center px-5 max-w-4xl mx-auto">
+      <p class="text-brand-blue text-xs font-bold tracking-[0.25em] uppercase mb-6 reveal">Orezzo, Valle Seriana — dal 1970</p>
+      <h1 class="font-cursive text-white text-[clamp(3.5rem,12vw,9rem)] leading-[0.85] mb-4 reveal reveal-delay-1" style="text-shadow: 0 4px 30px rgba(0,0,0,0.4);">
+        Sci Club Orezzo
+      </h1>
+      <p class="font-display text-brand-blue text-[clamp(0.9rem,2.5vw,1.6rem)] tracking-[0.3em] uppercase font-bold mb-10 reveal reveal-delay-2">
+        Sci Alpino
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-3">
+        <a href="#attivita" class="inline-flex items-center gap-2 px-7 py-3 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-transparent hover:text-brand-blue transition-all">
+          Le nostre attivita
+        </a>
+        <a href="#societa" class="inline-flex items-center gap-2 px-7 py-3 bg-transparent text-white font-bold text-sm tracking-wider uppercase border-2 border-white/40 hover:border-white hover:bg-white/10 transition-all">
+          La Societa
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MARQUEE ========== -->
+  <div class="bg-brand-blue h-14 overflow-hidden flex items-center">
+    <div class="marquee-track">
+      {[...Array(8)].map(() => (
+        <span class="flex-shrink-0 text-white font-display text-lg font-bold tracking-wider pr-8">
+          SCI ALPINO &bull; SLALOM &bull; GIGANTE &bull; SUPER G &bull; DAL 1970 &bull;
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- ========== DISCIPLINES / ACTIVITIES ========== -->
+  <section class="py-20 md:py-28 px-5" id="attivita">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Cosa facciamo</p>
+        <h2 class="font-display text-[clamp(2rem,5vw,3rem)] font-bold text-brand-dark leading-tight mb-4 reveal reveal-delay-1">
+          Le Nostre Discipline
+        </h2>
+        <p class="text-brand-dark/60 max-w-xl mx-auto reveal reveal-delay-2">
+          Dallo slalom al gigante, dal Super G al fondo. Formiamo sciatori di tutte le eta sulle piste delle Orobie.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {DISCIPLINES.map((d, i) => (
+          <div class={`bg-white border-2 border-brand-dark shadow-[5px_5px_0_#1A1A1A] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_#1A1A1A] transition-all p-6 text-center reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <span class="text-4xl block mb-4">{d.icon}</span>
+            <h3 class="font-display text-lg font-bold text-brand-dark mb-2">{d.name}</h3>
+            <p class="text-sm text-brand-dark/60">{d.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CATEGORIES ========== -->
+  <section class="py-20 md:py-28 px-5 bg-brand-snow">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Per tutte le eta</p>
+        <h2 class="font-display text-[clamp(2rem,5vw,3rem)] font-bold text-brand-dark leading-tight mb-4 reveal reveal-delay-1">
+          Categorie Agonistiche
+        </h2>
+        <p class="text-brand-dark/60 max-w-xl mx-auto reveal reveal-delay-2">
+          Dai primi passi sulla neve fino all'agonismo di alto livello. Un percorso completo per ogni sciatore.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        {CATEGORIES.map((cat, i) => (
+          <div class={`bg-white border-2 border-brand-dark/10 p-5 text-center hover:border-brand-blue/30 transition-colors reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <h3 class="font-display text-lg font-bold text-brand-blue mb-1">{cat.name}</h3>
+            <p class="text-xs font-bold text-brand-dark/40 tracking-wider uppercase mb-2">{cat.ages}</p>
+            <p class="text-xs text-brand-dark/60">{cat.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== VENUES / PISTE ========== -->
+  <section class="py-20 md:py-28 px-5 bg-brand-dark text-white" id="gare">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Dove gareggiamo</p>
+        <h2 class="font-display text-[clamp(2rem,5vw,3rem)] font-bold leading-tight mb-4 reveal reveal-delay-1">
+          Le Nostre Piste
+        </h2>
+        <p class="text-white/60 max-w-xl mx-auto reveal reveal-delay-2">
+          Le localita sciistiche dove il club compete e allena i propri atleti nelle Orobie bergamasche.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {VENUES.map((v, i) => (
+          <div class={`bg-white/5 border border-white/10 p-6 hover:bg-white/10 transition-colors reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <div class="w-12 h-12 bg-brand-blue/20 rounded-full flex items-center justify-center mb-4">
+              <span class="text-2xl">🏔️</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-white mb-1">{v.name}</h3>
+            <p class="text-brand-blue text-xs font-bold tracking-wider uppercase mb-3">{v.location}</p>
+            <p class="text-white/60 text-sm">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BOARD / SOCIETA ========== -->
+  <section class="py-20 md:py-28 px-5" id="societa">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">La Societa</p>
+        <h2 class="font-display text-[clamp(2rem,5vw,3rem)] font-bold text-brand-dark leading-tight mb-4 reveal reveal-delay-1">
+          Chi Siamo
+        </h2>
+        <p class="text-brand-dark/60 max-w-xl mx-auto reveal reveal-delay-2">
+          Oltre cinquant'anni di passione per lo sci alpino, una tradizione che si rinnova di generazione in generazione nella Valle Seriana.
+        </p>
+      </div>
+
+      <!-- Key numbers -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mb-16">
+        {[
+          { num: '1970', label: 'Anno di fondazione' },
+          { num: '50+', label: 'Anni di attivita' },
+          { num: '7', label: 'Categorie agonistiche' },
+          { num: '5', label: 'Piste di gara' },
+        ].map((stat, i) => (
+          <div class={`text-center bg-white border-2 border-brand-dark shadow-[4px_4px_0_#1A1A1A] p-6 reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <span class="font-display text-3xl md:text-4xl font-bold text-brand-blue block">{stat.num}</span>
+            <span class="text-xs text-brand-dark/50 font-bold tracking-wider uppercase mt-2 block">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Board -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-3xl mx-auto">
+        {BOARD.map((member, i) => (
+          <div class={`bg-brand-snow border-2 border-brand-dark/10 p-5 text-center hover:border-brand-blue/30 transition-colors reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <div class="w-14 h-14 bg-brand-blue/20 rounded-full flex items-center justify-center mx-auto mb-3">
+              <span class="font-display text-brand-blue font-bold text-lg">{member.name.charAt(0)}</span>
+            </div>
+            <h3 class="font-bold text-sm text-brand-dark mb-1">{member.name}</h3>
+            <p class="text-brand-blue text-[0.7rem] font-bold tracking-wider uppercase">{member.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SPONSORS ========== -->
+  <section class="py-16 md:py-20 px-5 bg-brand-snow" id="sponsor">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Insieme</p>
+        <h2 class="font-display text-[clamp(1.5rem,4vw,2.5rem)] font-bold text-brand-dark leading-tight reveal reveal-delay-1">
+          Sponsor e Partner
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+        {SPONSORS.map((sponsor, i) => (
+          <a
+            href={sponsor.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={`bg-white border-2 px-5 py-6 text-center no-underline hover:scale-[1.03] transition-all reveal reveal-delay-${Math.min(i + 1, 4)} ${sponsor.tier === 'main' ? 'border-brand-blue/40 shadow-[3px_3px_0_#0066B3]' : sponsor.tier === 'technical' ? 'border-amber-500/30 shadow-[3px_3px_0_#d97706]' : 'border-brand-dark/10 shadow-[2px_2px_0_#1A1A1A20]'}`}
+          >
+            <span class={`block text-[0.6rem] font-bold tracking-[0.15em] uppercase mb-2 ${sponsor.tier === 'main' ? 'text-brand-blue' : sponsor.tier === 'technical' ? 'text-amber-600' : 'text-brand-dark/40'}`}>
+              {sponsor.tier === 'main' ? 'Main Sponsor' : sponsor.tier === 'technical' ? 'Partner Tecnico' : 'Supporter'}
+            </span>
+            <span class="font-display text-sm font-bold text-brand-dark block">{sponsor.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="py-20 md:py-28 px-5 bg-brand-dark text-white">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="font-display text-[clamp(2rem,5vw,3rem)] font-bold leading-tight mb-6 reveal">
+        Vuoi entrare nel club?
+      </h2>
+      <p class="text-white/60 text-lg mb-10 reveal reveal-delay-1">
+        Iscrizioni aperte per tutte le categorie. Contattaci per informazioni sui corsi e l'attivita agonistica.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-2">
+        <a href="/contatti/" class="inline-flex items-center gap-2 px-7 py-3 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-transparent hover:text-brand-blue transition-all">
+          Contattaci
+        </a>
+        <a href="/storia/" class="inline-flex items-center gap-2 px-7 py-3 bg-transparent text-white font-bold text-sm tracking-wider uppercase border-2 border-white/40 hover:border-white hover:bg-white/10 transition-all">
+          La nostra storia
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BOTTOM MARQUEE ========== -->
+  <div class="bg-brand-dark h-14 overflow-hidden flex items-center">
+    <div class="marquee-track">
+      {[...Array(8)].map(() => (
+        <span class="flex-shrink-0 text-brand-blue font-display text-lg font-bold tracking-wider pr-8">
+          OREZZO &bull; GAZZANIGA &bull; VALLE SERIANA &bull; OROBIE &bull; BERGAMO &bull;
+        </span>
+      ))}
+    </div>
+  </div>
+
+</BaseLayout>

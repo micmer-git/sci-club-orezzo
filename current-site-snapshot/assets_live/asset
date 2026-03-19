@@ -1,0 +1,67 @@
+/* Begin Theme Settings */
+.site_info > .container > .row-fluid > * 
+{
+  height: 80px;
+  line-height: 80px;
+}
+
+.navbar .btn-navbar 
+{
+  margin-top: 40px
+}
+
+header 
+{
+  height: 81px;
+  min-height: 81px;
+}
+.navbar .nav > li > a,
+.nav .nav-search-box
+{
+  height: 81px;
+  line-height: 81px;
+}
+
+.navbar .nav > li > a.with_teaser > .half
+{
+  height: 40px;
+}
+
+header .navbar .nav > li > a > i 
+{
+  font-size: 21px;
+  line-height: 81px;
+  height: 81px;
+}
+
+.navbar .nav > li > a.with_teaser > i,
+.navbar .nav > li > a.menu_item_without_text > i
+{
+  font-size: 28px;
+}
+
+.navbar .nav > li > a.with_teaser > .half > span
+{
+  padding-top: 22px;
+}
+
+.navbar .nav > li > a.with_teaser > .teaser
+{
+  font-size: 12px;
+}
+
+header .navbar .nav .nav-search-box .search-form
+{
+  top: 0; /*-22px; */
+}
+
+header .company_logo.menu-logo,
+header .company_logo.menu-logo > a
+{
+  height: 81px;
+  line-height: 81px;
+}
+
+/* End Theme Settings */
+
+/* CSS Generator Execution Time: 0.010292053222656 seconds */

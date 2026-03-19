@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { STORIA_MILESTONES, SITE } from '../data/site.js';
+---
+
+<BaseLayout
+  title="Storia — Sci Club Orezzo"
+  description="La storia dello Sci Club Orezzo dal 1970 ad oggi. Oltre cinquant'anni di sci alpino a Orezzo, Gazzaniga, Valle Seriana."
+>
+
+  <!-- Hero -->
+  <section class="relative py-32 md:py-40 px-5 bg-brand-dark text-white overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-dark/90 to-brand-blue/20"></div>
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="w-full h-20 md:h-28" aria-hidden="true">
+        <path d="M0,120 L0,80 L80,50 L160,70 L280,20 L400,60 L520,10 L640,55 L760,25 L880,65 L1000,15 L1120,50 L1240,30 L1360,55 L1440,40 L1440,120 Z" fill="#F0F4F8"/>
+      </svg>
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center">
+      <p class="text-brand-blue text-xs font-bold tracking-[0.25em] uppercase mb-4 reveal">Dal 1970</p>
+      <h1 class="font-display text-[clamp(2.5rem,8vw,5rem)] font-bold leading-tight mb-6 reveal reveal-delay-1">
+        La Nostra Storia
+      </h1>
+      <p class="text-white/60 text-lg max-w-xl mx-auto reveal reveal-delay-2">
+        Oltre cinquant'anni di passione per lo sci. Dalle prime discese sulle Orobie ai circuiti provinciali e regionali.
+      </p>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-16 md:py-24 px-5">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-lg text-brand-dark/80 leading-relaxed mb-6 reveal">
+        Lo Sci Club Orezzo nasce nel <strong>1970</strong> nella piccola frazione di <strong>Orezzo</strong>,
+        nel comune di Gazzaniga, cuore della Valle Seriana bergamasca.
+        Un gruppo di appassionati di montagna e neve decide di fondare un club dedicato allo sci alpino,
+        portando i colori del proprio paese sulle piste delle Orobie.
+      </p>
+      <p class="text-lg text-brand-dark/80 leading-relaxed mb-6 reveal reveal-delay-1">
+        Da allora il club ha formato generazioni di sciatori, dai bambini che muovono i primi passi sulla neve
+        fino agli agonisti che competono nei circuiti provinciali e regionali FISI.
+        Le piste di <strong>Monte Pora</strong>, <strong>Lizzola</strong>, <strong>Spiazzi di Gromo</strong>
+        e <strong>Selvino</strong> sono diventate la palestra naturale degli atleti del club.
+      </p>
+      <p class="text-lg text-brand-dark/80 leading-relaxed reveal reveal-delay-2">
+        Nel 2020 il club ha celebrato i suoi primi <strong>cinquant'anni</strong> di attivita,
+        confermandosi come una delle realta piu solide dello sci alpino bergamasco.
+        Lo Sci Club Orezzo continua a essere un punto di riferimento per famiglie e giovani
+        che vogliono vivere la montagna attraverso lo sport.
+      </p>
+    </div>
+  </section>
+
+  <!-- Timeline milestones -->
+  <section class="py-16 md:py-24 px-5 bg-brand-dark text-white" id="tappe">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-3xl font-bold text-center mb-16 reveal">Le Tappe Fondamentali</h2>
+
+      <div class="relative">
+        <!-- Vertical line -->
+        <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/10" aria-hidden="true"></div>
+
+        {STORIA_MILESTONES.map((m, i) => {
+          const isLeft = i % 2 === 0;
+          return (
+            <div class={`relative mb-12 md:mb-16 md:flex ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'} reveal reveal-delay-${Math.min(i % 4 + 1, 4)}`}>
+              {/* Dot */}
+              <div class="absolute left-8 md:left-1/2 -translate-x-1/2 top-2 z-10">
+                <div class="w-4 h-4 rounded-full bg-brand-blue border-2 border-brand-blue"></div>
+              </div>
+
+              {/* Card */}
+              <div class={`ml-16 md:ml-0 md:w-[calc(50%-2rem)] ${isLeft ? 'md:pr-0 md:mr-auto' : 'md:pl-0 md:ml-auto'}`}>
+                <div class="bg-white/5 border border-white/10 p-6 hover:bg-white/10 transition-colors">
+                  <span class="font-display text-3xl font-bold text-brand-blue">{m.year}</span>
+                  <h3 class="font-display text-lg font-bold text-white mt-2 mb-2">{m.title}</h3>
+                  <p class="text-white/60 text-sm leading-relaxed">{m.text}</p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Key numbers -->
+  <section class="py-16 md:py-24 px-5">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-3xl font-bold text-brand-dark text-center mb-12 reveal">I Numeri</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {[
+          { num: '1970', label: 'Anno di fondazione' },
+          { num: '50+', label: 'Anni di attivita' },
+          { num: '5', label: 'Piste di gara' },
+          { num: '7', label: 'Categorie' },
+        ].map((stat, i) => (
+          <div class={`text-center bg-white border-2 border-brand-dark shadow-[4px_4px_0_#1A1A1A] p-6 reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <span class="font-display text-3xl md:text-4xl font-bold text-brand-blue block">{stat.num}</span>
+            <span class="text-xs text-brand-dark/50 font-bold tracking-wider uppercase mt-2 block">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 px-5 bg-brand-snow">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-brand-dark/60 text-sm mb-4">Vuoi far parte della nostra storia?</p>
+      <a href="/contatti/" class="inline-flex items-center gap-2 px-7 py-3 bg-brand-dark text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-dark hover:bg-brand-blue hover:border-brand-blue transition-all">
+        Contattaci
+      </a>
+    </div>
+  </section>
+
+  <!-- Back link -->
+  <div class="text-center py-12">
+    <a href="/" class="inline-flex items-center gap-2 text-sm font-bold text-brand-blue hover:underline">
+      &larr; Torna alla home
+    </a>
+  </div>
+
+</BaseLayout>

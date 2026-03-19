@@ -1,0 +1,20 @@
+{
+  "name": "sci-club-orezzo",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "node scripts/deploy-ftp.mjs"
+  },
+  "dependencies": {
+    "astro": "^4.16.18",
+    "@astrojs/tailwind": "^5.1.4",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "basic-ftp": "^5.0.5"
+  }
+}
