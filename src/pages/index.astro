@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, FEATURED_EVENT, GALLERY_IMAGES, NOTABLE_ATHLETES, RESULTS, COACHING_STAFF } from '../data/site.js';
+import { SITE, BOARD, SPONSORS, FEATURED_EVENT, GALLERY_IMAGES, NOTABLE_ATHLETES, RESULTS, COACHING_STAFF } from '../data/site.js';
 const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
 ---
 
@@ -49,8 +49,8 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
         {SITE.athleteCount} atleti agonisti &bull; {SITE.memberCount} tesserati &bull; FISI Bergamo
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-4">
-        <a href="#attivita" class="btn-shine inline-flex items-center gap-2 px-7 py-3 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-transparent hover:text-brand-blue transition-all">
-          Le nostre attivita
+        <a href="#evento" class="btn-shine inline-flex items-center gap-2 px-7 py-3 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-transparent hover:text-brand-blue transition-all">
+          Il nostro evento
         </a>
         <a href="#societa" class="btn-shine inline-flex items-center gap-2 px-7 py-3 bg-transparent text-white font-bold text-sm tracking-wider uppercase border-2 border-white/40 hover:border-white hover:bg-white/10 transition-all">
           Chi siamo
@@ -109,23 +109,51 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
     </div>
   </section>
 
-  <!-- ========== MARQUEE ========== -->
-  <div class="bg-brand-blue h-14 overflow-hidden flex items-center marquee-glow">
-    <div class="marquee-track">
-      {[...Array(8)].map(() => (
-        <span class="flex-shrink-0 text-white font-display text-lg font-bold tracking-wider pr-8" style="text-shadow: 0 0 20px rgba(255,255,255,0.3);">
-          SCI ALPINO &bull; SLALOM &bull; GIGANTE &bull; SUPER G &bull; FONDO &bull; ALPINISMO &bull; DAL 1968 &bull;
-        </span>
-      ))}
-    </div>
+  <div class="max-w-6xl mx-auto px-5">
+    <hr class="border-0 border-t border-brand-dark/10" />
   </div>
 
-  <!-- Mountain divider -->
-  <div class="mountain-divider mountain-divider--flip bg-brand-snow">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,0 L0,30 Q120,60 240,25 Q360,0 480,35 Q600,55 720,20 Q840,0 960,30 Q1080,50 1200,15 Q1320,0 1440,25 L1440,0 Z" fill="#0066B3"/>
-    </svg>
-  </div>
+  <!-- ========== SPONSORS CAROUSEL ========== -->
+  <section class="py-16 md:py-20 px-5 bg-brand-snow" id="sponsor">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Insieme</p>
+        <h2 class="font-display text-[clamp(1.5rem,4vw,2.5rem)] font-bold text-brand-dark leading-tight reveal reveal-delay-1">
+          Sponsor e Partner
+        </h2>
+      </div>
+
+      <div class="overflow-hidden relative">
+        <div class="flex gap-5 transition-transform duration-500 ease-out" id="sponsorSlider">
+          {SPONSORS.map((sponsor, i) => (
+            <a
+              href={sponsor.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`sponsor-card flex-shrink-0 w-[280px] md:w-[320px] glass-card-light rounded-lg no-underline hover:scale-[1.02] transition-all ${sponsor.tier === 'main' ? 'border-brand-blue/40 shadow-[4px_4px_0_#0066B3]' : sponsor.tier === 'technical' ? 'border-amber-500/30 shadow-[4px_4px_0_#d97706]' : sponsor.tier === 'storico' ? 'border-purple-500/30 shadow-[4px_4px_0_#7c3aed]' : 'border-brand-dark/10 shadow-[3px_3px_0_#1A1A1A20]'}`}
+            >
+              <div class="h-32 bg-brand-snow flex items-center justify-center p-4 border-b border-brand-dark/5">
+                <img src={sponsor.logo} alt={`Logo ${sponsor.name}`} class="max-h-full max-w-full object-contain" loading="lazy" />
+              </div>
+              <div class="p-5">
+                <span class={`inline-block px-2 py-0.5 text-[0.55rem] font-bold tracking-[0.15em] uppercase mb-2 ${sponsor.tier === 'main' ? 'bg-brand-blue/10 text-brand-blue' : sponsor.tier === 'technical' ? 'bg-amber-100 text-amber-700' : sponsor.tier === 'storico' ? 'bg-purple-100 text-purple-700' : 'bg-brand-dark/5 text-brand-dark/40'}`}>
+                  {sponsor.tier === 'main' ? 'Main Sponsor' : sponsor.tier === 'technical' ? 'Partner Tecnico' : sponsor.tier === 'storico' ? 'Sponsor Storico' : 'Supporter'}
+                </span>
+                <h3 class="font-display text-sm font-bold text-brand-dark mb-1">{sponsor.name}</h3>
+                {sponsor.desc && <p class="text-[0.7rem] text-brand-dark/50 leading-relaxed">{sponsor.desc}</p>}
+              </div>
+            </a>
+          ))}
+        </div>
+        <button class="sponsor-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-brand-dark text-white flex items-center justify-center hover:bg-brand-blue transition-colors opacity-0 pointer-events-none" aria-label="Precedente">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="sponsor-next absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-brand-dark text-white flex items-center justify-center hover:bg-brand-blue transition-colors" aria-label="Successivo">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
 
   <!-- ========== FEATURED EVENT ========== -->
   <section class="py-20 md:py-28 px-5" id="evento">
@@ -158,38 +186,6 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
             Lizzola — Valbondione
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mountain divider -->
-  <div class="mountain-divider bg-brand-snow">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,60 L0,40 Q180,10 360,35 Q540,55 720,25 Q900,5 1080,40 Q1260,55 1440,30 L1440,60 Z" fill="#F0F4F8"/>
-    </svg>
-  </div>
-
-  <!-- ========== DISCIPLINES ========== -->
-  <section class="py-20 md:py-28 px-5 bg-brand-snow" id="attivita">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Cosa facciamo</p>
-        <h2 class="font-display text-[clamp(2rem,5vw,3rem)] font-bold text-brand-dark leading-tight mb-4 reveal reveal-delay-1">
-          Le Nostre Discipline
-        </h2>
-        <p class="text-brand-dark/60 max-w-xl mx-auto reveal reveal-delay-2">
-          Tre discipline, una passione. Dal 1968 formiamo sciatori sulle montagne delle Orobie bergamasche.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {DISCIPLINES.map((d, i) => (
-          <div class={`bg-white border-2 border-brand-dark shadow-[5px_5px_0_#1A1A1A] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_#1A1A1A] transition-all p-8 text-center reveal reveal-delay-${Math.min(i + 1, 4)}`}>
-            <span class="text-5xl block mb-4">{d.icon}</span>
-            <h3 class="font-display text-xl font-bold text-brand-dark mb-3">{d.name}</h3>
-            <p class="text-sm text-brand-dark/60 leading-relaxed">{d.desc}</p>
-          </div>
-        ))}
       </div>
     </div>
   </section>
@@ -228,48 +224,6 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
     </div>
   </section>
 
-  <!-- Mountain divider -->
-  <div class="mountain-divider">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,60 L0,30 Q180,55 360,20 Q540,0 720,40 Q900,55 1080,15 Q1260,0 1440,35 L1440,60 Z" fill="#1A1A1A"/>
-    </svg>
-  </div>
-
-  <!-- ========== VENUES ========== -->
-  <section class="py-20 md:py-28 px-5 bg-brand-dark text-white" id="gare">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Dove gareggiamo</p>
-        <h2 class="font-display text-[clamp(2rem,5vw,3rem)] font-bold leading-tight mb-4 reveal reveal-delay-1">
-          Le Nostre Piste
-        </h2>
-        <p class="text-white/60 max-w-xl mx-auto reveal reveal-delay-2">
-          Dalle Orobie al Tonale, le localita dove allenarsi e competere con i colori dello Sci Club Orezzo.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {VENUES.map((v, i) => (
-          <div class={`glass-card p-6 rounded-lg reveal reveal-delay-${Math.min(i + 1, 4)}`}>
-            <div class="w-12 h-12 bg-brand-blue/20 rounded-full flex items-center justify-center mb-4">
-              <span class="text-2xl">🏔️</span>
-            </div>
-            <h3 class="font-display text-xl font-bold text-white mb-1">{v.name}</h3>
-            <p class="text-brand-blue text-xs font-bold tracking-wider uppercase mb-3">{v.location}</p>
-            <p class="text-white/60 text-sm leading-relaxed">{v.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Mountain divider -->
-  <div class="mountain-divider">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,60 L0,20 Q100,50 200,25 Q350,0 500,30 Q650,55 800,20 Q950,0 1100,35 Q1250,55 1440,15 L1440,60 Z" fill="#1A1A1A"/>
-    </svg>
-  </div>
-
   <!-- ========== FAMIGLIA ========== -->
   <section class="relative py-24 md:py-32 px-5 overflow-hidden snow-overlay" id="famiglia">
     <div class="absolute inset-0">
@@ -278,7 +232,8 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
     </div>
     <div class="relative z-10 max-w-4xl mx-auto text-center">
       <p class="font-cursive text-[clamp(2.5rem,8vw,5.5rem)] text-white leading-tight mb-8 reveal-blur" style="text-shadow: 0 4px 30px rgba(0,102,179,0.3);">
-        {SITE.familyQuote}
+        Prima di uno Sci Club,<br />
+        una Famiglia
       </p>
       <div class="w-20 h-[2px] bg-brand-blue mx-auto mb-8 reveal reveal-delay-1"></div>
       <p class="text-white/70 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto reveal reveal-delay-2">
@@ -293,13 +248,6 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
       </div>
     </div>
   </section>
-
-  <!-- Mountain divider -->
-  <div class="mountain-divider mountain-divider--flip">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,0 L0,40 Q180,10 360,45 Q540,60 720,30 Q900,5 1080,40 Q1260,55 1440,20 L1440,0 Z" fill="#1A1A1A"/>
-    </svg>
-  </div>
 
   <!-- ========== SOCIETA / BOARD ========== -->
   <section class="py-20 md:py-28 px-5" id="societa">
@@ -398,62 +346,6 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
     </div>
   </section>
 
-  <!-- Mountain divider -->
-  <div class="mountain-divider bg-brand-snow">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,60 L0,35 Q200,5 400,40 Q600,60 800,25 Q1000,0 1200,35 Q1350,50 1440,30 L1440,60 Z" fill="#F0F4F8"/>
-    </svg>
-  </div>
-
-  <!-- ========== SPONSORS CAROUSEL ========== -->
-  <section class="py-16 md:py-20 px-5 bg-brand-snow" id="sponsor">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Insieme</p>
-        <h2 class="font-display text-[clamp(1.5rem,4vw,2.5rem)] font-bold text-brand-dark leading-tight reveal reveal-delay-1">
-          Sponsor e Partner
-        </h2>
-      </div>
-
-      <div class="overflow-hidden relative">
-        <div class="flex gap-5 transition-transform duration-500 ease-out" id="sponsorSlider">
-          {SPONSORS.map((sponsor, i) => (
-            <a
-              href={sponsor.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class={`sponsor-card flex-shrink-0 w-[280px] md:w-[320px] glass-card-light rounded-lg no-underline hover:scale-[1.02] transition-all ${sponsor.tier === 'main' ? 'border-brand-blue/40 shadow-[4px_4px_0_#0066B3]' : sponsor.tier === 'technical' ? 'border-amber-500/30 shadow-[4px_4px_0_#d97706]' : sponsor.tier === 'storico' ? 'border-purple-500/30 shadow-[4px_4px_0_#7c3aed]' : 'border-brand-dark/10 shadow-[3px_3px_0_#1A1A1A20]'}`}
-            >
-              <div class="h-32 bg-brand-snow flex items-center justify-center p-4 border-b border-brand-dark/5">
-                <img src={sponsor.logo} alt={`Logo ${sponsor.name}`} class="max-h-full max-w-full object-contain" loading="lazy" />
-              </div>
-              <div class="p-5">
-                <span class={`inline-block px-2 py-0.5 text-[0.55rem] font-bold tracking-[0.15em] uppercase mb-2 ${sponsor.tier === 'main' ? 'bg-brand-blue/10 text-brand-blue' : sponsor.tier === 'technical' ? 'bg-amber-100 text-amber-700' : sponsor.tier === 'storico' ? 'bg-purple-100 text-purple-700' : 'bg-brand-dark/5 text-brand-dark/40'}`}>
-                  {sponsor.tier === 'main' ? 'Main Sponsor' : sponsor.tier === 'technical' ? 'Partner Tecnico' : sponsor.tier === 'storico' ? 'Sponsor Storico' : 'Supporter'}
-                </span>
-                <h3 class="font-display text-sm font-bold text-brand-dark mb-1">{sponsor.name}</h3>
-                {sponsor.desc && <p class="text-[0.7rem] text-brand-dark/50 leading-relaxed">{sponsor.desc}</p>}
-              </div>
-            </a>
-          ))}
-        </div>
-        <button class="sponsor-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-brand-dark text-white flex items-center justify-center hover:bg-brand-blue transition-colors opacity-0 pointer-events-none" aria-label="Precedente">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="sponsor-next absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-brand-dark text-white flex items-center justify-center hover:bg-brand-blue transition-colors" aria-label="Successivo">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mountain divider -->
-  <div class="mountain-divider">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,60 L0,25 Q150,50 300,20 Q450,0 600,35 Q750,55 900,15 Q1050,0 1200,30 Q1350,50 1440,20 L1440,60 Z" fill="#1A1A1A"/>
-    </svg>
-  </div>
-
   <!-- ========== CTA ========== -->
   <section class="py-20 md:py-28 px-5 bg-brand-dark text-white relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
@@ -477,17 +369,6 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
       </div>
     </div>
   </section>
-
-  <!-- ========== BOTTOM MARQUEE ========== -->
-  <div class="bg-brand-dark h-14 overflow-hidden flex items-center marquee-glow">
-    <div class="marquee-track">
-      {[...Array(8)].map(() => (
-        <span class="flex-shrink-0 text-brand-blue font-display text-lg font-bold tracking-wider pr-8" style="text-shadow: 0 0 15px rgba(0,102,179,0.4);">
-          OREZZO &bull; GAZZANIGA &bull; VALLE SERIANA &bull; OROBIE &bull; BERGAMO &bull;
-        </span>
-      ))}
-    </div>
-  </div>
 
   <!-- Cursor snow trail + Sliders JS -->
   <script>
