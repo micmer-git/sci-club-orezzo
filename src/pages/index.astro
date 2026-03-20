@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, FEATURED_EVENT, GALLERY_IMAGES, NOTABLE_ATHLETES, RESULTS } from '../data/site.js';
-const recentPodiums = RESULTS.filter(r => r.podium && r.position > 0).slice(0, 6);
+import { SITE, BOARD, SPONSORS, DISCIPLINES, VENUES, FEATURED_EVENT, GALLERY_IMAGES, NOTABLE_ATHLETES, RESULTS, COACHING_STAFF } from '../data/site.js';
+const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
 ---
 
 <BaseLayout
@@ -184,10 +184,10 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.position > 0).slice(0, 6
         {recentPodiums.map((r, i) => (
           <div class={`bg-white border-2 border-brand-blue/20 shadow-[4px_4px_0_#0066B3] p-5 reveal reveal-delay-${Math.min(i + 1, 4)}`}>
             <div class="flex items-center gap-3 mb-3">
-              <span class="w-10 h-10 flex items-center justify-center bg-brand-blue text-white font-display font-bold text-lg">{r.position}°</span>
+              <span class="w-10 h-10 flex items-center justify-center bg-brand-blue text-white font-display font-bold text-lg">{r.pos}°</span>
               <div>
                 <span class="font-bold text-brand-dark text-sm block">{r.athlete}</span>
-                <span class="text-brand-blue text-[0.65rem] font-bold tracking-wider uppercase">{r.category}</span>
+                <span class="text-brand-blue text-[0.65rem] font-bold tracking-wider uppercase">{r.cat}</span>
               </div>
             </div>
             <p class="text-xs text-brand-dark/50 truncate">{r.race}</p>
@@ -232,6 +232,30 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.position > 0).slice(0, 6
     </div>
   </section>
 
+  <!-- ========== FAMIGLIA ========== -->
+  <section class="relative py-24 md:py-32 px-5 overflow-hidden" id="famiglia">
+    <div class="absolute inset-0">
+      <img src="/img/neve-sfondo.jpg" alt="" class="w-full h-full object-cover opacity-15" />
+      <div class="absolute inset-0 bg-brand-dark/90"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center">
+      <p class="font-cursive text-[clamp(2.5rem,8vw,5.5rem)] text-white leading-tight mb-8 reveal" style="text-shadow: 0 4px 30px rgba(0,102,179,0.3);">
+        {SITE.familyQuote}
+      </p>
+      <div class="w-20 h-[2px] bg-brand-blue mx-auto mb-8 reveal reveal-delay-1"></div>
+      <p class="text-white/70 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto reveal reveal-delay-2">
+        Amicizia, serenita e divertimento vanno di pari passo con competizione, disciplina e rigore.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 mt-10 reveal reveal-delay-3">
+        {['Amicizia', 'Serenita', 'Divertimento', 'Competizione', 'Disciplina', 'Rigore'].map(val => (
+          <span class="px-5 py-2 border border-white/20 text-white/80 text-sm font-display font-bold tracking-wider uppercase bg-white/5 backdrop-blur-sm">
+            {val}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- ========== SOCIETA / BOARD ========== -->
   <section class="py-20 md:py-28 px-5" id="societa">
     <div class="max-w-6xl mx-auto">
@@ -242,7 +266,6 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.position > 0).slice(0, 6
         </h2>
         <p class="text-brand-dark/60 max-w-xl mx-auto reveal reveal-delay-2">
           Fondato nel 1968 da Tarcisio Merelli nella storica pizzeria "La Penzana del Merel" a Orezzo.
-          Amicizia, serenita e divertimento vanno di pari passo con competizione, disciplina e rigore.
         </p>
       </div>
 
@@ -259,6 +282,26 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.position > 0).slice(0, 6
             <span class="text-xs text-brand-dark/50 font-bold tracking-wider uppercase mt-2 block">{stat.label}</span>
           </div>
         ))}
+      </div>
+
+      <!-- Luca Agazzi highlight -->
+      <div class="max-w-3xl mx-auto mb-16 reveal">
+        <div class="relative bg-gradient-to-br from-brand-blue to-brand-blue/80 border-2 border-brand-dark shadow-[6px_6px_0_#1A1A1A] p-8 md:p-10 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+          <div class="relative z-10">
+            <span class="inline-block px-3 py-1 bg-white/20 text-white text-[0.65rem] font-bold tracking-[0.15em] uppercase mb-4">Il nostro orgoglio</span>
+            <h3 class="font-display text-2xl md:text-3xl font-bold mb-4">Luca Agazzi</h3>
+            <p class="text-white/90 text-lg leading-relaxed">
+              Cresciuto sulle nostre piste, oggi allena Sofia Goggia in Coppa del Mondo. Due Olimpiadi, coach di Lara Gut-Behrami e della campionessa bergamasca.
+            </p>
+            <div class="flex flex-wrap gap-3 mt-6">
+              <span class="px-3 py-1 bg-white/10 text-white/80 text-xs font-bold tracking-wider">PyeongChang 2018</span>
+              <span class="px-3 py-1 bg-white/10 text-white/80 text-xs font-bold tracking-wider">Pechino 2022</span>
+              <span class="px-3 py-1 bg-white/10 text-white/80 text-xs font-bold tracking-wider">Coppa del Mondo</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Board -->
@@ -279,6 +322,19 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.position > 0).slice(0, 6
         ))}
       </div>
 
+      <!-- Coaching staff -->
+      <div class="max-w-2xl mx-auto mb-16">
+        <h3 class="font-display text-xl font-bold text-brand-dark text-center mb-6 reveal">Staff Tecnico</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {COACHING_STAFF.map((s, i) => (
+            <div class={`bg-white border border-brand-dark/10 p-4 text-center reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+              <span class="text-brand-blue text-[0.65rem] font-bold tracking-[0.15em] uppercase block mb-2">{s.category}</span>
+              <span class="text-sm text-brand-dark font-medium">{s.coaches}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <!-- Notable athletes -->
       <div class="max-w-2xl mx-auto">
         <h3 class="font-display text-xl font-bold text-brand-dark text-center mb-6 reveal">Atleti di Rilievo</h3>
@@ -297,7 +353,7 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.position > 0).slice(0, 6
     </div>
   </section>
 
-  <!-- ========== SPONSORS ========== -->
+  <!-- ========== SPONSORS CAROUSEL ========== -->
   <section class="py-16 md:py-20 px-5 bg-brand-snow" id="sponsor">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-12">
@@ -307,21 +363,34 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.position > 0).slice(0, 6
         </h2>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-        {SPONSORS.map((sponsor, i) => (
-          <a
-            href={sponsor.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class={`bg-white border-2 px-5 py-6 text-center no-underline hover:scale-[1.03] transition-all reveal reveal-delay-${Math.min(i + 1, 4)} ${sponsor.tier === 'main' ? 'border-brand-blue/40 shadow-[3px_3px_0_#0066B3]' : sponsor.tier === 'technical' ? 'border-amber-500/30 shadow-[3px_3px_0_#d97706]' : 'border-brand-dark/10 shadow-[2px_2px_0_#1A1A1A20]'}`}
-          >
-            <span class={`block text-[0.6rem] font-bold tracking-[0.15em] uppercase mb-2 ${sponsor.tier === 'main' ? 'text-brand-blue' : sponsor.tier === 'technical' ? 'text-amber-600' : 'text-brand-dark/40'}`}>
-              {sponsor.tier === 'main' ? 'Main Sponsor' : sponsor.tier === 'technical' ? 'Partner Tecnico' : 'Supporter'}
-            </span>
-            <span class="font-display text-sm font-bold text-brand-dark block">{sponsor.name}</span>
-            {sponsor.desc && <span class="block text-[0.55rem] text-brand-dark/30 mt-1">{sponsor.desc}</span>}
-          </a>
-        ))}
+      <div class="overflow-hidden relative">
+        <div class="flex gap-5 transition-transform duration-500 ease-out" id="sponsorSlider">
+          {SPONSORS.map((sponsor, i) => (
+            <a
+              href={sponsor.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`sponsor-card flex-shrink-0 w-[280px] md:w-[320px] bg-white border-2 no-underline hover:scale-[1.02] transition-all ${sponsor.tier === 'main' ? 'border-brand-blue/40 shadow-[4px_4px_0_#0066B3]' : sponsor.tier === 'technical' ? 'border-amber-500/30 shadow-[4px_4px_0_#d97706]' : sponsor.tier === 'storico' ? 'border-purple-500/30 shadow-[4px_4px_0_#7c3aed]' : 'border-brand-dark/10 shadow-[3px_3px_0_#1A1A1A20]'}`}
+            >
+              <div class="h-32 bg-brand-snow flex items-center justify-center p-4 border-b border-brand-dark/5">
+                <img src={sponsor.logo} alt={`Logo ${sponsor.name}`} class="max-h-full max-w-full object-contain" loading="lazy" />
+              </div>
+              <div class="p-5">
+                <span class={`inline-block px-2 py-0.5 text-[0.55rem] font-bold tracking-[0.15em] uppercase mb-2 ${sponsor.tier === 'main' ? 'bg-brand-blue/10 text-brand-blue' : sponsor.tier === 'technical' ? 'bg-amber-100 text-amber-700' : sponsor.tier === 'storico' ? 'bg-purple-100 text-purple-700' : 'bg-brand-dark/5 text-brand-dark/40'}`}>
+                  {sponsor.tier === 'main' ? 'Main Sponsor' : sponsor.tier === 'technical' ? 'Partner Tecnico' : sponsor.tier === 'storico' ? 'Sponsor Storico' : 'Supporter'}
+                </span>
+                <h3 class="font-display text-sm font-bold text-brand-dark mb-1">{sponsor.name}</h3>
+                {sponsor.desc && <p class="text-[0.7rem] text-brand-dark/50 leading-relaxed">{sponsor.desc}</p>}
+              </div>
+            </a>
+          ))}
+        </div>
+        <button class="sponsor-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-brand-dark text-white flex items-center justify-center hover:bg-brand-blue transition-colors opacity-0 pointer-events-none" aria-label="Precedente">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="sponsor-next absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-brand-dark text-white flex items-center justify-center hover:bg-brand-blue transition-colors" aria-label="Successivo">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -361,51 +430,122 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.position > 0).slice(0, 6
     </div>
   </div>
 
-  <!-- Instagram slider + carousel JS -->
+  <!-- Instagram slider + Sponsor carousel JS -->
   <script>
     (() => {
+      // === Instagram slider ===
       const slider = document.getElementById('igSlider');
       const prev = document.querySelector('.ig-prev');
       const next = document.querySelector('.ig-next');
-      if (!slider || !prev || !next) return;
-      let pos = 0;
-      const cardW = slider.querySelector('.ig-card')?.offsetWidth || 300;
-      const gap = 16;
-      const step = cardW + gap;
+      if (slider && prev && next) {
+        let pos = 0;
+        const cardW = slider.querySelector('.ig-card')?.offsetWidth || 300;
+        const gap = 16;
+        const step = cardW + gap;
 
-      function getMaxScroll() {
-        return Math.max(0, slider.scrollWidth - slider.parentElement.offsetWidth);
-      }
+        function getMaxScroll() {
+          return Math.max(0, slider.scrollWidth - slider.parentElement.offsetWidth);
+        }
 
-      function update() {
-        const maxScroll = getMaxScroll();
-        slider.style.transform = `translateX(-${pos}px)`;
-        prev.classList.toggle('opacity-0', pos <= 0);
-        prev.classList.toggle('pointer-events-none', pos <= 0);
-        next.classList.toggle('opacity-0', pos >= maxScroll);
-        next.classList.toggle('pointer-events-none', pos >= maxScroll);
-      }
+        function update() {
+          const maxScroll = getMaxScroll();
+          slider.style.transform = `translateX(-${pos}px)`;
+          prev.classList.toggle('opacity-0', pos <= 0);
+          prev.classList.toggle('pointer-events-none', pos <= 0);
+          next.classList.toggle('opacity-0', pos >= maxScroll);
+          next.classList.toggle('pointer-events-none', pos >= maxScroll);
+        }
 
-      next.addEventListener('click', () => { pos = Math.min(pos + step, getMaxScroll()); update(); });
-      prev.addEventListener('click', () => { pos = Math.max(pos - step, 0); update(); });
+        next.addEventListener('click', () => { pos = Math.min(pos + step, getMaxScroll()); update(); });
+        prev.addEventListener('click', () => { pos = Math.max(pos - step, 0); update(); });
 
-      // Touch/swipe support
-      let startX = 0, startPos = 0;
-      slider.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; startPos = pos; }, { passive: true });
-      slider.addEventListener('touchmove', (e) => {
-        const dx = startX - e.touches[0].clientX;
-        pos = Math.max(0, Math.min(startPos + dx, getMaxScroll()));
-        slider.style.transition = 'none';
-        slider.style.transform = `translateX(-${pos}px)`;
-      }, { passive: true });
-      slider.addEventListener('touchend', () => {
-        slider.style.transition = '';
-        pos = Math.round(pos / step) * step;
-        pos = Math.max(0, Math.min(pos, getMaxScroll()));
+        let startX = 0, startPos = 0;
+        slider.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; startPos = pos; }, { passive: true });
+        slider.addEventListener('touchmove', (e) => {
+          const dx = startX - e.touches[0].clientX;
+          pos = Math.max(0, Math.min(startPos + dx, getMaxScroll()));
+          slider.style.transition = 'none';
+          slider.style.transform = `translateX(-${pos}px)`;
+        }, { passive: true });
+        slider.addEventListener('touchend', () => {
+          slider.style.transition = '';
+          pos = Math.round(pos / step) * step;
+          pos = Math.max(0, Math.min(pos, getMaxScroll()));
+          update();
+        });
+
         update();
-      });
+      }
 
-      update();
+      // === Sponsor carousel ===
+      const sponsorSlider = document.getElementById('sponsorSlider');
+      const sponsorPrev = document.querySelector('.sponsor-prev');
+      const sponsorNext = document.querySelector('.sponsor-next');
+      if (sponsorSlider && sponsorPrev && sponsorNext) {
+        let sPos = 0;
+        const sCardW = sponsorSlider.querySelector('.sponsor-card')?.offsetWidth || 320;
+        const sGap = 20;
+        const sStep = sCardW + sGap;
+
+        function sGetMaxScroll() {
+          return Math.max(0, sponsorSlider.scrollWidth - sponsorSlider.parentElement.offsetWidth);
+        }
+
+        function sUpdate() {
+          const maxScroll = sGetMaxScroll();
+          sponsorSlider.style.transform = `translateX(-${sPos}px)`;
+          sponsorPrev.classList.toggle('opacity-0', sPos <= 0);
+          sponsorPrev.classList.toggle('pointer-events-none', sPos <= 0);
+          sponsorNext.classList.toggle('opacity-0', sPos >= maxScroll);
+          sponsorNext.classList.toggle('pointer-events-none', sPos >= maxScroll);
+        }
+
+        sponsorNext.addEventListener('click', () => { sPos = Math.min(sPos + sStep, sGetMaxScroll()); sUpdate(); });
+        sponsorPrev.addEventListener('click', () => { sPos = Math.max(sPos - sStep, 0); sUpdate(); });
+
+        // Touch/swipe
+        let sStartX = 0, sStartPos = 0;
+        sponsorSlider.addEventListener('touchstart', (e) => { sStartX = e.touches[0].clientX; sStartPos = sPos; }, { passive: true });
+        sponsorSlider.addEventListener('touchmove', (e) => {
+          const dx = sStartX - e.touches[0].clientX;
+          sPos = Math.max(0, Math.min(sStartPos + dx, sGetMaxScroll()));
+          sponsorSlider.style.transition = 'none';
+          sponsorSlider.style.transform = `translateX(-${sPos}px)`;
+        }, { passive: true });
+        sponsorSlider.addEventListener('touchend', () => {
+          sponsorSlider.style.transition = '';
+          sPos = Math.round(sPos / sStep) * sStep;
+          sPos = Math.max(0, Math.min(sPos, sGetMaxScroll()));
+          sUpdate();
+        });
+
+        // Auto-scroll every 4 seconds
+        let autoInterval = setInterval(() => {
+          const maxScroll = sGetMaxScroll();
+          if (sPos >= maxScroll) {
+            sPos = 0;
+          } else {
+            sPos = Math.min(sPos + sStep, maxScroll);
+          }
+          sUpdate();
+        }, 4000);
+
+        // Pause auto-scroll on hover
+        sponsorSlider.parentElement.addEventListener('mouseenter', () => clearInterval(autoInterval));
+        sponsorSlider.parentElement.addEventListener('mouseleave', () => {
+          autoInterval = setInterval(() => {
+            const maxScroll = sGetMaxScroll();
+            if (sPos >= maxScroll) {
+              sPos = 0;
+            } else {
+              sPos = Math.min(sPos + sStep, maxScroll);
+            }
+            sUpdate();
+          }, 4000);
+        });
+
+        sUpdate();
+      }
     })();
   </script>
 

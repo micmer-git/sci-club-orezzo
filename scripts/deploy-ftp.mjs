@@ -53,8 +53,11 @@ async function deploy() {
     console.log(`\n--- Uploading ${localDist} → ${remoteDir} ---\n`);
 
     await client.ensureDir(remoteDir);
-    await client.clearWorkingDir(); // Clean remote before upload
-    await client.uploadFromDir(localDist, remoteDir);
+    await client.cd(remoteDir);
+
+    // Upload all built files into the remote dir (overwrites existing)
+    // Does NOT clear first — preserves any files not in the build
+    await client.uploadFromDir(localDist);
 
     console.log('\n--- Deploy complete! ---\n');
     console.log(`Site live at: ${env.FTP_HOST}`);
