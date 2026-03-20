@@ -84,6 +84,267 @@ body::after {
   will-change: transform;
 }
 
+/* ---- Snow particle overlay (CSS-only) ---- */
+@keyframes snowfall-1 {
+  0%   { transform: translateY(-10vh) translateX(0); opacity: 1; }
+  100% { transform: translateY(110vh) translateX(-30px); opacity: 0.3; }
+}
+@keyframes snowfall-2 {
+  0%   { transform: translateY(-10vh) translateX(0); opacity: 0.8; }
+  100% { transform: translateY(110vh) translateX(20px); opacity: 0.1; }
+}
+@keyframes snowfall-3 {
+  0%   { transform: translateY(-10vh) translateX(0); opacity: 0.6; }
+  100% { transform: translateY(110vh) translateX(-15px); opacity: 0; }
+}
+
+.snow-overlay {
+  position: relative;
+}
+.snow-overlay::before,
+.snow-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
+}
+.snow-overlay::before {
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.8) 50%, transparent 50%),
+    radial-gradient(2px 2px at 25% 45%, rgba(255,255,255,0.6) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 40% 10%, rgba(255,255,255,0.9) 50%, transparent 50%),
+    radial-gradient(2px 2px at 55% 65%, rgba(255,255,255,0.5) 50%, transparent 50%),
+    radial-gradient(1px 1px at 70% 30%, rgba(255,255,255,0.7) 50%, transparent 50%),
+    radial-gradient(2.5px 2.5px at 85% 80%, rgba(255,255,255,0.4) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 15% 70%, rgba(255,255,255,0.6) 50%, transparent 50%),
+    radial-gradient(2px 2px at 60% 5%, rgba(255,255,255,0.7) 50%, transparent 50%),
+    radial-gradient(1px 1px at 90% 50%, rgba(255,255,255,0.5) 50%, transparent 50%),
+    radial-gradient(2px 2px at 35% 90%, rgba(255,255,255,0.6) 50%, transparent 50%);
+  background-size: 200px 200px;
+  animation: snowfall-1 8s linear infinite;
+}
+.snow-overlay::after {
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 15%, rgba(255,255,255,0.5) 50%, transparent 50%),
+    radial-gradient(2px 2px at 45% 50%, rgba(255,255,255,0.4) 50%, transparent 50%),
+    radial-gradient(1px 1px at 65% 25%, rgba(255,255,255,0.6) 50%, transparent 50%),
+    radial-gradient(2.5px 2.5px at 80% 70%, rgba(255,255,255,0.3) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 5% 55%, rgba(255,255,255,0.7) 50%, transparent 50%),
+    radial-gradient(2px 2px at 50% 85%, rgba(255,255,255,0.4) 50%, transparent 50%),
+    radial-gradient(1px 1px at 75% 10%, rgba(255,255,255,0.5) 50%, transparent 50%),
+    radial-gradient(2px 2px at 30% 40%, rgba(255,255,255,0.6) 50%, transparent 50%);
+  background-size: 180px 180px;
+  animation: snowfall-2 12s linear infinite;
+  opacity: 0.7;
+}
+
+/* ---- Parallax background ---- */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@supports (-webkit-touch-callout: none) {
+  /* Disable on iOS where fixed bg is janky */
+  .parallax-bg { background-attachment: scroll; }
+}
+
+/* ---- Reveal variants ---- */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reveal-blur {
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-blur.visible {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* ---- Glassmorphism card ---- */
+.glass-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Glass card light variant (for light backgrounds) */
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 102, 179, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-card-light:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 102, 179, 0.1);
+}
+
+/* ---- Gradient text ---- */
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #7cb8e4 40%, #0066B3 70%, #004a82 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Floating animation ---- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ---- Skier animation ---- */
+@keyframes ski-down {
+  0% {
+    transform: translate(0, 0) scaleX(-1);
+    opacity: 0;
+  }
+  5% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% {
+    transform: translate(-200px, 300px) scaleX(-1);
+    opacity: 0;
+  }
+}
+.skier-anim {
+  animation: ski-down 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ---- Mountain divider ---- */
+.mountain-divider {
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
+  line-height: 0;
+  position: relative;
+}
+.mountain-divider svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.mountain-divider--flip svg {
+  transform: scaleY(-1);
+}
+@media (min-width: 768px) {
+  .mountain-divider { height: 80px; }
+}
+
+/* ---- Marquee glow effect ---- */
+.marquee-glow {
+  position: relative;
+  overflow: hidden;
+}
+.marquee-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  animation: marquee-shine 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes marquee-shine {
+  0% { left: -60%; }
+  100% { left: 160%; }
+}
+
+/* ---- Interactive hover enhancements ---- */
+a.hover-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+a.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 102, 179, 0.15);
+}
+
+/* Button shine effect */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+.btn-shine:hover::after {
+  left: 100%;
+}
+
+/* ---- Cursor snow trail ---- */
+.snow-cursor {
+  --cursor-x: 0px;
+  --cursor-y: 0px;
+}
+.snow-cursor .cursor-particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  z-index: 9999;
+  animation: cursor-fade 1s ease-out forwards;
+}
+@keyframes cursor-fade {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(0) translateY(20px); opacity: 0; }
+}
+
 /* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -91,6 +352,14 @@ body::after {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  .reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
   .marquee-track { animation: none; }
+  .snow-overlay::before,
+  .snow-overlay::after { animation: none; opacity: 0; }
+  .skier-anim { animation: none; opacity: 0; }
+  .float { animation: none; }
 }

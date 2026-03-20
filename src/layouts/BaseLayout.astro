@@ -61,7 +61,7 @@ const fullTitle = title === SITE.name ? title : `${title} — ${SITE.fullName}`;
 
   <script>
     const initRevealObserver = () => {
-      const items = document.querySelectorAll('.reveal');
+      const items = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur');
       if (!items.length) return;
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

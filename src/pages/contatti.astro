@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../data/site.js';
+
+const WORKER_URL = 'https://scicluborezzo-forms.micmer-recastello.workers.dev';
 ---
 
 <BaseLayout
   title="Contatti — Sci Club Orezzo"
-  description="Contatta lo Sci Club Orezzo. Informazioni su iscrizioni, corsi di sci e attivita agonistica."
+  description="Contatta lo Sci Club Orezzo. Informazioni su iscrizioni, corsi di sci e attivita agonistica. Invia i tuoi risultati gara."
 >
 
   <!-- Hero -->
@@ -22,69 +24,192 @@ import { SITE } from '../data/site.js';
     </div>
   </section>
 
-  <div class="max-w-4xl mx-auto px-5 py-16 md:py-24">
-    <div class="grid md:grid-cols-2 gap-12 md:gap-16">
+  <!-- Tab switcher -->
+  <div class="max-w-5xl mx-auto px-5 pt-12">
+    <div class="flex gap-2 justify-center mb-8">
+      <button id="tab-contatto" type="button"
+        class="tab-btn active px-6 py-3 text-sm font-bold tracking-wider uppercase border-2 border-brand-blue bg-brand-blue text-white transition-all">
+        Contattaci
+      </button>
+      <button id="tab-risultato" type="button"
+        class="tab-btn px-6 py-3 text-sm font-bold tracking-wider uppercase border-2 border-brand-dark/20 bg-white text-brand-dark hover:border-brand-blue hover:text-brand-blue transition-all">
+        Invia Risultato Gara
+      </button>
+    </div>
+  </div>
 
-      <!-- Contact Form -->
-      <div>
-        <h2 class="font-display text-2xl font-bold text-brand-dark mb-2 reveal">Scrivici un Messaggio</h2>
-        <p class="text-brand-dark/60 text-sm mb-8 reveal reveal-delay-1">Per iscrizioni, informazioni sui corsi e sull'attivita agonistica.</p>
+  <div class="max-w-5xl mx-auto px-5 pb-16 md:pb-24">
+    <div class="grid lg:grid-cols-3 gap-12 lg:gap-16">
 
-        <form id="contactForm" class="space-y-5" action="https://formsubmit.co/scicluborezzo@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="Nuovo messaggio dal sito Sci Club Orezzo" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value="https://www.scicluborezzo.com/contatti/?sent=1" />
-          <input type="text" name="_honey" style="display:none" />
+      <!-- Forms column (2/3) -->
+      <div class="lg:col-span-2">
 
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label for="c-name" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Nome</label>
-              <input type="text" id="c-name" name="nome" required
-                class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
-                placeholder="Mario" />
+        <!-- Contact Form -->
+        <div id="panel-contatto">
+          <h2 class="font-display text-2xl font-bold text-brand-dark mb-2 reveal">Scrivici un Messaggio</h2>
+          <p class="text-brand-dark/60 text-sm mb-8 reveal reveal-delay-1">Per iscrizioni, informazioni sui corsi e sull'attivita agonistica.</p>
+
+          <form id="contactForm" class="space-y-5">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="c-name" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Nome</label>
+                <input type="text" id="c-name" name="nome" required
+                  class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
+                  placeholder="Mario" />
+              </div>
+              <div>
+                <label for="c-surname" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Cognome</label>
+                <input type="text" id="c-surname" name="cognome" required
+                  class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
+                  placeholder="Rossi" />
+              </div>
             </div>
+
             <div>
-              <label for="c-surname" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Cognome</label>
-              <input type="text" id="c-surname" name="cognome" required
+              <label for="c-email" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Email</label>
+              <input type="email" id="c-email" name="email" required
                 class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
-                placeholder="Rossi" />
+                placeholder="mario@email.com" />
             </div>
-          </div>
 
-          <div>
-            <label for="c-email" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Email</label>
-            <input type="email" id="c-email" name="email" required
-              class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
-              placeholder="mario@email.com" />
-          </div>
+            <div>
+              <label for="c-subject" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Oggetto</label>
+              <select id="c-subject" name="oggetto"
+                class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark focus:border-brand-blue focus:outline-none transition-colors">
+                <option value="info">Informazioni generali</option>
+                <option value="iscrizione">Iscrizione al club</option>
+                <option value="corsi">Corsi di sci</option>
+                <option value="sponsor">Sponsorizzazione / Partnership</option>
+                <option value="altro">Altro</option>
+              </select>
+            </div>
 
-          <div>
-            <label for="c-subject" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Oggetto</label>
-            <select id="c-subject" name="oggetto"
-              class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark focus:border-brand-blue focus:outline-none transition-colors">
-              <option value="info">Informazioni generali</option>
-              <option value="iscrizione">Iscrizione al club</option>
-              <option value="corsi">Corsi di sci</option>
-              <option value="sponsor">Sponsorizzazione / Partnership</option>
-              <option value="altro">Altro</option>
-            </select>
-          </div>
+            <div>
+              <label for="c-msg" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Messaggio</label>
+              <textarea id="c-msg" name="messaggio" rows="5" required
+                class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors resize-y"
+                placeholder="Scrivi il tuo messaggio..."></textarea>
+            </div>
 
-          <div>
-            <label for="c-msg" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Messaggio</label>
-            <textarea id="c-msg" name="messaggio" rows="5" required
-              class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors resize-y"
-              placeholder="Scrivi il tuo messaggio..."></textarea>
-          </div>
+            <button type="submit" id="btn-contatto"
+              class="w-full px-7 py-3.5 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-brand-dark hover:border-brand-dark transition-all">
+              Invia messaggio
+            </button>
+          </form>
 
-          <button type="submit"
-            class="w-full px-7 py-3.5 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-brand-dark hover:border-brand-dark transition-all">
-            Invia messaggio
-          </button>
-        </form>
+          <div id="success-contatto" class="hidden bg-brand-blue/10 border-2 border-brand-blue p-8 text-center">
+            <p class="font-display text-2xl font-bold text-brand-blue mb-2">Messaggio inviato!</p>
+            <p class="text-brand-dark/60">Ti risponderemo il prima possibile. Grazie!</p>
+          </div>
+        </div>
+
+        <!-- Result Submission Form -->
+        <div id="panel-risultato" class="hidden">
+          <h2 class="font-display text-2xl font-bold text-brand-dark mb-2 reveal">Invia il tuo Risultato</h2>
+          <p class="text-brand-dark/60 text-sm mb-8 reveal reveal-delay-1">Condividi il risultato della tua gara con il club. Le foto migliori verranno pubblicate sul sito!</p>
+
+          <form id="resultForm" class="space-y-5">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="r-name" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Nome</label>
+                <input type="text" id="r-name" name="nome" required
+                  class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
+                  placeholder="Mario" />
+              </div>
+              <div>
+                <label for="r-surname" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Cognome</label>
+                <input type="text" id="r-surname" name="cognome" required
+                  class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
+                  placeholder="Rossi" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="r-gara" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Gara</label>
+                <input type="text" id="r-gara" name="gara" required
+                  class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
+                  placeholder="Trofeo Topolino" />
+              </div>
+              <div>
+                <label for="r-luogo" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Luogo</label>
+                <input type="text" id="r-luogo" name="luogo"
+                  class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
+                  placeholder="Foppolo (BG)" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4">
+              <div>
+                <label for="r-data" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Data</label>
+                <input type="date" id="r-data" name="data"
+                  class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark focus:border-brand-blue focus:outline-none transition-colors" />
+              </div>
+              <div>
+                <label for="r-posizione" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Posizione</label>
+                <input type="text" id="r-posizione" name="posizione"
+                  class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
+                  placeholder="3" />
+              </div>
+              <div>
+                <label for="r-tempo" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Tempo</label>
+                <input type="text" id="r-tempo" name="tempo"
+                  class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
+                  placeholder="1:23.45" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="r-specialita" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Specialita</label>
+                <select id="r-specialita" name="specialita"
+                  class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark focus:border-brand-blue focus:outline-none transition-colors">
+                  <option value="">Seleziona...</option>
+                  <option value="SL">Slalom (SL)</option>
+                  <option value="GS">Slalom Gigante (GS)</option>
+                  <option value="SG">Super-G (SG)</option>
+                  <option value="DH">Discesa Libera (DH)</option>
+                  <option value="Fondo">Sci di Fondo</option>
+                  <option value="Alpinismo">Sci Alpinismo</option>
+                </select>
+              </div>
+              <div>
+                <label for="r-instagram" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Instagram</label>
+                <input type="text" id="r-instagram" name="instagram"
+                  class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors"
+                  placeholder="@tuohandle" />
+              </div>
+            </div>
+
+            <div>
+              <label for="r-racconto" class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Racconto della gara</label>
+              <textarea id="r-racconto" name="racconto" rows="4"
+                class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark placeholder:text-brand-dark/30 focus:border-brand-blue focus:outline-none transition-colors resize-y"
+                placeholder="Com'e andata? Racconta la tua gara..."></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold tracking-wider uppercase text-brand-dark/60 mb-1.5">Foto (max 3)</label>
+              <input type="file" id="r-photos" accept="image/*" multiple
+                class="w-full px-4 py-3 border-2 border-brand-dark/20 bg-white text-sm text-brand-dark file:mr-4 file:py-1 file:px-3 file:border-0 file:text-xs file:font-bold file:bg-brand-blue file:text-white file:uppercase file:tracking-wider file:cursor-pointer focus:border-brand-blue focus:outline-none transition-colors" />
+              <p class="text-xs text-brand-dark/40 mt-1">JPG o PNG, max 3 immagini</p>
+            </div>
+
+            <button type="submit" id="btn-risultato"
+              class="w-full px-7 py-3.5 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-brand-dark hover:border-brand-dark transition-all">
+              Invia risultato
+            </button>
+          </form>
+
+          <div id="success-risultato" class="hidden bg-brand-blue/10 border-2 border-brand-blue p-8 text-center">
+            <p class="font-display text-2xl font-bold text-brand-blue mb-2">Risultato inviato!</p>
+            <p class="text-brand-dark/60">Grazie per aver condiviso il tuo risultato. Lo pubblicheremo presto!</p>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Info sidebar -->
+      <!-- Info sidebar (1/3) -->
       <div>
         <h2 class="font-display text-2xl font-bold text-brand-dark mb-8 reveal">Dove Trovarci</h2>
 
@@ -132,21 +257,115 @@ import { SITE } from '../data/site.js';
     </div>
   </div>
 
-  <!-- Success message (shown after form submission) -->
-  <script>
-    if (window.location.search.includes('sent=1')) {
-      const form = document.getElementById('contactForm');
-      if (form) {
-        form.innerHTML = '<div class="bg-brand-blue/10 border-2 border-brand-blue p-8 text-center"><p class="font-display text-2xl font-bold text-brand-blue mb-2">Messaggio inviato!</p><p class="text-brand-dark/60">Ti risponderemo il prima possibile. Grazie!</p></div>';
-      }
-    }
-  </script>
-
   <!-- Back link -->
   <div class="text-center pb-16">
     <a href="/" class="inline-flex items-center gap-2 text-sm font-bold text-brand-blue hover:underline">
       &larr; Torna alla home
     </a>
   </div>
+
+  <script define:vars={{ WORKER_URL }}>
+    // Tab switching
+    const tabContatto = document.getElementById('tab-contatto');
+    const tabRisultato = document.getElementById('tab-risultato');
+    const panelContatto = document.getElementById('panel-contatto');
+    const panelRisultato = document.getElementById('panel-risultato');
+
+    function switchTab(active) {
+      const isContatto = active === 'contatto';
+      panelContatto.classList.toggle('hidden', !isContatto);
+      panelRisultato.classList.toggle('hidden', isContatto);
+
+      tabContatto.classList.toggle('bg-brand-blue', isContatto);
+      tabContatto.classList.toggle('text-white', isContatto);
+      tabContatto.classList.toggle('border-brand-blue', isContatto);
+      tabContatto.classList.toggle('bg-white', !isContatto);
+      tabContatto.classList.toggle('text-brand-dark', !isContatto);
+      tabContatto.classList.toggle('border-brand-dark/20', !isContatto);
+
+      tabRisultato.classList.toggle('bg-brand-blue', !isContatto);
+      tabRisultato.classList.toggle('text-white', !isContatto);
+      tabRisultato.classList.toggle('border-brand-blue', !isContatto);
+      tabRisultato.classList.toggle('bg-white', isContatto);
+      tabRisultato.classList.toggle('text-brand-dark', isContatto);
+      tabRisultato.classList.toggle('border-brand-dark/20', isContatto);
+    }
+
+    tabContatto.addEventListener('click', () => switchTab('contatto'));
+    tabRisultato.addEventListener('click', () => switchTab('risultato'));
+
+    // File to base64
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Submit handler
+    async function submitForm(form, type, btnId, successId) {
+      const btn = document.getElementById(btnId);
+      const successEl = document.getElementById(successId);
+      const originalText = btn.textContent;
+
+      btn.disabled = true;
+      btn.textContent = 'Invio in corso...';
+      btn.classList.add('opacity-60');
+
+      try {
+        const formData = new FormData(form);
+        const payload = { _type: type };
+
+        for (const [key, value] of formData.entries()) {
+          if (key !== 'photos') payload[key] = value;
+        }
+
+        // Handle photos for risultato
+        if (type === 'risultato') {
+          const photoInput = document.getElementById('r-photos');
+          if (photoInput.files.length > 0) {
+            const photos = [];
+            const files = Array.from(photoInput.files).slice(0, 3);
+            for (const file of files) {
+              photos.push(await fileToBase64(file));
+            }
+            payload.photos = photos;
+          }
+        }
+
+        const res = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+
+        if (data.ok) {
+          form.classList.add('hidden');
+          successEl.classList.remove('hidden');
+        } else {
+          throw new Error(data.error || 'Errore sconosciuto');
+        }
+      } catch (err) {
+        alert('Errore nell\'invio: ' + err.message);
+        btn.disabled = false;
+        btn.textContent = originalText;
+        btn.classList.remove('opacity-60');
+      }
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitForm(e.target, 'contatto', 'btn-contatto', 'success-contatto');
+    });
+
+    document.getElementById('resultForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitForm(e.target, 'risultato', 'btn-risultato', 'success-risultato');
+    });
+  </script>
 
 </BaseLayout>

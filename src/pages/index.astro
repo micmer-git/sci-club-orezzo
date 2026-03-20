@@ -10,7 +10,7 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
 >
 
   <!-- ========== HERO ========== -->
-  <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark" id="hero">
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark snow-overlay" id="hero">
     <!-- Real mountain background -->
     <div class="absolute inset-0">
       <img src="/img/montagna-sfondo.jpg" alt="" class="w-full h-full object-cover opacity-30" />
@@ -23,13 +23,23 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
       </svg>
     </div>
 
+    <!-- Animated skier -->
+    <div class="absolute top-[15%] right-[10%] z-20 skier-anim pointer-events-none" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="38" cy="10" r="6" fill="rgba(255,255,255,0.7)"/>
+        <path d="M30 20L38 16L46 22L42 38L48 50L40 52L36 40L30 38L24 48L18 46L26 30Z" fill="rgba(255,255,255,0.7)"/>
+        <line x1="20" y1="44" x2="52" y2="32" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="34" y1="38" x2="28" y2="18" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
     <div class="relative z-20 text-center px-5 max-w-4xl mx-auto">
       <!-- Club logo -->
-      <div class="mb-8 reveal">
+      <div class="mb-8 reveal-scale">
         <img src="/img/logo-sci-club-orezzo.jpg" alt="Logo Sci Club Orezzo" class="w-24 h-auto mx-auto rounded-lg shadow-2xl border-2 border-white/20" />
       </div>
       <p class="text-brand-blue text-xs font-bold tracking-[0.25em] uppercase mb-6 reveal reveal-delay-1">Orezzo, Valle Seriana — dal 1968</p>
-      <h1 class="font-cursive text-white text-[clamp(3.5rem,12vw,9rem)] leading-[0.85] mb-4 reveal reveal-delay-2" style="text-shadow: 0 4px 30px rgba(0,0,0,0.4);">
+      <h1 class="font-cursive text-gradient text-[clamp(3.5rem,12vw,9rem)] leading-[0.85] mb-4 reveal-blur reveal-delay-2" style="text-shadow: 0 4px 30px rgba(0,0,0,0.4);">
         Sci Club Orezzo
       </h1>
       <p class="font-display text-brand-blue text-[clamp(0.9rem,2.5vw,1.6rem)] tracking-[0.3em] uppercase font-bold mb-3 reveal reveal-delay-3">
@@ -39,10 +49,10 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
         {SITE.athleteCount} atleti agonisti &bull; {SITE.memberCount} tesserati &bull; FISI Bergamo
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-4">
-        <a href="#attivita" class="inline-flex items-center gap-2 px-7 py-3 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-transparent hover:text-brand-blue transition-all">
+        <a href="#attivita" class="btn-shine inline-flex items-center gap-2 px-7 py-3 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-transparent hover:text-brand-blue transition-all">
           Le nostre attivita
         </a>
-        <a href="#societa" class="inline-flex items-center gap-2 px-7 py-3 bg-transparent text-white font-bold text-sm tracking-wider uppercase border-2 border-white/40 hover:border-white hover:bg-white/10 transition-all">
+        <a href="#societa" class="btn-shine inline-flex items-center gap-2 px-7 py-3 bg-transparent text-white font-bold text-sm tracking-wider uppercase border-2 border-white/40 hover:border-white hover:bg-white/10 transition-all">
           Chi siamo
         </a>
       </div>
@@ -100,14 +110,21 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
   </section>
 
   <!-- ========== MARQUEE ========== -->
-  <div class="bg-brand-blue h-14 overflow-hidden flex items-center">
+  <div class="bg-brand-blue h-14 overflow-hidden flex items-center marquee-glow">
     <div class="marquee-track">
       {[...Array(8)].map(() => (
-        <span class="flex-shrink-0 text-white font-display text-lg font-bold tracking-wider pr-8">
+        <span class="flex-shrink-0 text-white font-display text-lg font-bold tracking-wider pr-8" style="text-shadow: 0 0 20px rgba(255,255,255,0.3);">
           SCI ALPINO &bull; SLALOM &bull; GIGANTE &bull; SUPER G &bull; FONDO &bull; ALPINISMO &bull; DAL 1968 &bull;
         </span>
       ))}
     </div>
+  </div>
+
+  <!-- Mountain divider -->
+  <div class="mountain-divider mountain-divider--flip bg-brand-snow">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,0 L0,30 Q120,60 240,25 Q360,0 480,35 Q600,55 720,20 Q840,0 960,30 Q1080,50 1200,15 Q1320,0 1440,25 L1440,0 Z" fill="#0066B3"/>
+    </svg>
   </div>
 
   <!-- ========== FEATURED EVENT ========== -->
@@ -115,19 +132,19 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
     <div class="max-w-6xl mx-auto">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal">Il nostro evento</p>
-          <h2 class="font-display text-[clamp(2rem,5vw,3.5rem)] font-bold text-brand-dark leading-tight mb-6 reveal reveal-delay-1">
+          <p class="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase mb-3 reveal-left">Il nostro evento</p>
+          <h2 class="font-display text-[clamp(2rem,5vw,3.5rem)] font-bold text-brand-dark leading-tight mb-6 reveal-left reveal-delay-1">
             {FEATURED_EVENT.name}
           </h2>
           <p class="text-brand-dark/70 text-lg leading-relaxed mb-8 reveal reveal-delay-2">
             {FEATURED_EVENT.description}
           </p>
           <div class="flex flex-wrap gap-4 mb-8 reveal reveal-delay-3">
-            <div class="bg-white px-5 py-3 border-2 border-brand-dark shadow-[4px_4px_0_#1A1A1A]">
+            <div class="glass-card-light px-5 py-3 rounded-lg">
               <span class="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-brand-blue">Sede</span>
               <span class="font-display text-lg font-bold">{FEATURED_EVENT.location}</span>
             </div>
-            <div class="bg-white px-5 py-3 border-2 border-brand-dark shadow-[4px_4px_0_#1A1A1A]">
+            <div class="glass-card-light px-5 py-3 rounded-lg">
               <span class="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-brand-blue">Categorie</span>
               <span class="font-display text-lg font-bold">{FEATURED_EVENT.categories}</span>
             </div>
@@ -144,6 +161,13 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
       </div>
     </div>
   </section>
+
+  <!-- Mountain divider -->
+  <div class="mountain-divider bg-brand-snow">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,60 L0,40 Q180,10 360,35 Q540,55 720,25 Q900,5 1080,40 Q1260,55 1440,30 L1440,60 Z" fill="#F0F4F8"/>
+    </svg>
+  </div>
 
   <!-- ========== DISCIPLINES ========== -->
   <section class="py-20 md:py-28 px-5 bg-brand-snow" id="attivita">
@@ -204,6 +228,13 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
     </div>
   </section>
 
+  <!-- Mountain divider -->
+  <div class="mountain-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,60 L0,30 Q180,55 360,20 Q540,0 720,40 Q900,55 1080,15 Q1260,0 1440,35 L1440,60 Z" fill="#1A1A1A"/>
+    </svg>
+  </div>
+
   <!-- ========== VENUES ========== -->
   <section class="py-20 md:py-28 px-5 bg-brand-dark text-white" id="gare">
     <div class="max-w-6xl mx-auto">
@@ -219,7 +250,7 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {VENUES.map((v, i) => (
-          <div class={`bg-white/5 border border-white/10 p-6 hover:bg-white/10 transition-colors reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+          <div class={`glass-card p-6 rounded-lg reveal reveal-delay-${Math.min(i + 1, 4)}`}>
             <div class="w-12 h-12 bg-brand-blue/20 rounded-full flex items-center justify-center mb-4">
               <span class="text-2xl">🏔️</span>
             </div>
@@ -232,14 +263,21 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
     </div>
   </section>
 
+  <!-- Mountain divider -->
+  <div class="mountain-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,60 L0,20 Q100,50 200,25 Q350,0 500,30 Q650,55 800,20 Q950,0 1100,35 Q1250,55 1440,15 L1440,60 Z" fill="#1A1A1A"/>
+    </svg>
+  </div>
+
   <!-- ========== FAMIGLIA ========== -->
-  <section class="relative py-24 md:py-32 px-5 overflow-hidden" id="famiglia">
+  <section class="relative py-24 md:py-32 px-5 overflow-hidden snow-overlay" id="famiglia">
     <div class="absolute inset-0">
       <img src="/img/neve-sfondo.jpg" alt="" class="w-full h-full object-cover opacity-15" />
       <div class="absolute inset-0 bg-brand-dark/90"></div>
     </div>
     <div class="relative z-10 max-w-4xl mx-auto text-center">
-      <p class="font-cursive text-[clamp(2.5rem,8vw,5.5rem)] text-white leading-tight mb-8 reveal" style="text-shadow: 0 4px 30px rgba(0,102,179,0.3);">
+      <p class="font-cursive text-[clamp(2.5rem,8vw,5.5rem)] text-white leading-tight mb-8 reveal-blur" style="text-shadow: 0 4px 30px rgba(0,102,179,0.3);">
         {SITE.familyQuote}
       </p>
       <div class="w-20 h-[2px] bg-brand-blue mx-auto mb-8 reveal reveal-delay-1"></div>
@@ -248,13 +286,20 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
       </p>
       <div class="flex flex-wrap justify-center gap-4 mt-10 reveal reveal-delay-3">
         {['Amicizia', 'Serenita', 'Divertimento', 'Competizione', 'Disciplina', 'Rigore'].map(val => (
-          <span class="px-5 py-2 border border-white/20 text-white/80 text-sm font-display font-bold tracking-wider uppercase bg-white/5 backdrop-blur-sm">
+          <span class="glass-card px-5 py-2 text-white/80 text-sm font-display font-bold tracking-wider uppercase rounded">
             {val}
           </span>
         ))}
       </div>
     </div>
   </section>
+
+  <!-- Mountain divider -->
+  <div class="mountain-divider mountain-divider--flip">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,0 L0,40 Q180,10 360,45 Q540,60 720,30 Q900,5 1080,40 Q1260,55 1440,20 L1440,0 Z" fill="#1A1A1A"/>
+    </svg>
+  </div>
 
   <!-- ========== SOCIETA / BOARD ========== -->
   <section class="py-20 md:py-28 px-5" id="societa">
@@ -277,7 +322,7 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
           { num: '118', label: 'Tesserati' },
           { num: '1000+', label: 'Atleti formati' },
         ].map((stat, i) => (
-          <div class={`text-center bg-white border-2 border-brand-dark shadow-[4px_4px_0_#1A1A1A] p-6 reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+          <div class={`text-center glass-card-light p-6 rounded-lg reveal-scale reveal-delay-${Math.min(i + 1, 4)}`}>
             <span class="font-display text-3xl md:text-4xl font-bold text-brand-blue block">{stat.num}</span>
             <span class="text-xs text-brand-dark/50 font-bold tracking-wider uppercase mt-2 block">{stat.label}</span>
           </div>
@@ -353,6 +398,13 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
     </div>
   </section>
 
+  <!-- Mountain divider -->
+  <div class="mountain-divider bg-brand-snow">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,60 L0,35 Q200,5 400,40 Q600,60 800,25 Q1000,0 1200,35 Q1350,50 1440,30 L1440,60 Z" fill="#F0F4F8"/>
+    </svg>
+  </div>
+
   <!-- ========== SPONSORS CAROUSEL ========== -->
   <section class="py-16 md:py-20 px-5 bg-brand-snow" id="sponsor">
     <div class="max-w-6xl mx-auto">
@@ -370,7 +422,7 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
               href={sponsor.url}
               target="_blank"
               rel="noopener noreferrer"
-              class={`sponsor-card flex-shrink-0 w-[280px] md:w-[320px] bg-white border-2 no-underline hover:scale-[1.02] transition-all ${sponsor.tier === 'main' ? 'border-brand-blue/40 shadow-[4px_4px_0_#0066B3]' : sponsor.tier === 'technical' ? 'border-amber-500/30 shadow-[4px_4px_0_#d97706]' : sponsor.tier === 'storico' ? 'border-purple-500/30 shadow-[4px_4px_0_#7c3aed]' : 'border-brand-dark/10 shadow-[3px_3px_0_#1A1A1A20]'}`}
+              class={`sponsor-card flex-shrink-0 w-[280px] md:w-[320px] glass-card-light rounded-lg no-underline hover:scale-[1.02] transition-all ${sponsor.tier === 'main' ? 'border-brand-blue/40 shadow-[4px_4px_0_#0066B3]' : sponsor.tier === 'technical' ? 'border-amber-500/30 shadow-[4px_4px_0_#d97706]' : sponsor.tier === 'storico' ? 'border-purple-500/30 shadow-[4px_4px_0_#7c3aed]' : 'border-brand-dark/10 shadow-[3px_3px_0_#1A1A1A20]'}`}
             >
               <div class="h-32 bg-brand-snow flex items-center justify-center p-4 border-b border-brand-dark/5">
                 <img src={sponsor.logo} alt={`Logo ${sponsor.name}`} class="max-h-full max-w-full object-contain" loading="lazy" />
@@ -395,6 +447,13 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
     </div>
   </section>
 
+  <!-- Mountain divider -->
+  <div class="mountain-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,60 L0,25 Q150,50 300,20 Q450,0 600,35 Q750,55 900,15 Q1050,0 1200,30 Q1350,50 1440,20 L1440,60 Z" fill="#1A1A1A"/>
+    </svg>
+  </div>
+
   <!-- ========== CTA ========== -->
   <section class="py-20 md:py-28 px-5 bg-brand-dark text-white relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
@@ -409,10 +468,10 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
         Contattaci per informazioni sui corsi e l'attivita agonistica.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-2">
-        <a href="/contatti/" class="inline-flex items-center gap-2 px-7 py-3 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-transparent hover:text-brand-blue transition-all">
+        <a href="/contatti/" class="btn-shine inline-flex items-center gap-2 px-7 py-3 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-transparent hover:text-brand-blue transition-all">
           Contattaci
         </a>
-        <a href="/storia/" class="inline-flex items-center gap-2 px-7 py-3 bg-transparent text-white font-bold text-sm tracking-wider uppercase border-2 border-white/40 hover:border-white hover:bg-white/10 transition-all">
+        <a href="/storia/" class="btn-shine inline-flex items-center gap-2 px-7 py-3 bg-transparent text-white font-bold text-sm tracking-wider uppercase border-2 border-white/40 hover:border-white hover:bg-white/10 transition-all">
           La nostra storia
         </a>
       </div>
@@ -420,19 +479,36 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
   </section>
 
   <!-- ========== BOTTOM MARQUEE ========== -->
-  <div class="bg-brand-dark h-14 overflow-hidden flex items-center">
+  <div class="bg-brand-dark h-14 overflow-hidden flex items-center marquee-glow">
     <div class="marquee-track">
       {[...Array(8)].map(() => (
-        <span class="flex-shrink-0 text-brand-blue font-display text-lg font-bold tracking-wider pr-8">
+        <span class="flex-shrink-0 text-brand-blue font-display text-lg font-bold tracking-wider pr-8" style="text-shadow: 0 0 15px rgba(0,102,179,0.4);">
           OREZZO &bull; GAZZANIGA &bull; VALLE SERIANA &bull; OROBIE &bull; BERGAMO &bull;
         </span>
       ))}
     </div>
   </div>
 
-  <!-- Instagram slider + Sponsor carousel JS -->
+  <!-- Cursor snow trail + Sliders JS -->
   <script>
     (() => {
+      // === Subtle cursor snow (hero section only) ===
+      const heroSection = document.getElementById('hero');
+      if (heroSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        let lastTime = 0;
+        heroSection.addEventListener('mousemove', (e) => {
+          const now = Date.now();
+          if (now - lastTime < 80) return;
+          lastTime = now;
+          const particle = document.createElement('div');
+          particle.className = 'cursor-particle';
+          particle.style.left = e.clientX + 'px';
+          particle.style.top = e.clientY + 'px';
+          document.body.appendChild(particle);
+          setTimeout(() => particle.remove(), 1000);
+        });
+      }
+
       // === Instagram slider ===
       const slider = document.getElementById('igSlider');
       const prev = document.querySelector('.ig-prev');
