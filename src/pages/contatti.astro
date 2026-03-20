@@ -304,6 +304,29 @@ const WORKER_URL = 'https://scicluborezzo-forms.micmer-recastello.workers.dev';
       });
     }
 
+    // Send email via FormSubmit.co (browser-side, always works)
+    async function sendEmail(formData, type) {
+      const emailPayload = {
+        _subject: type === 'contatto'
+          ? `Sci Club Orezzo — Contatto: ${formData.nome} ${formData.cognome}`
+          : `Sci Club Orezzo — Risultato: ${formData.nome} ${formData.cognome} — ${formData.gara || ''}`,
+        _replyto: formData.email || '',
+        _captcha: 'false',
+        _template: 'table',
+      };
+      // Copy all fields except internal ones
+      for (const [k, v] of Object.entries(formData)) {
+        if (k !== '_type' && k !== 'photos' && v) emailPayload[k] = v;
+      }
+      try {
+        await fetch('https://formsubmit.co/ajax/info@scicluborezzo.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(emailPayload),
+        });
+      } catch (e) { /* best effort */ }
+    }
+
     // Submit handler
     async function submitForm(form, type, btnId, successId) {
       const btn = document.getElementById(btnId);
@@ -335,13 +358,17 @@ const WORKER_URL = 'https://scicluborezzo-forms.micmer-recastello.workers.dev';
           }
         }
 
-        const res = await fetch(WORKER_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
+        // Send to Worker (GitHub Issues) + Email in parallel
+        const [workerRes] = await Promise.all([
+          fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          }),
+          sendEmail(payload, type),
+        ]);
 
-        const data = await res.json();
+        const data = await workerRes.json();
 
         if (data.ok) {
           form.classList.add('hidden');

@@ -5,7 +5,7 @@
  * - Sends email notification to club email
  */
 
-const NOTIFY_EMAIL = 'michelemerelli.8@gmail.com'; // Club notification recipient
+const NOTIFY_EMAIL = 'info@scicluborezzo.com'; // Club notification recipient
 
 const ALLOWED_ORIGINS = [
   'https://www.scicluborezzo.com',
@@ -90,23 +90,34 @@ async function createIssue(token, title, body, labels) {
   return res.json();
 }
 
-// Send email notification via MailChannels (free for CF Workers)
-async function sendEmailNotification(subject, htmlBody, replyTo) {
+// Send WhatsApp notification via CallMeBot (best effort, fire and forget)
+async function sendWhatsAppNotification(message, apiKey) {
+  if (!apiKey) return;
   try {
-    const res = await fetch('https://api.mailchannels.net/tx/v1/send', {
+    const phone = '393491016979';
+    const encoded = encodeURIComponent(message);
+    const url = `https://api.callmebot.com/whatsapp.php?phone=${phone}&text=${encoded}&apikey=${apiKey}`;
+    const res = await fetch(url);
+    if (!res.ok) console.error('WhatsApp send failed:', res.status);
+  } catch (e) {
+    console.error('WhatsApp error:', e.message); // best effort
+  }
+}
+
+// Send email notification via FormSubmit.co (free, reliable)
+async function sendEmailNotification(subject, textBody, replyTo) {
+  try {
+    const res = await fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
-        personalizations: [{
-          to: [{ email: NOTIFY_EMAIL, name: 'Sci Club Orezzo' }],
-        }],
-        from: { email: 'noreply@scicluborezzo.com', name: 'Sci Club Orezzo — Sito Web' },
-        reply_to: replyTo ? { email: replyTo } : undefined,
-        subject,
-        content: [{ type: 'text/html', value: htmlBody }],
+        _subject: subject,
+        _replyto: replyTo || '',
+        _captcha: 'false',
+        message: textBody,
       }),
     });
-    if (!res.ok) console.error('Email send failed:', await res.text());
+    if (!res.ok) console.error('Email send failed:', res.status);
   } catch (e) {
     console.error('Email error:', e.message); // best effort
   }
@@ -231,26 +242,18 @@ export default {
         ? `Nuovo contatto dal sito: ${data.nome} ${data.cognome}`
         : `Nuovo risultato gara: ${data.nome} ${data.cognome} — ${data.gara}`;
 
-      const emailHtml = type === 'contatto'
-        ? `<h2>Nuovo messaggio dal sito Sci Club Orezzo</h2>
-           <p><strong>Da:</strong> ${data.nome} ${data.cognome} (${data.email})</p>
-           <p><strong>Oggetto:</strong> ${data.oggetto || 'info'}</p>
-           <hr>
-           <p>${(data.messaggio || '').replace(/\n/g, '<br>')}</p>
-           <hr>
-           <p><small><a href="${issue.html_url}">Vedi su GitHub</a></small></p>`
-        : `<h2>Nuovo risultato gara</h2>
-           <p><strong>Atleta:</strong> ${data.nome} ${data.cognome}</p>
-           <p><strong>Gara:</strong> ${data.gara} (${data.specialita || 'N/A'})</p>
-           <p><strong>Luogo:</strong> ${data.luogo || '—'} | <strong>Data:</strong> ${data.data || '—'}</p>
-           <p><strong>Posizione:</strong> ${data.posizione || '—'} | <strong>Tempo:</strong> ${data.tempo || '—'}</p>
-           ${data.racconto ? `<hr><p>${data.racconto.replace(/\n/g, '<br>')}</p>` : ''}
-           ${photoCount > 0 ? `<p>${photoCount} foto allegate</p>` : ''}
-           <hr>
-           <p><small><a href="${issue.html_url}">Vedi su GitHub</a></small></p>`;
+      const emailBody = type === 'contatto'
+        ? `Nuovo messaggio dal sito Sci Club Orezzo\n\nDa: ${data.nome} ${data.cognome} (${data.email})\nOggetto: ${data.oggetto || 'info'}\n\n${data.messaggio || ''}\n\n---\n${issue.html_url}`
+        : `Nuovo risultato gara\n\nAtleta: ${data.nome} ${data.cognome}\nGara: ${data.gara} (${data.specialita || 'N/A'})\nLuogo: ${data.luogo || '—'}\nData: ${data.data || '—'}\nPosizione: ${data.posizione || '—'}\nTempo: ${data.tempo || '—'}\n\n${data.racconto || ''}\n${photoCount > 0 ? `\n${photoCount} foto allegate` : ''}\n\n---\n${issue.html_url}`;
 
       // Fire and forget — don't await to keep response fast
-      sendEmailNotification(emailSubject, emailHtml, data.email);
+      sendEmailNotification(emailSubject, emailBody, data.email);
+
+      // WhatsApp notification to Efrem (best effort, fire and forget)
+      const waMessage = type === 'contatto'
+        ? `Nuovo contatto dal sito: ${data.nome} ${data.cognome} - ${data.oggetto || 'info'}`
+        : `Nuovo risultato: ${data.nome} ${data.cognome} - ${data.gara}`;
+      sendWhatsAppNotification(waMessage, env.CALLMEBOT_APIKEY);
 
       return json(
         { ok: true, issue_url: issue.html_url, photo_count: photoCount },

@@ -34,6 +34,7 @@ export const BOARD = [
   { role: 'Presidente / Fondatore', name: 'Tarcisio Merelli', note: 'Fondatore nel 1968, guida il club da oltre mezzo secolo dalla sede storica "La Penzana del Merel"' },
   { role: 'Coordinatore / Consigliere', name: 'Efrem Merelli', note: 'Figlio del fondatore. Campione italiano GS 1983, Coppa Italia 1985. Istruttore nazionale, ex allenatore Coppa del Mondo' },
   { role: 'Allenatore storico', name: 'Giuseppe Panizza', note: 'Coach degli anni \'80, ha formato la generazione d\'oro del club' },
+  { role: 'Consigliere', name: 'Gian Mauro Piantoni', note: 'Campione del Mondo Master SL 2019 (Megeve), Campione Italiano Master SL e SG 2019, Argento Italiani GS Cortina 2025' },
 ];
 
 // Current coaching staff (from 2022 RaceSkiMagazine article)
@@ -97,6 +98,15 @@ export const NOTABLE_ATHLETES = [
   { name: 'Gabriele De Paola', achievement: '1° U14M Super G Passo del Tonale', era: '2026' },
   { name: 'Nathan Galizzi', achievement: '1° Baby 1 M, Skicross Colere', era: '2026' },
   { name: 'Melissa Caranoni', achievement: '2a U16F al 42° Trofeo Merelli Fiorenza', era: '2025' },
+  { name: 'Gian Mauro Piantoni', achievement: 'Campione del Mondo Master SL 2019 (Megeve), Campione Italiano SL+SG 2019, Argento GS Cortina 2025', era: 'Master' },
+  { name: 'Patrizia Spampatti', achievement: 'Campionessa Italiana Master SG/GS/SL 2019 (Roccaraso), dominatrice assoluta Gruppo D', era: 'Master' },
+];
+
+// === SPONSOR PACKAGES ===
+export const SPONSOR_PACKAGES = [
+  { tier: 'Gold', price: 'Su richiesta', benefits: ['Logo su sito web e materiali', 'Banner alle gare', 'Menzione social media', 'Invito eventi esclusivi', 'Naming su trofeo'] },
+  { tier: 'Silver', price: 'Su richiesta', benefits: ['Logo su sito web', 'Banner alle gare', 'Menzione social media'] },
+  { tier: 'Bronze', price: 'Su richiesta', benefits: ['Logo su sito web', 'Menzione social media'] },
 ];
 
 // Club legends who attended the 2022 reunion
@@ -118,6 +128,7 @@ export const RESULTS = [
   { date: '2026-01-06', race: '43° Trofeo Merelli Fiorenza — Lizzola SL', athlete: 'Simone Bondioli', pos: 1, cat: 'Ragazzi M', podium: true },
   { date: '2026-01-06', race: '43° Trofeo Merelli Fiorenza — Lizzola SL', athlete: 'Michele Bondioli', pos: 3, cat: 'Ragazzi M', podium: true },
   // 2025
+  { date: '2025-02-08', race: 'Campionati Italiani Master — GS Cortina', athlete: 'Gian Mauro Piantoni', pos: 2, cat: 'Master A4', note: 'Argento', podium: true },
   { date: '2025-01-12', race: 'Trofeo La Penzana del Merel — Lizzola SL', athlete: 'Organizzazione SCO', pos: 0, cat: 'Pulcini', note: '100+ atleti in gara' },
   { date: '2025-01-03', race: '42° Trofeo Merelli Fiorenza — Lizzola SL', athlete: 'Noe Turani', pos: 1, cat: 'U14M', note: 'Pettorale rosso', podium: true },
   { date: '2025-01-03', race: '42° Trofeo Merelli Fiorenza — Lizzola SL', athlete: 'Melissa Caranoni', pos: 2, cat: 'U16F', podium: true },
@@ -138,6 +149,14 @@ export const RESULTS = [
   { date: '2010-03-01', race: 'Trofeo San Simone — GS Provinciale', athlete: 'Guido Colombi', pos: 1, cat: 'Cuccioli M', podium: true },
   { date: '2010-03-01', race: 'Trofeo San Simone — GS Provinciale', athlete: 'Marta Bordogni', pos: 1, cat: 'Seniores F', podium: true },
   { date: '2010-03-01', race: 'Trofeo San Simone — GS Provinciale', athlete: 'Luca Agazzi', pos: 1, cat: 'Seniores M', podium: true },
+  // 2019 — Master glory
+  { date: '2019-03-01', race: 'Campionati del Mondo Master — SL Megeve', athlete: 'Gian Mauro Piantoni', pos: 1, cat: 'Master A3', note: 'Campione del Mondo', podium: true },
+  { date: '2019-03-01', race: 'Campionati Italiani Master — SG Roccaraso', athlete: 'Gian Mauro Piantoni', pos: 1, cat: 'Master A3', note: 'Campione italiano, miglior tempo assoluto', podium: true },
+  { date: '2019-03-01', race: 'Campionati Italiani Master — SL Roccaraso', athlete: 'Gian Mauro Piantoni', pos: 1, cat: 'Master A3', note: 'Campione italiano', podium: true },
+  { date: '2019-03-01', race: 'Campionati Italiani Master — GS Roccaraso', athlete: 'Gian Mauro Piantoni', pos: 3, cat: 'Master A3', note: 'Bronzo', podium: true },
+  { date: '2019-03-01', race: 'Campionati Italiani Master — SG Roccaraso', athlete: 'Patrizia Spampatti', pos: 1, cat: 'Master D F', note: 'Campionessa italiana, vincitrice assoluta', podium: true },
+  { date: '2019-03-01', race: 'Campionati Italiani Master — GS Roccaraso', athlete: 'Patrizia Spampatti', pos: 1, cat: 'Master D F', note: 'Campionessa italiana', podium: true },
+  { date: '2019-03-01', race: 'Campionati Italiani Master — SL Roccaraso', athlete: 'Patrizia Spampatti', pos: 1, cat: 'Master D F', note: 'Campionessa italiana', podium: true },
   // Historical
   { date: '1985-01-01', race: 'Coppa Italia Sci Alpino', athlete: 'Efrem Merelli', pos: 1, cat: 'Assoluto', note: 'Vittoria Coppa Italia', podium: true },
   { date: '1983-01-01', race: 'Campionato Italiano GS', athlete: 'Efrem Merelli', pos: 1, cat: 'Assoluto', note: 'Campione italiano', podium: true },
