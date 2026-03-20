@@ -152,6 +152,12 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
+
+      <div class="text-center mt-10 reveal reveal-delay-2">
+        <a href="/diventa-sponsor/" class="btn-shine inline-flex items-center gap-2 px-7 py-3 bg-brand-blue text-white font-bold text-sm tracking-wider uppercase border-2 border-brand-blue hover:bg-transparent hover:text-brand-blue transition-all">
+          Diventa Sponsor &rarr;
+        </a>
+      </div>
     </div>
   </section>
 
@@ -202,7 +208,7 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
         {recentPodiums.map((r, i) => (
-          <div class={`bg-white border-2 border-brand-blue/20 shadow-[4px_4px_0_#0066B3] p-5 reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+          <a href="/risultati/" class={`block no-underline bg-white border-2 border-brand-blue/20 shadow-[4px_4px_0_#0066B3] p-5 hover:shadow-[2px_2px_0_#0066B3] hover:translate-x-[2px] hover:translate-y-[2px] transition-all reveal reveal-delay-${Math.min(i + 1, 4)}`}>
             <div class="flex items-center gap-3 mb-3">
               <span class="w-10 h-10 flex items-center justify-center bg-brand-blue text-white font-display font-bold text-lg">{r.pos}°</span>
               <div>
@@ -212,7 +218,7 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
             </div>
             <p class="text-xs text-brand-dark/50 truncate">{r.race}</p>
             {r.note && <p class="text-xs text-brand-blue mt-1 font-medium">{r.note}</p>}
-          </div>
+          </a>
         ))}
       </div>
 
@@ -334,13 +340,23 @@ const recentPodiums = RESULTS.filter(r => r.podium && r.pos > 0).slice(0, 6);
         <div class="space-y-3">
           {NOTABLE_ATHLETES.map((a, i) => (
             <div class={`flex items-center gap-4 bg-white border border-brand-dark/10 p-4 reveal reveal-delay-${Math.min(i + 1, 4)}`}>
-              <span class="text-brand-blue font-display font-bold text-sm bg-brand-blue/10 px-3 py-1 flex-shrink-0">{a.era}</span>
+              {a.photo ? (
+                <img src={a.photo} alt={a.name} class="w-14 h-14 object-cover flex-shrink-0 border border-brand-dark/10" loading="lazy" />
+              ) : (
+                <span class="text-brand-blue font-display font-bold text-sm bg-brand-blue/10 px-3 py-1 flex-shrink-0">{a.era}</span>
+              )}
               <div>
                 <span class="font-bold text-brand-dark text-sm">{a.name}</span>
+                {a.photo && <span class="text-brand-blue text-[0.6rem] font-bold tracking-wider uppercase block">{a.era}</span>}
                 <span class="text-brand-dark/50 text-xs block">{a.achievement}</span>
               </div>
             </div>
           ))}
+        </div>
+        <div class="text-center mt-8 reveal reveal-delay-2">
+          <a href="/atleti/" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-dark text-white font-bold text-xs tracking-wider uppercase border-2 border-brand-dark hover:bg-brand-blue hover:border-brand-blue transition-all">
+            Vedi pagina Atleti &rarr;
+          </a>
         </div>
       </div>
     </div>
