@@ -94,7 +94,7 @@ async function createIssue(token, title, body, labels) {
 async function sendWhatsAppNotification(message, apiKey) {
   if (!apiKey) return;
   try {
-    const phone = '393491016979';
+    const phone = '393491019679';
     const encoded = encodeURIComponent(message);
     const url = `https://api.callmebot.com/whatsapp.php?phone=${phone}&text=${encoded}&apikey=${apiKey}`;
     const res = await fetch(url);
