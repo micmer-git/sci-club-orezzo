@@ -1,8 +1,11 @@
 /**
  * Sci Club Orezzo — Form submission worker
- * Accepts contact forms and athlete result submissions,
- * creates GitHub Issues in micmer-git/sci-club-orezzo.
+ * Accepts contact forms and athlete result submissions.
+ * - Creates GitHub Issues in micmer-git/sci-club-orezzo
+ * - Sends email notification to club email
  */
+
+const NOTIFY_EMAIL = 'michelemerelli.8@gmail.com'; // Club notification recipient
 
 const ALLOWED_ORIGINS = [
   'https://www.scicluborezzo.com',
@@ -85,6 +88,28 @@ async function createIssue(token, title, body, labels) {
   }
 
   return res.json();
+}
+
+// Send email notification via MailChannels (free for CF Workers)
+async function sendEmailNotification(subject, htmlBody, replyTo) {
+  try {
+    const res = await fetch('https://api.mailchannels.net/tx/v1/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        personalizations: [{
+          to: [{ email: NOTIFY_EMAIL, name: 'Sci Club Orezzo' }],
+        }],
+        from: { email: 'noreply@scicluborezzo.com', name: 'Sci Club Orezzo — Sito Web' },
+        reply_to: replyTo ? { email: replyTo } : undefined,
+        subject,
+        content: [{ type: 'text/html', value: htmlBody }],
+      }),
+    });
+    if (!res.ok) console.error('Email send failed:', await res.text());
+  } catch (e) {
+    console.error('Email error:', e.message); // best effort
+  }
 }
 
 // Format contact submission as markdown
@@ -200,6 +225,32 @@ export default {
       }
 
       const issue = await createIssue(token, title, finalBody, labels);
+
+      // Send email notification (best effort, don't block response)
+      const emailSubject = type === 'contatto'
+        ? `Nuovo contatto dal sito: ${data.nome} ${data.cognome}`
+        : `Nuovo risultato gara: ${data.nome} ${data.cognome} — ${data.gara}`;
+
+      const emailHtml = type === 'contatto'
+        ? `<h2>Nuovo messaggio dal sito Sci Club Orezzo</h2>
+           <p><strong>Da:</strong> ${data.nome} ${data.cognome} (${data.email})</p>
+           <p><strong>Oggetto:</strong> ${data.oggetto || 'info'}</p>
+           <hr>
+           <p>${(data.messaggio || '').replace(/\n/g, '<br>')}</p>
+           <hr>
+           <p><small><a href="${issue.html_url}">Vedi su GitHub</a></small></p>`
+        : `<h2>Nuovo risultato gara</h2>
+           <p><strong>Atleta:</strong> ${data.nome} ${data.cognome}</p>
+           <p><strong>Gara:</strong> ${data.gara} (${data.specialita || 'N/A'})</p>
+           <p><strong>Luogo:</strong> ${data.luogo || '—'} | <strong>Data:</strong> ${data.data || '—'}</p>
+           <p><strong>Posizione:</strong> ${data.posizione || '—'} | <strong>Tempo:</strong> ${data.tempo || '—'}</p>
+           ${data.racconto ? `<hr><p>${data.racconto.replace(/\n/g, '<br>')}</p>` : ''}
+           ${photoCount > 0 ? `<p>${photoCount} foto allegate</p>` : ''}
+           <hr>
+           <p><small><a href="${issue.html_url}">Vedi su GitHub</a></small></p>`;
+
+      // Fire and forget — don't await to keep response fast
+      sendEmailNotification(emailSubject, emailHtml, data.email);
 
       return json(
         { ok: true, issue_url: issue.html_url, photo_count: photoCount },
