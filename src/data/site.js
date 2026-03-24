@@ -55,7 +55,7 @@ export const DISCIPLINES = [
 export const SPONSORS = [
   { name: 'Industria Chimica Panzeri', url: 'https://www.chimicapanzeri.it/', tier: 'main', logo: '/img/sponsors/chimicapanzeri.png', desc: 'Chimica industriale — Orio al Serio (BG)' },
   { name: 'Kempatex', url: 'https://www.kempatex.it/', tier: 'main', logo: '/img/sponsors/kempatex.jpg', desc: 'Ausiliari chimici tessili — Grassobbio (BG)' },
-  { name: 'Brembana Service', url: 'https://www.brembanaservice.it/', tier: 'main', logo: '/img/sponsors/brembanaservice.jpg', desc: 'Revisioni veicoli — Villa d\'Alme (BG)' },
+  { name: 'Brembana Service', url: 'https://www.brembanaservice.it/', tier: 'main', logo: '/img/logo-brembana-service.png', desc: 'Revisioni veicoli — Villa d\'Alme (BG)' },
   { name: 'A&G Chemical', url: 'https://aegchem.com/', tier: 'main', logo: '/img/sponsors/aegchemical.png', desc: 'Detergenti e prodotti chimici' },
   { name: 'Sitip', url: 'https://sitip.it/', tier: 'storico', logo: '/img/sponsors/sitip.png', desc: 'Tessuti tecnici e innovativi — Cene (BG). Sponsor storico, 600 dipendenti, 120M fatturato' },
   { name: 'Pedretti Serramenti', url: 'https://pedrettiserramenti.it/', tier: 'technical', logo: '/img/sponsors/pedrettiserramenti.png', desc: 'Serramenti PVC — Endine Gaiano (BG)' },
@@ -86,8 +86,8 @@ export const STORIA_MILESTONES = [
 
 // === NOTABLE ATHLETES ===
 export const NOTABLE_ATHLETES = [
-  { name: 'Efrem Merelli', achievement: 'Campione italiano GS 1983, Coppa Italia 1985. Oggi coordinatore del club', era: '1983' },
-  { name: 'Luca Agazzi', achievement: 'Cresciuto allo SC Orezzo. Allenatore Coppa del Mondo, coach di Lara Gut e Sofia Goggia. 2 Olimpiadi.', era: '2000s' },
+  { name: 'Efrem Merelli', achievement: 'Campione Italiano Assoluto di Slalom Gigante (1983), 2 podi in Coppa Europa (1979-80). Oggi coordinatore del club.', era: '1983', photo: '/img/efrem-merelli.jpg', badges: [{ type: 'ita', label: 'Campione Italiano GS 1983' }, { type: 'world', label: 'Podi Coppa Europa' }] },
+  { name: 'Luca Agazzi', achievement: 'Cresciuto allo SC Orezzo. Allenatore Coppa del Mondo, coach di Lara Gut e Sofia Goggia. 2 Olimpiadi.', era: '2000s', badges: [{ type: 'worldcup', label: 'Coppa del Mondo' }, { type: 'olympic', label: '2 Olimpiadi' }] },
   { name: 'Michela Azzola', achievement: 'Atleta nazionale, originaria di Albino', era: '2000s' },
   { name: 'Marta Benzoni', achievement: 'Atleta nazionale, originaria di Rovetta', era: '2000s' },
   { name: 'Elena Oprandi', achievement: 'Pettorale rosso circuito Children FISI Bergamo', era: '2020' },
@@ -98,8 +98,8 @@ export const NOTABLE_ATHLETES = [
   { name: 'Gabriele De Paola', achievement: '1° U14M Super G Passo del Tonale', era: '2026' },
   { name: 'Nathan Galizzi', achievement: '1° Baby 1 M, Skicross Colere', era: '2026' },
   { name: 'Melissa Caranoni', achievement: '2a U16F al 42° Trofeo Merelli Fiorenza', era: '2025' },
-  { name: 'Gian Mauro Piantoni', achievement: 'Campione del Mondo Master SL 2019 (Megeve), Campione Italiano SL+SG 2019, Argento GS Cortina 2025', era: 'Master' },
-  { name: 'Patrizia Spampatti', achievement: 'Campionessa Italiana Master SG/GS/SL 2019 (Roccaraso), dominatrice assoluta Gruppo D', era: 'Master' },
+  { name: 'Gian Mauro Piantoni', achievement: 'Campione del Mondo Master SL 2019 (Megeve), Campione Italiano SL+SG 2019, Argento GS Cortina 2025', era: 'Master', photo: '/img/gianmauro-piantoni.png', badges: [{ type: 'world', label: 'Campione del Mondo Master' }, { type: 'ita', label: 'Campione Italiano' }, { type: 'silver', label: 'Argento Italiano GS' }] },
+  { name: 'Patrizia Spampatti', achievement: 'Campionessa Italiana Master SG/GS/SL 2019 (Roccaraso), dominatrice assoluta Gruppo D', era: 'Master', photo: '/img/patrizia-spampatti.png', badges: [{ type: 'ita', label: 'Tripla Campionessa Italiana' }, { type: 'master', label: 'Master Gruppo D' }] },
 ];
 
 // === SPONSOR PACKAGES ===

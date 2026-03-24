@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { NOTABLE_ATHLETES } from '../data/site.js';
+
+const BADGE_TYPES = {
+  world: { color: 'bg-emerald-600', icon: '🌍' },
+  ita: { color: 'bg-sky-600', icon: '🇮🇹' },
+  silver: { color: 'bg-slate-500', icon: '🥈' },
+  master: { color: 'bg-violet-600', icon: '🏔️' },
+  worldcup: { color: 'bg-indigo-600', icon: '⛷️' },
+  olympic: { color: 'bg-amber-500', icon: '🏅' },
+};
+
+const highlighted = NOTABLE_ATHLETES.filter((a) => a.photo || (a.badges && a.badges.length > 0));
+const others = NOTABLE_ATHLETES.filter((a) => !a.photo && !(a.badges && a.badges.length > 0));
+---
+
+<BaseLayout
+  title="Atleti di Rilievo — Sci Club Orezzo"
+  description="Pagina dedicata agli atleti di rilievo dello Sci Club Orezzo, con palmares e badge distintivi."
+>
+  <section class="relative py-32 md:py-40 px-5 bg-brand-dark text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="/img/neve-sfondo.jpg" alt="" class="w-full h-full object-cover opacity-15" />
+      <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/75 via-brand-dark/55 to-brand-blue/25"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center">
+      <p class="text-brand-blue text-xs font-bold tracking-[0.25em] uppercase mb-4">Team Élite</p>
+      <h1 class="font-display text-[clamp(2.2rem,8vw,4.8rem)] font-bold leading-tight mb-6">
+        Atleti di Rilievo
+      </h1>
+      <p class="text-white/70 text-lg max-w-2xl mx-auto">
+        Profili storici e contemporanei dello Sci Club Orezzo. Risultati, palmares e riconoscimenti in formato visuale.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 px-5">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {highlighted.map((a) => (
+          <article class="bg-white border-2 border-brand-dark shadow-[6px_6px_0_#1A1A1A] overflow-hidden">
+            <div class="relative h-64 bg-brand-snow">
+              {a.photo ? (
+                <img src={a.photo} alt={a.name} class="w-full h-full object-cover" loading="lazy" />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-blue/15 to-brand-dark/10">
+                  <span class="font-display text-6xl text-brand-blue/60">{a.name.charAt(0)}</span>
+                </div>
+              )}
+
+              <div class="absolute top-3 left-3 flex flex-wrap gap-2 max-w-[90%]">
+                {(a.badges || []).map((b) => {
+                  const bt = BADGE_TYPES[b.type] || { color: 'bg-brand-dark', icon: '⭐' };
+                  return (
+                    <span class={`inline-flex items-center gap-1 ${bt.color} text-white text-[0.62rem] font-bold tracking-wide px-2.5 py-1 shadow`}> 
+                      <span>{bt.icon}</span>
+                      <span>{b.label}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div class="p-5">
+              <div class="flex items-center justify-between gap-3 mb-2">
+                <h2 class="font-display text-xl font-bold text-brand-dark">{a.name}</h2>
+                <span class="text-[0.62rem] font-bold tracking-[0.14em] uppercase bg-brand-blue/10 text-brand-blue px-2 py-1">{a.era}</span>
+              </div>
+              <p class="text-sm text-brand-dark/70 leading-relaxed">{a.achievement}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-20 px-5">
+    <div class="max-w-4xl mx-auto">
+      <h3 class="font-display text-2xl font-bold text-brand-dark mb-6 text-center">Altri atleti di rilievo</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {others.map((a) => (
+          <div class="bg-white border border-brand-dark/15 p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-brand-blue font-display font-bold text-xs bg-brand-blue/10 px-2 py-1">{a.era}</span>
+              <h4 class="font-bold text-brand-dark text-sm">{a.name}</h4>
+            </div>
+            <p class="text-xs text-brand-dark/60">{a.achievement}</p>
+          </div>
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a href="/" class="inline-flex items-center gap-2 text-sm font-bold text-brand-blue hover:underline">&larr; Torna alla home</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
