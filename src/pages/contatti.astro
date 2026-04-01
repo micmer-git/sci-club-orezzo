@@ -304,7 +304,10 @@ const WORKER_URL = 'https://scicluborezzo-forms.micmer-recastello.workers.dev';
       });
     }
 
-    // Send email via FormSubmit.co (browser-side, always works)
+    // Getform.io redundant endpoint (replace ID after creating form at getform.io)
+    const SCICLUB_GETFORM_URL = 'https://getform.io/f/GETFORM_SCICLUB_ID';
+
+    // Send email via FormSubmit.co + Getform.io (browser-side, dual-send)
     async function sendEmail(formData, type) {
       const emailPayload = {
         _subject: type === 'contatto'
@@ -318,12 +321,29 @@ const WORKER_URL = 'https://scicluborezzo-forms.micmer-recastello.workers.dev';
       for (const [k, v] of Object.entries(formData)) {
         if (k !== '_type' && k !== 'photos' && v) emailPayload[k] = v;
       }
-      try {
-        await fetch('https://formsubmit.co/ajax/info@scicluborezzo.com', {
+      const sends = [
+        fetch('https://formsubmit.co/ajax/info@scicluborezzo.com', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify(emailPayload),
-        });
+        })
+      ];
+      // Redundant: getform.io (skipped if placeholder ID still present)
+      if (!SCICLUB_GETFORM_URL.includes('REPLACE_ME') && !SCICLUB_GETFORM_URL.includes('GETFORM_SCICLUB_ID')) {
+        const getformPayload = {};
+        for (const [k, v] of Object.entries(formData)) {
+          if (k !== '_type' && k !== 'photos' && v) getformPayload[k] = v;
+        }
+        getformPayload.type = type;
+        getformPayload.source = 'sciclub-contatti';
+        sends.push(fetch(SCICLUB_GETFORM_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(getformPayload),
+        }));
+      }
+      try {
+        await Promise.allSettled(sends);
       } catch (e) { /* best effort */ }
     }
 

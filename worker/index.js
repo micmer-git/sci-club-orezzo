@@ -104,10 +104,13 @@ async function sendWhatsAppNotification(message, apiKey) {
   }
 }
 
-// Send email notification via FormSubmit.co (free, reliable)
+// Getform.io redundant endpoint (replace ID after creating form at getform.io)
+const GETFORM_SCICLUB_URL = 'https://getform.io/f/GETFORM_SCICLUB_ID';
+
+// Send email notification via FormSubmit.co + Getform.io (dual-send, redundant)
 async function sendEmailNotification(subject, textBody, replyTo) {
-  try {
-    const res = await fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+  const sends = [
+    fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
@@ -116,10 +119,32 @@ async function sendEmailNotification(subject, textBody, replyTo) {
         _captcha: 'false',
         message: textBody,
       }),
-    });
-    if (!res.ok) console.error('Email send failed:', res.status);
-  } catch (e) {
-    console.error('Email error:', e.message); // best effort
+    })
+  ];
+
+  // Redundant: getform.io (skipped if placeholder ID still present)
+  if (!GETFORM_SCICLUB_URL.includes('REPLACE_ME') && !GETFORM_SCICLUB_URL.includes('GETFORM_SCICLUB_ID')) {
+    sends.push(
+      fetch(GETFORM_SCICLUB_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subject: subject,
+          message: textBody,
+          replyTo: replyTo || '',
+          source: 'sciclub-worker',
+        }),
+      })
+    );
+  }
+
+  const results = await Promise.allSettled(sends);
+  for (const r of results) {
+    if (r.status === 'rejected') {
+      console.error('Email error:', r.reason?.message || r.reason);
+    } else if (!r.value?.ok) {
+      console.error('Email send failed:', r.value?.status);
+    }
   }
 }
 
