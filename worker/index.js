@@ -107,17 +107,19 @@ async function sendWhatsAppNotification(message, apiKey) {
 // Getform.io redundant endpoint (replace ID after creating form at getform.io)
 const GETFORM_SCICLUB_URL = 'https://getform.io/f/GETFORM_SCICLUB_ID';
 
-// Send email notification via FormSubmit.co + Getform.io (dual-send, redundant)
+// Send email notification via MailChannels (free on CF Workers) + optional Getform.io redundancy
 async function sendEmailNotification(subject, textBody, replyTo) {
   const sends = [
-    fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+    // Primary: MailChannels API (free from CF Workers)
+    fetch('https://api.mailchannels.net/tx/v1/send', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        _subject: subject,
-        _replyto: replyTo || '',
-        _captcha: 'false',
-        message: textBody,
+        personalizations: [{ to: [{ email: NOTIFY_EMAIL, name: 'Sci Club Orezzo' }] }],
+        from: { email: 'noreply@scicluborezzo.com', name: 'Sci Club Orezzo Forms' },
+        reply_to: replyTo ? { email: replyTo } : undefined,
+        subject: subject,
+        content: [{ type: 'text/html', value: `<pre style="font-family:sans-serif;white-space:pre-wrap;">${textBody}</pre>` }],
       }),
     })
   ];
@@ -143,7 +145,8 @@ async function sendEmailNotification(subject, textBody, replyTo) {
     if (r.status === 'rejected') {
       console.error('Email error:', r.reason?.message || r.reason);
     } else if (!r.value?.ok) {
-      console.error('Email send failed:', r.value?.status);
+      const errText = r.value ? await r.value.text().catch(() => 'unknown') : 'unknown';
+      console.error('Email send failed:', r.value?.status, errText);
     }
   }
 }
