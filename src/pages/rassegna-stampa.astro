@@ -1,0 +1,571 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Rassegna stampa storica dello Sci Club Orezzo (1979-1987)
+// 16 ritagli scannerizzati e normalizzati dal quaderno spirale di Tarcisio Merelli
+// Captions con testo OCR diretto dai ritagli originali
+const ritagli = [
+  {
+    img: '/img/rassegna/page-14.jpg',
+    year: '21 dicembre 1979',
+    headline: 'Efrem Merelli batte i titolari',
+    source: '«Vittorioso nel gigante FIS di Pinzolo»',
+    note: '«La valanga bergamasca colpisce continuamente, senza pietà. Li ha battuti tutti un bergamasco diciottenne, Efrem Merelli, di Orezzo». Davanti a Giorgi, Bieller, Noeckler. Camozzi 6° e Ghislandi 7° per lo Sci Club Orezzo.',
+    tag: 'Esordi',
+    rotate: '-1.4deg',
+    span: 'wide',
+  },
+  {
+    img: '/img/rassegna/page-13.jpg',
+    year: '13 febbraio 1980',
+    headline: 'Ecco gli eredi di Fausto Radici',
+    source: 'Cortina — Campionati assoluti / Franco Bartolini',
+    note: 'Sei volti sulla pista del Canalone Tofane: Berera (Foppolo), Carletti (Foppolo), Giudici (Clusone), Marelli (Orezzo, 15 ottobre 1961), Filisetti (Clusone), Camozzi (Albino, 12 aprile 1962). La generazione bergamasca che cresce verso Lake Placid.',
+    tag: 'Generazione \'80',
+    rotate: '0.8deg',
+    span: 'wide',
+  },
+  {
+    img: '/img/rassegna/page-05.jpg',
+    year: '1981',
+    headline: 'Si rivela Efrem Merelli',
+    source: 'Pinzolo — slalom gigante / battendo Giorgi, Bieller e Noeckler',
+    note: '«Sulla neve fresca caduta nelle ultime 24 ore, è sorprendentemente affermato sopra tutti la giovane Efrem Merelli (Orezzo)». Classifica: Merelli E. 156"30, Giorgi 156"59, Bieller 156"75, Noeckler 156"97. Camozzi 6°, Ghislandi 7°.',
+    tag: 'Pinzolo',
+    rotate: '1.2deg',
+  },
+  {
+    img: '/img/rassegna/page-06.jpg',
+    year: '1° maggio 1981',
+    headline: 'Dal Trofeo Speedy Gonzales ai «provinciali» di Valcanale',
+    source: 'Settima edizione della rassegna SC Lizzola',
+    note: '«Ivano Camozzi ed Efrem Merelli hanno portato allo S.C. Orezzo l\'ennesimo trofeo vincendo lo Speedy Gonzales». A seguire: Efrem Merelli vittorioso a Borno nel gigante zonale, Filisetti terzo nello slalom.',
+    tag: 'Provinciali',
+    rotate: '-0.6deg',
+  },
+  {
+    img: '/img/rassegna/page-04.jpg',
+    year: '1982',
+    headline: 'Primo Spampatti, terzo Merelli',
+    source: 'Alpe di Paglio — IV Memorial Roberto Burini / Gian Piero Gerosa',
+    note: '«Un centesimo di secondo: questo il distacco fra il bergamasco Roberto Spampatti e il gardenese Alex Giorgi». Spampatti 2\'54"77, Giorgi 2\'54"78, Merelli 2\'55"25. A seguire Tomasoni, Huntergassmaier, Herzog, Fernandez Ochoa, Gerosa, Belfrond, Barcella.',
+    tag: 'Internazionali',
+    rotate: '-1.8deg',
+  },
+  {
+    img: '/img/rassegna/page-08.jpg',
+    year: 'inizi anni \'80',
+    headline: 'Lo S.C. Orezzo con quattro atleti alla finale del «Corrierino»',
+    source: 'A Madonna di Campiglio domani e domenica — Frecce Rosse',
+    note: 'La squadra nasce nel 1969 ad Orezzo. Allenatori Attilio Lanfranchi, Sandro Seghezzi, Franco Martinelli. Casacche rosse cucite dalle mamme. Quattro «Frecce Rosse» alla finale nazionale del Corrierino dei Piccoli.',
+    tag: 'Frecce Rosse',
+    rotate: '1.0deg',
+    span: 'wide',
+  },
+  {
+    img: '/img/rassegna/page-12.jpg',
+    year: '1983',
+    headline: '«Quella, se continua così, darà dei dispiaceri anche a te»',
+    source: 'Vignetta di Mino Cornolti per L\'Eco di Bergamo',
+    note: 'Efrem Merelli a Maria Rosa Quario, fra le bandierine di LECCE, MILAN, PISTOIESE, BOLOGNA, BARI, AREZZO, CATANIA, CAMPOBASSO. Un campione di Orezzo nelle vignette satiriche dei grandi quotidiani.',
+    tag: 'Folklore',
+    rotate: '2.4deg',
+  },
+  {
+    img: '/img/rassegna/page-01.jpg',
+    year: '1983',
+    headline: 'Merelli batte Kerschbaumer nel «gigante» degli assoluti',
+    source: 'St-Grée — Campionati Italiani Assoluti / Giorgio Viglino',
+    note: '«I campionati nazionali si chiudono con un gigante che racchiude la filosofia di quest\'ultima stagione azzurra nello sci. Ha vinto Efrem Merelli davanti a Siegfried Kerschbaumer, entrambi inseriti nei quadri della squadra B». Il titolo italiano che entra nella storia del club.',
+    tag: 'Titolo italiano',
+    rotate: '-1deg',
+    span: 'wide',
+    highlight: true,
+  },
+  {
+    img: '/img/rassegna/page-16.jpg',
+    year: '1984',
+    headline: 'Domina in Coppa Europa la «valanga bergamasca»',
+    source: '«Paoletta Magoni e Lori Frigo nella scia delle primedonne» — «Efrem Merelli 2° in Valsassina»',
+    note: 'Bormio in piena stagione. Magoni vince lo slalom femminile World Series, Merelli secondo a Pampago in gigante (battuto da Kerschbaumer), quarto nello speciale dietro Pansolaria, Tonazzi, Camozzi.',
+    tag: 'Coppa Europa',
+    rotate: '0.4deg',
+  },
+  {
+    img: '/img/rassegna/page-11.jpg',
+    year: '1° marzo 1984',
+    headline: 'Merelli 2° e 4° in Coppitalia',
+    source: 'Pian delle Betulle — Due Giorni di Coppa Italia / Trofeo Ambrogio Malugani',
+    note: '«Merelli è stato battuto per poco meno di un secondo nelle due manches dall\'altoatesino Rolando Brunner». Quarto in classifica generale dietro Tomasi, Brunner e Furli. A fianco: la cittadinanza di Marc Girardelli per i Mondiali, sempre iscritto «sub judice».',
+    tag: 'Coppa Italia',
+    rotate: '-0.8deg',
+  },
+  {
+    img: '/img/rassegna/page-09.jpg',
+    year: '11 marzo 1985',
+    headline: 'Merelli (Orezzo) e Bettineschi (Goggi) dominano nel gigante di Montecampione',
+    source: 'III Trofeo Giovanni Giudici — slalom gigante zonale',
+    note: 'Doppietta orobica: Merelli (giovani) e Bettineschi (seniores). Filisetti 2°, Bassi 3°, Ghislandi 4°, Ferrari 5°. A fianco: «Merelli ottavo a Santa Caterina» (Coppa Europa, dominata dagli svedesi Neuriesser e Wallner) e «Camozzi e Merelli in Coppa Europa Sestriere».',
+    tag: 'Coppa Italia 1985',
+    rotate: '1.8deg',
+    span: 'wide',
+    highlight: true,
+  },
+  {
+    img: '/img/rassegna/page-02.jpg',
+    year: '1985',
+    headline: 'Camozzi, Pichler, Merelli al computer del CONI',
+    source: 'Foto Vincenzo Giaco — Art Foto',
+    note: '«Da sinistra: Ivano Camozzi, Karl Pichler ed Efrem Merelli alle prese con le schede sulle quali si registra il lavoro effettuato da ogni atleta. I dati vengono poi trasmessi al computer del Coni».',
+    tag: 'Squadra azzurra',
+    rotate: '-1.2deg',
+  },
+  {
+    img: '/img/rassegna/page-03.jpg',
+    year: 'metà anni \'80',
+    headline: 'Pettorale 34 — sponsor BMW, sci Blizzard',
+    source: 'Foto azione FIS — Coppa del Mondo',
+    note: 'Tuta bianca Sci Club Orezzo, casco bianco, sci Blizzard. Posizione di gigante in pieno carving. Una delle poche foto a colori del diario.',
+    tag: 'FIS',
+    rotate: '1.4deg',
+  },
+  {
+    img: '/img/rassegna/page-07.jpg',
+    year: '1986',
+    headline: 'Per gli azzurri è un festival',
+    source: 'Settimana FIS della val Pusteria — San Candido',
+    note: '«Dopo Tonazzi, ieri il successo è toccato ad Efrem Merelli, impostatosi nel gigante di Monte Elmo. Al terzo posto Kerschbaumer. Oggi slalom a Plan de Corones». Ordine d\'arrivo: Merelli 2\'22"82, Buchner 2\'23"03, Kerschbaumer 2\'23"10, Walk, Lamotte. A fianco: Mair e Sbardellotto fuori dalla Wengen per infortunio.',
+    tag: 'Settimana FIS',
+    rotate: '1.6deg',
+    span: 'wide',
+  },
+  {
+    img: '/img/rassegna/page-15.jpg',
+    year: '4 marzo 1987',
+    headline: 'Presentato lo Sci Club Orezzo-Cominelli Due',
+    source: 'L\'Eco di Bergamo / foto Roby Cassotti',
+    note: 'Mariotti (presidente CONI), Drago (assessore allo Sport), Cacciamatta (vicepresidente FISI provinciale) ufficializzano l\'accordo. Trentadue atleti, sponsor Gavazzeni. Allenatore: Efrem Merelli, coadiuvato da Ghislandi. Si chiude la categoria «giovani» per dedicarsi al Ciao-Crem.',
+    tag: 'Storia del club',
+    rotate: '-1.4deg',
+  },
+  {
+    img: '/img/rassegna/page-10.jpg',
+    year: 'fine anni \'70',
+    headline: 'Sotto i pali, in tuta bianca',
+    source: 'Polaroid d\'archivio — gara provinciale',
+    note: 'Tuta bianca con scritta «SCI CLUB OREZZO», calzettoni gialli, telone azzurro come unico fondale. Una foto a colori incollata fra i ritagli di giornale: la pista era casa, la gara era la festa.',
+    tag: 'Vivai',
+    rotate: '-2deg',
+  },
+];
+
+const cover = ritagli.find((r) => r.highlight) ?? ritagli[0];
+---
+
+<BaseLayout
+  title="Rassegna Stampa — Sci Club Orezzo"
+  description="La rassegna stampa storica dello Sci Club Orezzo dal 1979 al 1987: 16 ritagli di giornale dal quaderno spirale custodito da Tarcisio Merelli. Dal Trofeo Speedy Gonzales al titolo italiano 1983."
+>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="relative pt-28 md:pt-36 pb-16 md:pb-24 px-5 overflow-hidden bg-[#efe6d2]">
+    <div class="absolute inset-0 paper-texture pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute -top-10 -right-16 w-64 h-64 rounded-full bg-[#8b5a2b]/10 blur-2xl pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute bottom-10 -left-10 w-80 h-80 rounded-full bg-[#5a3a1a]/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto">
+      <div class="text-center">
+        <p class="font-mono text-[0.7rem] md:text-xs text-[#5a3a1a]/60 tracking-[0.4em] uppercase mb-3 reveal">
+          1979 — 1987 · Quaderno spirale, archivio Merelli
+        </p>
+        <h1 class="font-cursive text-[clamp(3rem,11vw,7rem)] text-[#1a1a1a] leading-[0.9] reveal reveal-delay-1">
+          Rassegna Stampa
+        </h1>
+        <p class="font-display text-xs md:text-sm tracking-[0.35em] uppercase text-brand-blue mt-2 reveal reveal-delay-2">
+          dello Sci Club Orezzo
+        </p>
+        <div class="mx-auto mt-8 max-w-2xl reveal reveal-delay-3">
+          <p class="text-[#3a2a18] text-base md:text-lg leading-relaxed font-serif italic">
+            Sedici ritagli di giornale, una vignetta e tre fotografie a colori.
+            Tarcisio Merelli ha conservato tutto in un quaderno spirale,
+            ritagliando, incollando, annotando a penna l'anno a margine. Otto anni
+            di sci alpino bergamasco — dall'esordio del giovane Efrem nel gigante
+            di Pinzolo (1979) alla nascita dell'Orezzo-Cominelli Due (1987).
+          </p>
+        </div>
+      </div>
+
+      <!-- copertina featured: Title italiano 1983 -->
+      <div class="mt-14 md:mt-20 grid md:grid-cols-12 gap-8 items-center reveal reveal-delay-4">
+        <div class="md:col-span-7">
+          <div class="relative">
+            <span class="absolute -top-4 left-8 w-24 h-7 bg-[#f4d97a]/70 rotate-[-4deg] shadow-sm z-20" aria-hidden="true"></span>
+            <span class="absolute -top-3 right-12 w-20 h-6 bg-[#f4d97a]/70 rotate-[6deg] shadow-sm z-20" aria-hidden="true"></span>
+            <div class="relative bg-white p-3 md:p-4 shadow-[0_18px_40px_-12px_rgba(0,0,0,0.35)] rotate-[-1.5deg]">
+              <img
+                src={cover.img}
+                alt={cover.headline}
+                class="w-full h-auto block"
+                loading="eager"
+              />
+              <div class="px-2 pt-3 pb-1">
+                <p class="font-mono text-[0.65rem] tracking-widest uppercase text-[#5a3a1a]/60">{cover.year} · {cover.source}</p>
+                <p class="font-cursive text-2xl md:text-3xl text-[#1a1a1a] mt-1 leading-tight">{cover.headline}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="md:col-span-5">
+          <p class="font-mono text-[0.7rem] tracking-[0.3em] uppercase text-brand-blue mb-3">Il pezzo da museo</p>
+          <h2 class="font-display text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4 leading-tight">
+            Marzo 1983 — il titolo italiano
+          </h2>
+          <p class="text-[#3a2a18]/80 text-sm md:text-base leading-relaxed mb-4">
+            St-Grée, Campionati Italiani Assoluti. Efrem Merelli vince lo slalom
+            gigante davanti a Siegfried Kerschbaumer. La firma di Giorgio Viglino
+            sulla cronaca dell'Eco di Bergamo: «un gigante che racchiude la
+            filosofia di quest'ultima stagione azzurra nello sci».
+          </p>
+          <a href="#ritagli" class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.3em] uppercase text-brand-blue hover:underline">
+            Sfoglia la rassegna
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- numeri -->
+      <div class="mt-14 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+        {[
+          { num: '8', label: 'anni di stampa' },
+          { num: '16', label: 'ritagli scannerizzati' },
+          { num: '1', label: 'titolo italiano' },
+          { num: '57', label: 'anni di storia' },
+        ].map((s) => (
+          <div class="bg-white/70 border border-[#5a3a1a]/15 p-4 text-center backdrop-blur-sm">
+            <span class="block font-display text-3xl font-bold text-[#1a1a1a]">{s.num}</span>
+            <span class="block font-mono text-[0.65rem] tracking-[0.25em] uppercase text-[#5a3a1a]/60 mt-1">{s.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INTRO ===================== -->
+  <section class="py-16 md:py-24 px-5 bg-[#f6efde]">
+    <div class="max-w-3xl mx-auto">
+      <div class="reveal">
+        <p class="font-mono text-[0.7rem] tracking-[0.3em] uppercase text-brand-blue mb-3">Nota d'archivio</p>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-6">Otto anni di valanga bergamasca</h2>
+      </div>
+      <div class="space-y-5 text-[#2a1a08] text-base md:text-lg leading-relaxed reveal reveal-delay-1">
+        <p>
+          La rassegna comincia con un titolo che sintetizza un'epoca:
+          «la valanga bergamasca colpisce continuamente, senza pietà».
+          È il 21 dicembre 1979, lo slalom gigante FIS di Pinzolo. Un Efrem Merelli
+          di diciotto anni batte tutti i titolari della Nazionale, con
+          Camozzi e Ghislandi sesto e settimo a portare la doppietta orobica.
+        </p>
+        <p>
+          Da lì in poi, anno dopo anno, la pagina del diario si riempie:
+          la generazione bergamasca raccontata come «<strong>gli eredi di Fausto Radici</strong>»
+          (Cortina, febbraio 1980), il <strong>Trofeo Speedy Gonzales</strong> a Lizzola,
+          le internazionali all'<strong>Alpe di Paglio</strong>, il <strong>titolo italiano</strong>
+          a St-Grée nel 1983, la <strong>Coppa Italia 1985</strong> con la doppietta
+          di Montecampione, la <strong>Settimana FIS della val Pusteria</strong> nel 1986,
+          la nascita dell'<strong>Orezzo-Cominelli Due</strong> nel 1987.
+        </p>
+        <p>
+          Le pagine che seguono sono la versione scannerizzata del quaderno originale
+          — ritagli normalizzati, ruotati nel verso di lettura, con testo OCR
+          riportato fedelmente nelle didascalie. Il quaderno fisico è ancora oggi
+          custodito alla pizzeria «La Penzana del Merel».
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RITAGLI ===================== -->
+  <section id="ritagli" class="py-16 md:py-24 px-5 bg-[#efe6d2] relative">
+    <div class="absolute inset-0 paper-texture pointer-events-none" aria-hidden="true"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto">
+      <div class="text-center mb-12 md:mb-16">
+        <p class="font-mono text-[0.7rem] tracking-[0.35em] uppercase text-brand-blue mb-3 reveal">Pagina per pagina</p>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-[#1a1a1a] reveal reveal-delay-1">I ritagli, in ordine</h2>
+        <p class="text-[#3a2a18]/70 text-sm md:text-base mt-3 max-w-xl mx-auto reveal reveal-delay-2">
+          Ordine cronologico, dal 1979 al 1987. Tocca un\'immagine per leggere il ritaglio a tutto schermo.
+        </p>
+      </div>
+
+      <div class="diario-grid">
+        {ritagli.map((r, i) => (
+          <figure
+            class={`diario-card reveal reveal-delay-${(i % 4) + 1} ${r.span === 'wide' ? 'diario-card--wide' : ''} ${r.highlight ? 'diario-card--highlight' : ''}`}
+            style={`--rot: ${r.rotate ?? '0deg'};`}
+            data-img={r.img}
+            data-headline={r.headline}
+            data-source={r.source}
+            data-note={r.note}
+            data-year={r.year}
+          >
+            <span class="diario-tape diario-tape--tl" aria-hidden="true"></span>
+            <span class="diario-tape diario-tape--br" aria-hidden="true"></span>
+            <button
+              type="button"
+              class="diario-trigger"
+              aria-label={`Apri: ${r.headline}`}
+            >
+              <img src={r.img} alt={r.headline} loading="lazy" />
+            </button>
+            <figcaption class="diario-cap">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-brand-blue">{r.year}</span>
+                <span class="text-[#5a3a1a]/30">·</span>
+                <span class="font-mono text-[0.6rem] tracking-[0.25em] uppercase text-[#5a3a1a]/60">{r.tag}</span>
+              </div>
+              <p class="font-display font-bold text-base md:text-lg text-[#1a1a1a] leading-tight mb-2">{r.headline}</p>
+              <p class="font-mono text-[0.65rem] text-[#5a3a1a]/70 italic mb-3">{r.source}</p>
+              <p class="text-[#2a1a08]/80 text-sm leading-relaxed">{r.note}</p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CHIUSURA ===================== -->
+  <section class="py-16 md:py-24 px-5 bg-brand-dark text-white">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="font-cursive text-3xl md:text-4xl text-brand-blue mb-4 reveal">Prima di uno sci club, una famiglia.</p>
+      <p class="text-white/60 text-sm md:text-base max-w-xl mx-auto reveal reveal-delay-1">
+        Il quaderno è pieno, ma la rassegna stampa non si chiude. Ogni stagione
+        un nuovo ritaglio, ogni atleta un nuovo nome incollato a margine.
+      </p>
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4 reveal reveal-delay-2">
+        <a href="/storia/" class="px-6 py-3 bg-brand-blue text-white font-bold text-xs tracking-[0.2em] uppercase border-2 border-brand-blue hover:bg-white hover:text-brand-dark transition-all">
+          La Storia del Club
+        </a>
+        <a href="/atleti/" class="px-6 py-3 bg-transparent text-white font-bold text-xs tracking-[0.2em] uppercase border-2 border-white/30 hover:border-white transition-all">
+          Gli Atleti di Oggi
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LIGHTBOX ===================== -->
+  <div id="diario-lightbox" class="diario-lightbox" aria-hidden="true" role="dialog" aria-label="Immagine ingrandita">
+    <button type="button" class="diario-lightbox__close" aria-label="Chiudi">×</button>
+    <button type="button" class="diario-lightbox__nav diario-lightbox__nav--prev" aria-label="Precedente">‹</button>
+    <button type="button" class="diario-lightbox__nav diario-lightbox__nav--next" aria-label="Successivo">›</button>
+    <div class="diario-lightbox__inner">
+      <img class="diario-lightbox__img" alt="" />
+      <div class="diario-lightbox__meta">
+        <p class="diario-lightbox__year"></p>
+        <p class="diario-lightbox__headline"></p>
+        <p class="diario-lightbox__source"></p>
+        <p class="diario-lightbox__note"></p>
+      </div>
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style>
+  .paper-texture {
+    background-color: #efe6d2;
+    background-image:
+      radial-gradient(at 30% 20%, rgba(139,90,43,0.06) 0%, transparent 50%),
+      radial-gradient(at 80% 60%, rgba(90,58,26,0.05) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+    background-size: auto, auto, 220px;
+  }
+  .diario-grid { column-count: 1; column-gap: 1.5rem; }
+  @media (min-width: 640px) { .diario-grid { column-count: 2; column-gap: 2rem; } }
+  @media (min-width: 1024px) { .diario-grid { column-count: 3; column-gap: 2.25rem; } }
+
+  .diario-card {
+    break-inside: avoid;
+    margin: 0 0 2.25rem 0;
+    background: #fdfaf2;
+    padding: 0.75rem 0.75rem 1.25rem;
+    box-shadow: 0 14px 30px -12px rgba(0,0,0,0.3), 0 4px 10px -4px rgba(0,0,0,0.15);
+    transform: rotate(var(--rot, 0deg));
+    position: relative;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
+    border: 1px solid rgba(90,58,26,0.08);
+  }
+  .diario-card:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow: 0 22px 50px -16px rgba(0,0,0,0.4), 0 6px 14px -6px rgba(0,0,0,0.2);
+    z-index: 5;
+  }
+  .diario-card--wide img { aspect-ratio: 4/3; object-fit: cover; }
+  .diario-card--highlight {
+    background: #fffaea;
+    border: 1px solid rgba(0,102,179,0.25);
+    box-shadow: 0 18px 40px -14px rgba(0,102,179,0.35), 0 6px 14px -6px rgba(0,0,0,0.2);
+  }
+  .diario-card--highlight::before {
+    content: '★';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 32px;
+    height: 32px;
+    background: #0066B3;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .diario-trigger {
+    display: block; width: 100%; padding: 0; border: 0;
+    background: transparent; cursor: zoom-in; overflow: hidden; line-height: 0;
+  }
+  .diario-trigger img { width: 100%; height: auto; display: block; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .diario-trigger:hover img { transform: scale(1.03); }
+  .diario-cap { padding-top: 1rem; padding-left: 0.25rem; padding-right: 0.25rem; }
+
+  .diario-tape {
+    position: absolute; width: 64px; height: 18px;
+    background: linear-gradient(135deg, rgba(244,217,122,0.85) 0%, rgba(255,234,160,0.6) 100%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08); z-index: 3; pointer-events: none;
+  }
+  .diario-tape--tl { top: -8px; left: 16px; transform: rotate(-6deg); }
+  .diario-tape--br { bottom: 18px; right: 12px; transform: rotate(8deg); width: 52px; height: 16px; }
+
+  .diario-lightbox {
+    position: fixed; inset: 0; background: rgba(20, 14, 6, 0.93);
+    z-index: 10000; display: none; align-items: center; justify-content: center;
+    padding: 1rem; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .diario-lightbox.open { display: flex; }
+  .diario-lightbox__inner {
+    max-width: 1100px; width: 100%; max-height: 92vh;
+    display: grid; grid-template-rows: 1fr auto; gap: 1rem;
+  }
+  @media (min-width: 900px) {
+    .diario-lightbox__inner { grid-template-rows: none; grid-template-columns: 1fr 320px; }
+  }
+  .diario-lightbox__img {
+    max-width: 100%; max-height: 78vh; object-fit: contain;
+    background: #fdfaf2; padding: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    justify-self: center; align-self: center;
+  }
+  .diario-lightbox__meta {
+    background: #fdfaf2; color: #1a1a1a; padding: 1.25rem 1.5rem;
+    align-self: end; max-height: 78vh; overflow-y: auto;
+  }
+  @media (min-width: 900px) {
+    .diario-lightbox__meta { align-self: center; max-height: 78vh; }
+  }
+  .diario-lightbox__year {
+    font-family: 'Inter', monospace; font-size: 0.7rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: #0066B3; margin: 0 0 0.5rem 0;
+  }
+  .diario-lightbox__headline {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.4rem;
+    line-height: 1.2; margin: 0 0 0.75rem 0;
+  }
+  .diario-lightbox__source {
+    font-family: 'Inter', monospace; font-size: 0.75rem;
+    color: rgba(90,58,26,0.75); font-style: italic; margin: 0 0 1rem 0;
+  }
+  .diario-lightbox__note { font-size: 0.95rem; line-height: 1.55; color: rgba(42,26,8,0.85); margin: 0; }
+  .diario-lightbox__close, .diario-lightbox__nav {
+    position: absolute; top: 1rem; right: 1rem; width: 48px; height: 48px;
+    background: rgba(255,255,255,0.1); color: white;
+    border: 1px solid rgba(255,255,255,0.25);
+    font-size: 1.6rem; line-height: 1; cursor: pointer; z-index: 2;
+    transition: background 0.2s ease;
+  }
+  .diario-lightbox__close:hover, .diario-lightbox__nav:hover { background: rgba(255,255,255,0.22); }
+  .diario-lightbox__nav { top: 50%; transform: translateY(-50%); width: 52px; height: 52px; font-size: 2rem; }
+  .diario-lightbox__nav--prev { left: 1rem; right: auto; }
+  .diario-lightbox__nav--next { right: 1rem; }
+
+  @media (max-width: 640px) {
+    .diario-lightbox { padding: 0; }
+    .diario-lightbox__inner { padding: 0 0.5rem; gap: 0.5rem; }
+    .diario-lightbox__img { max-height: 60vh; padding: 4px; }
+    .diario-lightbox__meta { padding: 1rem; max-height: 32vh; }
+    .diario-lightbox__nav { width: 44px; height: 44px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .diario-card { transform: none; }
+    .diario-card:hover { transform: translateY(-2px); }
+    .diario-trigger img { transition: none; }
+  }
+</style>
+
+<script>
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.diario-card'));
+  const lightbox = document.getElementById('diario-lightbox');
+  const lbImg = lightbox?.querySelector<HTMLImageElement>('.diario-lightbox__img');
+  const lbYear = lightbox?.querySelector<HTMLElement>('.diario-lightbox__year');
+  const lbHeadline = lightbox?.querySelector<HTMLElement>('.diario-lightbox__headline');
+  const lbSource = lightbox?.querySelector<HTMLElement>('.diario-lightbox__source');
+  const lbNote = lightbox?.querySelector<HTMLElement>('.diario-lightbox__note');
+  const btnClose = lightbox?.querySelector<HTMLButtonElement>('.diario-lightbox__close');
+  const btnPrev = lightbox?.querySelector<HTMLButtonElement>('.diario-lightbox__nav--prev');
+  const btnNext = lightbox?.querySelector<HTMLButtonElement>('.diario-lightbox__nav--next');
+
+  let currentIndex = 0;
+
+  const open = (idx: number) => {
+    if (!lightbox || !lbImg) return;
+    currentIndex = (idx + cards.length) % cards.length;
+    const card = cards[currentIndex];
+    lbImg.src = card.dataset.img ?? '';
+    lbImg.alt = card.dataset.headline ?? '';
+    if (lbYear) lbYear.textContent = card.dataset.year ?? '';
+    if (lbHeadline) lbHeadline.textContent = card.dataset.headline ?? '';
+    if (lbSource) lbSource.textContent = card.dataset.source ?? '';
+    if (lbNote) lbNote.textContent = card.dataset.note ?? '';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const close = () => {
+    if (!lightbox) return;
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  cards.forEach((card, idx) => {
+    const trigger = card.querySelector<HTMLButtonElement>('.diario-trigger');
+    trigger?.addEventListener('click', () => open(idx));
+  });
+
+  btnClose?.addEventListener('click', close);
+  btnPrev?.addEventListener('click', () => open(currentIndex - 1));
+  btnNext?.addEventListener('click', () => open(currentIndex + 1));
+
+  lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox?.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') open(currentIndex - 1);
+    if (e.key === 'ArrowRight') open(currentIndex + 1);
+  });
+
+  let touchStartX = 0;
+  lightbox?.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  lightbox?.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) {
+      open(dx < 0 ? currentIndex + 1 : currentIndex - 1);
+    }
+  });
+</script>
