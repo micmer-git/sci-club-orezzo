@@ -60,6 +60,7 @@ export const SPONSORS = [
   { name: 'Sitip', url: 'https://sitip.it/', tier: 'storico', logo: '/img/sponsors/sitip.png', desc: 'Tessuti tecnici e innovativi — Cene (BG). Sponsor storico, 600 dipendenti, 120M fatturato' },
   { name: 'Pedretti Serramenti', url: 'https://pedrettiserramenti.it/', tier: 'technical', logo: '/img/sponsors/pedrettiserramenti.png', desc: 'Serramenti PVC — Endine Gaiano (BG)' },
   { name: 'Hidrodepur', url: 'https://www.hidrodepur.it/', tier: 'supporter', logo: '/img/sponsors/hidrodepur.png', desc: 'Trattamento acque — Levate (BG)' },
+  { name: 'Termolan', url: 'https://edilizia.termolan.it/', tier: 'supporter', logo: '/img/sponsors/termolan.webp', desc: 'Isolamento termico e materiali edili — Empoli (FI)' },
 ];
 
 // === VENUES ===
