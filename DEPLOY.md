@@ -2,24 +2,34 @@
 
 Sito: **[www.scicluborezzo.com](https://www.scicluborezzo.com)** — Astro + Tailwind, build statica in `dist/`.
 
-## Stato: migrazione hosting NON completata
+## Stato: IN ONDA su Aruba
 
-Il repo contiene il sito ricostruito, ma il passaggio all'hosting nuovo è **fermo in attesa delle credenziali Aruba e dell'accesso DNS** del club. Vedi `hosting-transfer/HOSTING_TRANSFER_INPUTS.md` (ancora da compilare) e `hosting-transfer/TRANSFER_CHECKLIST.md` (procedura completa: inventario → freeze → staging → cutover DNS → rollback).
+Il sito è pubblicato e www.scicluborezzo.com serve la build Astro di questo repo.
+Le credenziali FTP **ci sono già**, nel `.env` in root (gitignorato): il deploy si
+lancia e basta. Verificato il 22/09/2026.
 
-Serve, da chi gestisce il dominio:
+> ⚠️ Questa sezione diceva «fermo in attesa delle credenziali Aruba» fino al
+> 22/09/2026, quando il file `.env` era già compilato e il sito già online. Chi
+> legge un DEPLOY.md e si ferma senza controllare il `.env` e il dominio perde
+> un deploy: guarda prima cosa risponde il sito.
 
-- account Aruba: username, URL pannello, piano hosting;
-- accesso FTP: host, utente, porta;
-- accesso DB (se il sito attuale ha un CMS/MySQL);
-- registrar del dominio, DNS provider, nameserver attuali;
-- record A/CNAME e MX/SPF/DKIM/DMARC (per non rompere la posta al cutover).
+`hosting-transfer/` resta come storia della migrazione (inventario, checklist,
+piano di rollback).
 
-## Come si deploya (una volta avute le credenziali)
+## Come si deploya
 
 ```bash
 npm ci
 npm run build
 npm run deploy      # scripts/deploy-ftp.mjs, basic-ftp
+```
+
+**Verifica dopo il deploy** — non basta l'exit 0 dello script: `uploadFromDir`
+sovrascrive ma non cancella, quindi un file rimosso dalla build resta online.
+Si colpisce il dominio e si guarda il contenuto, per esempio:
+
+```bash
+curl -sL "https://www.scicluborezzo.com/?v=$RANDOM" | grep -c "<nome di uno sponsor nuovo>"
 ```
 
 Lo script legge un `.env` in root (file **gitignorato**, da creare a mano):

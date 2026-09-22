@@ -78,7 +78,7 @@ export const SPONSORS = [
   { name: 'Autoghinzani', url: 'https://autoghinzani.it/', logo: '/img/sponsors/autoghinzani.svg', desc: "Concessionaria — Calusco d'Adda e San Paolo d'Argon (BG)" },
   { name: 'El. System', url: null, logo: '/img/sponsors/elsystem.png', desc: 'Impianti di illuminazione e fotovoltaici — Gandino (BG)' },
   { name: 'Rainoldi', url: 'https://rainoldi.it/', logo: '/img/sponsors/rainoldi.png', desc: 'Prodotti chimici — Levate (BG)' },
-  { name: 'Cantonair', url: null, logo: null, desc: null },
+  { name: 'Canton Air', url: 'https://www.cantorair.it/', logo: '/img/sponsors/cantonair.png', desc: 'Scuola di volo certificata — aeroporto di Bergamo' },
   { name: 'Seriana Diesel', url: null, logo: null, desc: 'Officina e centro revisioni — Gazzaniga (BG)' },
 ];
 
