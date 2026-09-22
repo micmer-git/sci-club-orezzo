@@ -52,14 +52,30 @@ export const DISCIPLINES = [
 ];
 
 // === SPONSORS ===
+// Elenco aggiornato il 22/09/2026 su indicazione di Michele.
+// logo: null -> l'azienda non ha un logo: la scheda mostra il nome composto tipograficamente.
+// url: null  -> nessun sito ufficiale verificato: la scheda non e' un link.
 export const SPONSORS = [
-  { name: 'Industria Chimica Panzeri', url: 'https://www.chimicapanzeri.it/', tier: 'main', logo: '/img/sponsors/chimicapanzeri.png', desc: 'Chimica industriale — Orio al Serio (BG)' },
-  { name: 'Kempatex', url: 'https://www.kempatex.it/', tier: 'main', logo: '/img/sponsors/kempatex.jpg', desc: 'Ausiliari chimici tessili — Grassobbio (BG)' },
-  { name: 'Brembana Service', url: 'https://www.brembanaservice.it/', tier: 'main', logo: '/img/logo-brembana-service.png', desc: 'Revisioni veicoli — Villa d\'Alme (BG)' },
-  { name: 'A&G Chemical', url: 'https://aegchem.com/', tier: 'main', logo: '/img/sponsors/aegchemical.png', desc: 'Detergenti e prodotti chimici' },
-  { name: 'Sitip', url: 'https://sitip.it/', tier: 'storico', logo: '/img/sponsors/sitip.png', desc: 'Tessuti tecnici e innovativi — Cene (BG). Sponsor storico, 600 dipendenti, 120M fatturato' },
-  { name: 'Pedretti Serramenti', url: 'https://pedrettiserramenti.it/', tier: 'technical', logo: '/img/sponsors/pedrettiserramenti.png', desc: 'Serramenti PVC — Endine Gaiano (BG)' },
-  { name: 'Hidrodepur', url: 'https://www.hidrodepur.it/', tier: 'supporter', logo: '/img/sponsors/hidrodepur.png', desc: 'Trattamento acque — Levate (BG)' },
+  { name: 'Utensili Fratelli Magoni', url: 'https://www.magonispa.it/', logo: '/img/sponsors/magoni.png', desc: 'Utensili e lame a nastro — Ranica (BG)' },
+  { name: 'Perrel', url: 'https://www.magonispa.it/', logo: '/img/sponsors/perrel.png', desc: 'Marchio utensili di Utensili Fratelli Magoni — Ranica (BG)' },
+  { name: 'Priopav', url: 'https://priopav.com/', logo: '/img/sponsors/priopav.png', desc: 'Massetti e pavimentazioni industriali — Brembate (BG)' },
+  { name: 'Persico', url: 'https://www.persico.com/', logo: '/img/sponsors/persico.svg', desc: 'Stampi, automazione e prototipi — Nembro (BG)' },
+  { name: 'Termolan', url: 'https://termolan.it/', logo: '/img/sponsors/termolan.webp', desc: 'Isolanti termici e acustici' },
+  { name: 'Simpres', url: null, logo: null, desc: 'Edilizia — Fiorano al Serio (BG)' },
+  { name: 'iMode', url: 'https://www.imodesrl.com/', logo: '/img/sponsors/imode.png', desc: 'Telecontrollo, monitoraggio ambientale ed energia — Albino (BG)' },
+  { name: 'Autoscuola Tris', url: 'https://www.facebook.com/autoscuolatris/', logo: null, desc: 'Autoscuola — Clusone, Ardesio, Ponte Nossa, Colere (BG)' },
+  { name: 'Red Kite', url: null, logo: null, desc: null },
+  { name: 'Edilcommercio', url: 'https://edilcommercio-colzate.bigmat.it/', logo: '/img/sponsors/edilcommercio-bigmat.png', desc: 'Materiali edili BigMat — Colzate (BG)' },
+  { name: 'Meccanica di Precisione Epis', url: 'https://www.meccanicaepis.it/', logo: '/img/sponsors/epis.svg', desc: 'Lavorazioni meccaniche di precisione — Casnigo (BG)' },
+  { name: 'Anesa', url: 'https://anesabirra.it/', logo: '/img/sponsors/anesa.svg', desc: 'Importazione e distribuzione birra — Gazzaniga (BG)' },
+  { name: 'Poliplast', url: 'https://www.poliplastspa.com/', logo: '/img/sponsors/poliplast.png', desc: 'Polimeri termoplastici — Casnigo (BG)' },
+  { name: 'Petra', url: null, logo: null, desc: null },
+  { name: 'MZ Energia', url: null, logo: null, desc: 'Distribuzione carburanti — Brembate (BG)' },
+  { name: 'Autoghinzani', url: 'https://autoghinzani.it/', logo: '/img/sponsors/autoghinzani.svg', desc: "Concessionaria — Calusco d'Adda e San Paolo d'Argon (BG)" },
+  { name: 'El. System', url: null, logo: '/img/sponsors/elsystem.png', desc: 'Impianti di illuminazione e fotovoltaici — Gandino (BG)' },
+  { name: 'Rainoldi', url: 'https://rainoldi.it/', logo: '/img/sponsors/rainoldi.png', desc: 'Prodotti chimici — Levate (BG)' },
+  { name: 'Cantonair', url: null, logo: null, desc: null },
+  { name: 'Seriana Diesel', url: null, logo: null, desc: 'Officina e centro revisioni — Gazzaniga (BG)' },
 ];
 
 // === VENUES ===
