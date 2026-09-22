@@ -60,7 +60,7 @@ export const SPONSORS = [
   { name: 'Perrel', url: 'https://www.magonispa.it/', logo: '/img/sponsors/perrel.png', desc: 'Marchio utensili di Utensili Fratelli Magoni — Ranica (BG)' },
   { name: 'Priopav', url: 'https://priopav.com/', logo: '/img/sponsors/priopav.png', desc: 'Massetti e pavimentazioni industriali — Brembate (BG)' },
   { name: 'Persico', url: 'https://www.persico.com/', logo: '/img/sponsors/persico.svg', desc: 'Stampi, automazione e prototipi — Nembro (BG)' },
-  { name: 'Termolan', url: 'https://termolan.it/', logo: '/img/sponsors/termolan.webp', desc: 'Isolanti termici e acustici' },
+  { name: 'Termolan', url: 'https://edilizia.termolan.it/', logo: '/img/sponsors/termolan.webp', desc: 'Isolamento termico e materiali edili — Empoli (FI)' },
   { name: 'Simpres', url: null, logo: null, desc: 'Edilizia — Fiorano al Serio (BG)' },
   { name: 'iMode', url: 'https://www.imodesrl.com/', logo: '/img/sponsors/imode.png', desc: 'Telecontrollo, monitoraggio ambientale ed energia — Albino (BG)' },
   { name: 'Autoscuola Tris', url: 'https://www.facebook.com/autoscuolatris/', logo: null, desc: 'Autoscuola — Clusone, Ardesio, Ponte Nossa, Colere (BG)' },
