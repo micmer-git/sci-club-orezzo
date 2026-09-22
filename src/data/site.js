@@ -55,6 +55,10 @@ export const DISCIPLINES = [
 // Elenco aggiornato il 22/09/2026 su indicazione di Michele.
 // logo: null -> l'azienda non ha un logo: la scheda mostra il nome composto tipograficamente.
 // url: null  -> nessun sito ufficiale verificato: la scheda non e' un link.
+// Autoscuola Tris: il logo ESISTE e sta su
+//   https://www.autoscuolatris.it/immagini/Logo_TRIS.png (367x110)
+//   ma il 22/09/2026 tutto il dominio risponde 999 e l'Internet Archive era
+//   offline. Quando uno dei due torna su, si scarica e si toglie il logo: null.
 export const SPONSORS = [
   { name: 'Utensili Fratelli Magoni', url: 'https://www.magonispa.it/', logo: '/img/sponsors/magoni.png', desc: 'Utensili e lame a nastro — Ranica (BG)' },
   { name: 'Perrel', url: 'https://www.magonispa.it/', logo: '/img/sponsors/perrel.png', desc: 'Marchio utensili di Utensili Fratelli Magoni — Ranica (BG)' },
@@ -69,8 +73,8 @@ export const SPONSORS = [
   { name: 'Meccanica di Precisione Epis', url: 'https://www.meccanicaepis.it/', logo: '/img/sponsors/epis.svg', desc: 'Lavorazioni meccaniche di precisione — Casnigo (BG)' },
   { name: 'Anesa', url: 'https://anesabirra.it/', logo: '/img/sponsors/anesa.svg', desc: 'Importazione e distribuzione birra — Gazzaniga (BG)' },
   { name: 'Poliplast', url: 'https://www.poliplastspa.com/', logo: '/img/sponsors/poliplast.png', desc: 'Polimeri termoplastici — Casnigo (BG)' },
-  { name: 'Petra', url: null, logo: null, desc: null },
-  { name: 'MZ Energia', url: null, logo: null, desc: 'Distribuzione carburanti — Brembate (BG)' },
+  { name: 'pe.tra', url: 'https://www.petragroup.it/', logo: '/img/sponsors/petra.png', desc: 'Trasporti e logistica intermodale — Brembate (BG)' },
+  { name: 'MZ Energia', url: null, logo: null, desc: 'Distributore carburanti e LNG del gruppo pe.tra — Brembate (BG)' },
   { name: 'Autoghinzani', url: 'https://autoghinzani.it/', logo: '/img/sponsors/autoghinzani.svg', desc: "Concessionaria — Calusco d'Adda e San Paolo d'Argon (BG)" },
   { name: 'El. System', url: null, logo: '/img/sponsors/elsystem.png', desc: 'Impianti di illuminazione e fotovoltaici — Gandino (BG)' },
   { name: 'Rainoldi', url: 'https://rainoldi.it/', logo: '/img/sponsors/rainoldi.png', desc: 'Prodotti chimici — Levate (BG)' },
