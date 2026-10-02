@@ -70,7 +70,7 @@ export const SPONSORS = [
   { name: 'Autoscuola Tris', url: 'https://www.facebook.com/autoscuolatris/', logo: null, desc: 'Autoscuola — Clusone, Ardesio, Ponte Nossa, Colere (BG)' },
   { name: 'Red Kite', url: null, logo: null, desc: null },
   { name: 'Edilcommercio', url: 'https://edilcommercio-colzate.bigmat.it/', logo: '/img/sponsors/edilcommercio-bigmat.png', desc: 'Materiali edili BigMat — Colzate (BG)' },
-  { name: 'Meccanica di Precisione Epis', url: 'https://www.meccanicaepis.it/', logo: '/img/sponsors/epis.svg', desc: 'Lavorazioni meccaniche di precisione — Casnigo (BG)' },
+  { name: 'Meccanica di Precisione Epis', url: 'https://www.meccanicaepis.it/', logo: '/img/sponsors/epis.png', desc: 'Lavorazioni meccaniche di precisione — Casnigo (BG)' },
   { name: 'Anesa', url: 'https://anesabirra.it/', logo: '/img/sponsors/anesa.svg', desc: 'Importazione e distribuzione birra — Gazzaniga (BG)' },
   { name: 'Poliplast', url: 'https://www.poliplastspa.com/', logo: '/img/sponsors/poliplast.png', desc: 'Polimeri termoplastici — Casnigo (BG)' },
   { name: 'pe.tra', url: 'https://www.petragroup.it/', logo: '/img/sponsors/petra.png', desc: 'Trasporti e logistica intermodale — Brembate (BG)' },
