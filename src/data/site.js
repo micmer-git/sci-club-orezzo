@@ -80,6 +80,9 @@ export const SPONSORS = [
   { name: 'Rainoldi', url: 'https://rainoldi.it/', logo: '/img/sponsors/rainoldi.png', desc: 'Prodotti chimici — Levate (BG)' },
   { name: 'Canton Air', url: 'https://www.cantorair.it/', logo: '/img/sponsors/cantonair.png', desc: 'Scuola di volo certificata — aeroporto di Bergamo' },
   { name: 'Seriana Diesel', url: null, logo: null, desc: 'Officina e centro revisioni — Gazzaniga (BG)' },
+  // Turani: logo vettoriale mandato da Michele via Telegram il 20/11/2026.
+  // Nessun sito verificato: nel bergamasco ci sono piu' Turani omonimi.
+  { name: 'Turani', url: null, logo: '/img/sponsors/turani.png', desc: null },
 ];
 
 // === VENUES ===
